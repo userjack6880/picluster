@@ -1,0 +1,3 @@
+pi-hpc-compute[01-08]	compute
+pi-hpc-storage[01-04]	storage
+pi-hpc-head01		head,pdsh_all_skip
