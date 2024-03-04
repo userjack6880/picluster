@@ -24,14 +24,14 @@ then
 
 	# if formatting disks, do it here
 	if [ "$1" == "format" ]; then
-		fdisk /dev/sda
+		cfdisk /dev/sda
 		mke2fs -t ext4 /dev/sda1
 		mke2fs -t ext4 /dev/sda2
 	fi
 
 	# add to fstab
-	blkid | grep /dev/sda1 | awk '{ print $5 "\t/home\text4\tdefaults\t0\t2" }' >> /etc/fstab
-	blkid | grep /dev/sda2 | awk '{ print $5 "\t/mnt/apps\text4\tdefaults\t0\t2" }' >> /etc/fstab
+	blkid | grep /dev/sda1 | awk '{ print $5 "\t/home\text4\tdefaults\t0\t2" }' | tee -a /etc/fstab
+	blkid | grep /dev/sda2 | awk '{ print $5 "\t/mnt/apps\text4\tdefaults\t0\t2" }' | tee -a /etc/fstab
 
 	# mount all
 	mount -a
@@ -93,6 +93,16 @@ then
 	rm /var/cache/apt/archives/*.deb
 	apt-get -y --download-only install openmpi-bin openmpi-common libopenmpi-dev libopenmpi3 libltdl7
 	cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/openmpi
+
+	mkdir /mnt/apps/pkgs/glusterfs-server
+	rm /var/cache/apt/archives/*.deb
+	apt-get -y --download-only install glusterfs-server
+	cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/glusterfs-server
+
+	mkdir /mnt/apps/pkgs/glusterfs-client
+	rm /var/cache/apt/archives/*.deb
+	apt-get -y --download-only install glusterfs-client
+	cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/glusterfs-client
 
 	# mkdir /mnt/apps/pkgs/mpich
 	# rm /var/cache/apt/archives/*.deb
