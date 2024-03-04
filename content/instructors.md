@@ -14,7 +14,7 @@ The modules are intended to be performed *in order*, so skipping modules is not 
 
 ## Materials
 
-You will need the hardware listed in the [introduction](index).Optionally, you will need a usb drive to load scritps on. this isn't necessary if you choose to use git. If you choose to use a USB drive, you will need to copy the configuration scripts located [here](https://j3b.in/pihpc/scripts.zip) and extract them to the drive. Ensure the contents are in the root of the drive or scripts will not function. Additionally, you should get the official [Raspberry Pi Imager](https://www.raspberrypi.com/software/).
+You will need the hardware listed in the [introduction](index). Optionally, you will need a usb drive to load scritps on. this isn't necessary if you choose to use git. If you choose to use a USB drive, you will need to copy the configuration scripts located [here](https://j3b.in/pihpc/scripts.zip) and extract them to the drive. Ensure the contents are in the root of the drive or scripts will not function. Additionally, you should get the official [Raspberry Pi Imager](https://www.raspberrypi.com/software/).
 
 A few things you will need to know:
 
