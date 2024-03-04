@@ -24,14 +24,14 @@ then
 
 	# if formatting disks, do it here
 	if [ "$1" == "format" ]; then
-		cfdisk /dev/sda
+		fdisk /dev/sda
 		mke2fs -t ext4 /dev/sda1
 		mke2fs -t ext4 /dev/sda2
 	fi
 
 	# add to fstab
-	blkid | grep /dev/sda1 | awk '{ print $5 "\t/home\text4\tdefaults\t0\t2" }' | tee -a /etc/fstab
-	blkid | grep /dev/sda2 | awk '{ print $5 "\t/mnt/apps\text4\tdefaults\t0\t2" }' | tee -a /etc/fstab
+	blkid | grep /dev/sda1 | awk '{ print $5 "\t/home\text4\tdefaults\t0\t2" }' >> -a /etc/fstab
+	blkid | grep /dev/sda2 | awk '{ print $5 "\t/mnt/apps\text4\tdefaults\t0\t2" }' >> -a /etc/fstab
 
 	# mount all
 	mount -a
