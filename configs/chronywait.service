@@ -1,0 +1,12 @@
+[Unit]
+Description=CronyWait service
+After=network-online.target
+Before=munge.service
+ 
+[Service]
+ExecStartPre=/usr/bin/bash -c "while [ $(chronyc sources -v | grep head | awk '{ print $1 }') == '^?' ]; do echo server unusable, waiting; sleep 3; done"
+ExecStart=/usr/bin/sh -c "chronyc makestep"
+RemainAfterExit=yes
+ 
+[Install]
+WantedBy=multi-user.target
