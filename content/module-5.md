@@ -102,4 +102,8 @@ sbatch --nodes=4 --ntasks-per-node=4 sub_mpi.sh
 
 As before, you should see "Hello World" return 16 times.
 
+## MPI Examples
+
+MPI examples can be found on the [LLNL HPC Tutorials Page](https://hpc-tutorials.llnl.gov/mpi/exercise_1/). Experiment and run a few of these examples.
+
 ## [Next Module - Parallel Storage](module-6)
