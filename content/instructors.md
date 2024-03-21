@@ -29,12 +29,12 @@ A few things you will need to know:
   - It is suggested that you use `10.0.0.101` with a subnet of `255.255.255.0`/`CIDR /24` if you aren't using a Pi Zero terminal.
 - The nodes will be assigned names and IP addresses as follows:
 
-  | Hostname                  | Address        |
-  | ------------------------- | -------------- |
-  | **pi-hpc-head01**         | `10.0.0.2`     |
-  | **pi-hpc-terminal**       | `10.0.0.101`   |
-  | **pi-hpc-compute[01-40]** | `10.0.0.11-50` |
-  | **pi-hpc-storage[01-40]** | `10.0.0.51-90` |
+| Hostname              | Address        |
+| --------------------- | -------------- |
+| pi-hpc-head01         | `10.0.0.2`     |
+| pi-hpc-terminal       | `10.0.0.101`   |
+| pi-hpc-compute[01-40] | `10.0.0.11-50` |
+| pi-hpc-storage[01-40] | `10.0.0.51-90` |
 
 ### Downloads
 [Preparation Scripts](https://j3b.in/pihpc/scripts.zip): the scripts needed to prepare the PI's are available in a zip file, as well as a copy of this website and presentations used by MSU SIG-HPC.
