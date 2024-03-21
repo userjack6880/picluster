@@ -28,6 +28,7 @@ A few things you will need to know:
 - Your cluster will be accessible using a priavte IP range. The optional **'pi-hpc-terminal'** node will be configured to have an interface in this private range.
   - It is suggested that you use `10.0.0.101` with a subnet of `255.255.255.0`/`CIDR /24` if you aren't using a Pi Zero terminal.
 - The nodes will be assigned names and IP addresses as follows:
+
   | Hostname                  | Address        |
   | ------------------------- | -------------- |
   | **pi-hpc-head01**         | `10.0.0.2`     |
@@ -35,8 +36,10 @@ A few things you will need to know:
   | **pi-hpc-compute[01-40]** | `10.0.0.11-50` |
   | **pi-hpc-storage[01-40]** | `10.0.0.51-90` |
 
-[Preparation Scripts](https://j3b.in/pihpc/scripts.zip)
-[Github](https://github.com/userjack6880/picluster)
+### Downloads
+[Preparation Scripts](https://j3b.in/pihpc/scripts.zip): the scripts needed to prepare the PI's are available in a zip file, as well as a copy of this website and presentations used by MSU SIG-HPC.
+
+[Github](https://github.com/userjack6880/picluster): all files included in the ZIP file above, including the ZIP file itself, are also hosted on github.
 
 ## Creating the SD Cards
 
