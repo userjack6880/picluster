@@ -6,7 +6,7 @@ index
 
 # Pi HPC Introduction
 
-<span class="small">Last Update 23 October 2023</span>
+<span class="small">Last Update 21 March 2024</span>
 
 These modules are intended on teaching you how to configure, setup, and run your own miniature cluster computer. While there are some differences between our setup and supercomputers on the Top500, the fundementals are essentially the same - a bunch of Linux computers performing various functions of an entire system.
 
