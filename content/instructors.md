@@ -36,6 +36,7 @@ A few things you will need to know:
   | **pi-hpc-storage[01-40]** | `10.0.0.51-90` |
 
 [Preparation Scripts](https://j3b.in/pihpc/scripts.zip)
+[Github](https://github.com/userjack6880/picluster)
 
 ## Creating the SD Cards
 
@@ -76,7 +77,7 @@ if you plan on using git:
 sudo su
 apt install git -y
 mkdir /mnt/usb
-git clone https://github.com/userjack6880/picluster_scripts.git /mnt/usb
+git clone https://github.com/userjack6880/picluster.git /mnt/usb
 cd /mnt/usb
 ./headnode.sh format
 ```
