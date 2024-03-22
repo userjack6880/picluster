@@ -10,7 +10,7 @@ install and configure network storage
 
 **Install, setup and configure Storage Nodes with GlusterFS**
 
-[GlusterFS](https://docs.gluster.org/en/latest/Administrator-Guide/GlusterFS-Introduction/) (short for GNU Cluster FileSystem) is an open source cluster filesystem that uses a "Peer" architecture and FUSE (filesystem in userspace) client. this way no one node is responsible for managing the system. GlusterFS allows us to pool together storage devices accross nodes as well as it allows us to write to the same file concurrently from different machines. We will be installing and configuring the storage nodes to be GlusterFS peers and configuring all other nodes to be GlusterFS clients.
+[GlusterFS](https://docs.gluster.org/en/latest/Administrator-Guide/GlusterFS-Introduction/) (short for GNU Cluster FileSystem) is an open source cluster filesystem that uses a "Peer" based architecture and FUSE (filesystem in userspace) client. this way no one node is responsible for managing the system. GlusterFS allows us to pool together storage devices accross nodes as well as it allows us to write to the same file concurrently from different machines. We will be installing and configuring the storage nodes to be GlusterFS peers and configuring all other nodes to be GlusterFS clients.
 
 ## Install Glusterd on the Storage nodes
 
@@ -140,6 +140,3 @@ pi-hpc-storage01:/gv0  671G   12G  659G   2% /scratch
 ```
 
 Contradulations, your cluster is setup. 
-
-
-## [Next Module - Supporting Software](module-4)
