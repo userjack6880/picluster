@@ -131,6 +131,9 @@ then
 	chown root:netdev /etc/dhcpcd.conf
 	chmod 664 /etc/dhcpcd.conf
 
+	# copy genders file
+	cp /mnt/usb/configs/genders /etc/genders
+
 	# copy chrony.conf to an accessible location
 	mkdir /mnt/apps/configs
 	cp /mnt/usb/configs/chrony-client.conf /mnt/apps/configs
