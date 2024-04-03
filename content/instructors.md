@@ -10,11 +10,19 @@ Notes for Instructors
 
 The modules will go through each step on how to setup a Raspberry Pi compute cluster. Before each section of each module are a set of links listed as "resources" that the students may review before going through the section. Most of these will be man pages, while the rest will be a combination of documentation, project pages, or Wikipedia articles.
 
-The modules are intended to be performed *in order*, so skipping modules is not advised. Each module should take anywhere between 5 - 10 minutes, depending on skill level.
+Additionally, modules will have an introduction explaining the purpose of the module, and what topics will be covered. In addition to the introduction, at the end there will be some discussions questions that for instructors and students to go over once the module is finished.
+
+The modules are intended to be performed *in order*, so skipping modules is not advised.
 
 ## Materials
 
-You will need the hardware listed in the [introduction](index) along with a USB drive. You will need to copy the configuration scripts located [here](https://j3b.in/pihpc/scripts.zip) and extract them to the drive. Ensure the contents are in the root of the drive or scripts will not function. Additionally, you should get the official [Raspberry Pi Imager](https://www.raspberrypi.com/software/).
+It is suggested that at minimum that 4 Raspberry Pi 4B compute modules be purchased for these modules with external storage being provided for at least one. At least one network switch to allow all of the compute modules to connect to each other is recommended, and some way to access to cluster, via a laptop or a direct montior/keyboard connection to one of the compute modules.
+
+The following list of materials were used as the reference hardware:
+
+Additionally, it is recommended that a USB drive be purchased. It will be needed to copy the configuration scripts located [here](https://j3b.in/pihpc/scripts.zip) and extract onto the drive. Ensure the contents are in the root of the drive or scripts will not function.
+
+Finally, get the official [Raspberry Pi Imager](https://www.raspberrypi.com/software/).
 
 Optionally, you can use git to download a copy of these scripts (and this documentation). Git is not installed with Raspberry Pi OS by default - this can be installed using 'sudo apt get install git'.
 

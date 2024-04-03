@@ -6,29 +6,27 @@ index
 
 # Pi HPC Introduction
 
-<span class="small">Last Update 21 March 2024</span>
+<span class="small">Last Update 5 April 2024</span>
 
-These modules are intended on teaching you how to configure, setup, and run your own miniature cluster computer. While there are some differences between our setup and supercomputers on the Top500, the fundementals are essentially the same - a bunch of Linux computers performing various functions of an entire system.
+Welcome to PI HPC, an instructional tool for instructors and students to explore the world of distributed computing with a hands-on guided experience through the process of building, configuring, and managing a miniature cluster computer. While the harware may differ from the systems found on the [Top500](https://top500.org), the fundementals remain the same. By mastering the principles underlying cluster computing, students will be equipped with valuable skills applicable to both small-scale projects and large-scale infrastructures.
 
-The instructions provided are assuming that you have the following hardware:
-
-- 5+ Raspberry Pi 4B with extra SSD storage (up to 41)
-  - 120GB minimum recommended
-  - 1 board will be used for the head and login node, the rest are for storage
-- 4+ Raspberry Pi 4B (up to 40)
-  - These will be used for compute
-- 1 Raspberry Pi Zero W/Zero 2 W (Optional)
-  - Optional node - this will not have HPC-related software on it, it is simply a terminal for students to use to SSH into the rest of the cluster.
-- Network Switch
-  - This will not need to be connected to the internet to go through the modules, but instructors will need network access for initial setup.
+In this digial era, the demand for scalable and efficient computing solutions continues to rise. Understanding how to harness the power of cluster computing is becoming increasingly essential across various fields, from data science and artificial intelligence to scientific research and beyond.
 
 [Instructors: Read This First](instructors)
 
 # Modules
 
-- [Module 1 - Sharing Storage](module-1)
-- [Module 2 - Keeping Time](module-2)
-- [Module 3 - Setup Scheduler](module-3)
-- [Module 4 - Supporting Software](module-4)
-- [Module 5 - Hello Worlds](module-5)
-- Module 6 - Parallel Storage
+- Module 1 - Hardware Selection and Assembly
+- Module 2 - Operating System Installation
+- Module 3 - Networking Configuration
+- [Module 4 - Sharing Storage Through NFS](module-4)
+- [Module 5 - Keeping Time](module-5)
+- Module 6 - User Management
+- [Module 7 - The Scheduler](module-7)
+- [Module 8 - Supporting Software](module-8)
+- [Module 9 - Hello World](module-9)
+- Module 10 - Benchmarking
+- Module 11 - Parallel Storage (Optional)
+- Module 12 - GPU Compute (Optional)
+- Module 13 - Basics of Parallel Programming
+- Module 14 - Challenges

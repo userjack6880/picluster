@@ -1,66 +1,201 @@
 page
-Module 4 - Supporting Software
-Install Open MPI and mpi4py
+Module 1 - Sharing Storage
+Setting up a simple NFS storage server.
 
 ---
 
-# Module 4 - Supporting Software
+# Module 1 - Sharing Storage
 
 ## Objective
 
-**Install Open MPI and `mpi4py`**
+**Setup an NFS shared file system**
 
-Now that Slurm is installed, we need ways to program in a parallel clustered fashion. The [Message Passing Interface](https://en.wikipedia.org/wiki/Message_Passing_Interface) (MPI) is a standardized and portable standard that's designed to function on parallel computing architectures for C, C++, and Fortran. Additionally, there are packages available that extend this to other langauges, such as [Python](https://www.python.org).
+While distributed filesytems (such as Lustre, GPFS, and others) are commonly used in clustered computing environments, [NFS (Network File System)](https://en.wikipedia.org/wiki/Network_File_System) is still used for filesharing between systems within a network. Your objective is to create, format, and share a partition, along with two other pre-created filesystems, between all of the nodes within our cluster.
 
-## Install Open MPI on Head Node
+A few things you will need to know:
+
+- There are two interactive users:
+  - `admin` - this will be the user you will do administrative tasks with - this user has `sudo` access.
+  - `user` - this will be an unprivleged user
+  - both users have the same password - `tuxcluster`
+- Your cluster will not have direct access to the internet. All packages you will need will be included on the pre-formated drive.
+- Your cluster will be accessible using a priavte IP range. The optional **'pi-hpc-terminal'** node will be configured to have an interface in this private range.
+  - It is suggested that you use `10.0.0.101` with a subnet of `255.255.255.0` if you aren't using a Pi Zero terminal.
+- The nodes will be assigned names and IP addresses as follows:
+  - **pi-hpc-head01** - `10.0.0.2`
+  - **pi-hpc-terminal** - `10.0.0.101`
+  - **pi-hpc-compute[01-40]** - `10.0.0.11-50`
+  - **pi-hpc-storage[01-40]** - `10.0.0.51-90`
+
+All nodes are accessible via [`ssh`](https://linux.die.net/man/1/ssh) using the `admin` user.
+
+## Partitioning the Hard Drive
 
 <span class="small">resources:
-[Open MPI](https://www.open-mpi.org)
+[fdisk](https://linux.die.net/man/8/fdisk)
 </span>
 
-Open MPI is an open source implementation of the Message Passing Interface developed and maintained by a consortium of academic, research, and industry parnters. It is commonly available on a lot of clusters.
-
-Install OpenMPI and supporting packages, including development packages:
+First, you need to see what drives are installed on the head node. Log into **`pi-hpc-head01`** and issue the following command:
 
 ```
-sudo dpkg -i /apps/pkgs/openmpi/*.deb
+sudo fdisk -l
 ```
 
-## Install mpi4py on Head Node
+Take node of the disk you'll need to add a partition to. It'll be the (approximately) 120 GiB disk. If the output is, for example:
+
+```
+Disk /dev/sda: 119.24 GiB, 128035676160 bytes, 250069780 sectors
+```
+
+then your disk is `/dev/sda`.
+
+Now, we need to add the partition.
+
+```
+sudo fdisk /dev/sda
+```
+
+At this point, you can press `m` to view your options. The key ones you'll need for this objective, though, are:
+
+- `n` : add a new partition
+- `w` : write table to disk and exit
+
+You will want to create a *primary* partition, it will be the third partition on the drive, and will go from the last free sector to the end of the disk. Essentially all default options.
+
+Note: `fdisk` may complain about an existing filesystem signature on the partition - this is fine, as this system may have been reused and some residual partitioning signatures are left behind - acknowledge it and continue on.
+
+## Creating a Filesystem
+
+<span class="small">resources: 
+[mke2fs](https://linux.die.net/man/8/mke2fs)
+</span>
+
+Creating an ext4 filesytem on linux is very straightforward.
+
+```
+sudo mke2fs -t ext4 /dev/sda3
+```
+
+Make sure you specify the correct partition. If you are unsure, you can do a `sudo fdisk -l` and it should be the last device listed - approximately 60 GiB.
+
+## Mounting the Filesystem
 
 <span class="small">resources:
-[mpi4py](https://mpi4py.readthedocs.io),
-[pip](https://pip.pypa.io/en/stable/),
-[gzip](https://linux.die.net/man/1/gzip),
-[tar](https://linux.die.net/man/1/tar),
-[python](https://linux.die.net/man/1/python)
+[mount points](https://www.ibm.com/docs/en/aix/7.3?topic=mounting-mount-points),
+[mkdir](https://linux.die.net/man/1/mkdir),
+[fstab](https://linux.die.net/man/5/fstab),
+[blkid](https://linux.die.net/man/8/blkid),
+[mount](https://linux.die.net/man/8/mount),
+[chgrp](https://linux.die.net/man/1/chgrp),
+[chmod](https://linux.die.net/man/1/chmod),
+[ln](https://linux.die.net/man/1/ln)
 </span>
 
-`mpi4py` gives Python the ability to exploit MPI and makes Python practical for cluster computing. Since we won't have direct access to the web, `pip` will not be available, and we will need to manually build and install `mpi4py`.
-
-The source files have already been downloaded and are located under `/apps/src/mpi4py`. Extract the files:
+Now that we have a filesystem on the third partition, we need to mount it. First, create a mount point:
 
 ```
-gzip -d mpi4py*.tar.gz
-tar -xf mpi4py*.tar
+sudo mkdir /mnt/shared
 ```
 
-Now go into the directory that was just created and build `mpi4py`:
+Now, find the partition id of the partition - we will need this to add it to `/etc/fstab`.
 
 ```
-python setup.py build
+sudo blkid /dev/sda3
 ```
 
-This will take a while. Once it completes, install using `sudo`:
+The output should include a portion similar to `PARTUUID="6B728F42-03"`. Add this to `/etc/fstab` using `vim`. The line you will need to add will look like the ones above it, except with the partition id you just found. The `fstab` file lists all available disk partitions, file systems, and datasources and where they are mounted on the system's file structure.
+
+Once you've added the new line, mount the file system:
 
 ```
-sudo python setup.py install
+sudo mount -a
 ```
 
-## Install Packages on Compute Nodes
+You can check if the filesystem is mounted usng `df -h`. Now, we need to give users permission to add and remove files from this directory.
 
-Perform the above steps using what you've learend in past modules using `pdsh`. Additionally, `srun` is now available to you.
+```
+sudo chgrp users /mnt/shared
+sudo chmod g+w /mnt/shared
+```
 
-*Note: you do not need to extract or build* `mpi4py` *again since it was already extracted and built in a shared directory. Since the architecture on all the nodes are the same, you can simply install it.*
+Finally, to make it easier to access, create a symbolic link to this path in the root directory.
 
-## [Next Module - Hello Worlds](module-5)
+```
+sudo ln -s /mnt/shared /shared
+```
+
+## Setup and Configure the NFS Server
+
+<span class="small">resources:
+[dpkg](https://linux.die.net/man/1/dpkg),
+[systemctl](https://www.man7.org/linux/man-pages/man1/systemctl.1.html),
+[exportfs](https://linux.die.net/man/8/exportfs)
+</span>
+
+While typically packages on a Debian-based system would be installed using `apt` or `apt-get`, we are working within an environment that does not have access to the network. All necessary packages are available under `/apps/pkgs`.
+
+The first step will be to install the NFS server package.
+
+```
+sudo dpkg -i /apps/pkgs/nfs-kernel-server*.deb
+```
+
+Now, create the export entries in `/etc/exports` using `vim`
+
+```
+/home           10.0.0.0/24(rw,async,no_root_squash)
+/mnt/apps       10.0.0.0/24(ro,async,no_root_squash)
+/mnt/shared     10.0.0.0/24(rw,async,no_root_squash)
+```
+
+This will allow any computer in the `10.0.0.0` subnet (`10.0.0.1` - `10.0.0.254`) to mount the exported directories. `/mnt/apps` is exported as read only so that this path is preserved from accidental writing from computers that mount these directories.
+
+Now, start and enable the NFS server:
+
+```
+sudo systemctl enable nfs-server
+sudo systemctl start nfs-server
+sudo systemctl status nfs-server
+sudo exportfs -a
+```
+
+You should get an `active (exited)` status. At this point, `/home`, `/mnt/apps`, and `/mnt/shared` should be available to mount. Note: it seems that on these raspberry pi's that `showmounts -e` will cause it to hang.
+
+If you want to make a change to `/etc/exports` after the NFS server has been started, you can set the new exports using `sudo exportfs -a`.
+
+## Setup and Configure Clients
+
+<span class="small">resources:
+[rm](https://linux.die.net/man/1/rm),
+[ping](https://linux.die.net/man/8/ping)
+</span>
+
+The following will need to be done on all nodes (excluding **'pi-hpc-terminal'**) except the storage nodes - those will be preconfigured.
+
+The first step will be to remove the local home directory for `admin`:
+
+```
+sudo rm -r /home/admin
+```
+
+This will prepare `/home` for the next steps.
+
+Now, confirm if you can see the head node.
+
+```
+ping -c 2 pi-hpc-head01
+```
+
+This should return `2 packets transmitted` - this means you are able to see the head node. If you aren't able, check to make sure everything is plugged in correctly.
+
+Create the /apps and /shared directories. You will need to use `sudo`. Once you've have done that, edit `/etc/fstab`:
+
+```
+pi-hpc-head01:/home         /home         nfs4    defaults,user,exec          0 0
+pi-hpc-head01:/mnt/apps     /apps         nfs4    defaults,user,exec          0 0
+pi-hpc-head01:/mnt/shared   /shared       nfs4    defaults,user,exec          0 0
+```
+
+Mount the shares using `sudo mount -a` and you should see the `pkgs` directory under `/apps` and a home directory for `user` under `/home`.
+
+## [Next Module - Keeping Time](module-2)

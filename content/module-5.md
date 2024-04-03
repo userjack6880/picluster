@@ -1,109 +1,131 @@
 page
-Module 5 - Hello Worlds
-Helloing all over the cluster.
+Module 2 - Keeping Time
+Set up timesyncd to keep time.
 
 ---
 
-# Module 5 - Hello Worlds
+# Module 2 - Keeping Time
 
 ## Objective
 
-**Implement the basic "hello world" program using C and Python**
+**Set up chronyd to keep time**
 
-There are many ways to tackle a problem. Even a basic "hello world" program that runs across multiple compute nodes can have more than one way to solve it. Two examples will be shown.
+Because of the intercommunication between storage, compute, and head nodes, it's important that every node in the system is in lockstep with each other. An additional complication with our setup is that not only is it isolated from the internet (so it can't grab the time automatically), Raspberry Pi 4's and Pi Zero's do not have a hardware clock, so every time they are powered off, the time is reset. They make an attempt at trying to keep time moving forward by using a fake hardware clock (aka, saving the time on shutdown), but this does not always work, especially if they are powered off suddenly.
 
-## Implementing Hello World with C
+Our goal is to setup a time server and have every node sync time with it using [NTP](https://en.wikipedia.org/wiki/Network_Time_Protocol). While Raspbian comes with `systemd-timesyncd`, we're going to replace it with `chrony` as it can act as both a time server and local 
 
-<span class="small">resources:
-[mpicc](https://www.open-mpi.org/doc/v4.0/man1/mpicc.1.php),
-[sbatch](https://slurm.schedmd.com/sbatch.html)
-</span>
+## Selecting the Time Server
 
-Log in as the `user` user instead of `admin` this time. Under `/shared`, create a new directory (you can name it something like `hello_mpi_c` or `hello_world_c`). Change to this directory and create a new file, `hello_mpi.c`:
+Before we put hands on keyboards, we need to think about which node should be the time server. Off the bat, a compute or storage node is not appropriate - these should dedicate resources to performing calculations or providing high-speed storage. In our setup, it leaves us with the head node. This node will need to be the first one to be turned on, and should always be properly shutdown. Optionally, and preferred, you should set the time on this node every time you turn it on.
 
-```
-#include <stdio.h>
-#include <mpi.h>
-
-int main(int argc, char** argv) {
-  int node;
-  MPI_Init(&argc, &argv);
-  MPI_Comm_rank(MPI_COMM_WORLD, &node);
-
-  // this is the stuff that's parallelized
-  printf("Hello World from compute node: %d!\n", node);
-
-  MPI_Finalize();
-}
-```
-
-Now, compile the program.
-
-```
-mpicc hello_mpi.c
-```
-
-This should create a new file called `a.out`. This is your program. Finally, create a shell script used to submit this program to Slurm (name it `sub_mpi.sh`):
-
-```
-#!/bin/bash
-
-cd $SLURM_SUBMIT_DIR
-
-# print the hostname of the submission node
-echo "submitted from $(hostname)"
-
-# run the program
-mpirun a.out
-```
-
-Finally, submit a new job to the cluster.
-
-```
-sbatch --nodes=4 --ntasks-per-node=4 sub_mpi.sh
-```
-
-This should submit a job, and it should return "Hello World" 16 times with a different number after the phrase.
-
-## Implementing Hello World with Python
+## Setting the Time
 
 <span class="small">resources:
-[mpirun](https://www.open-mpi.org/doc/current/man1/mpirun.1.php)
+[timedatectl](https://www.freedesktop.org/software/systemd/man/timedatectl.html),
+[grep](https://linux.die.net/man/1/grep)
 </span>
 
-Create a new directory under `/shared` like you did before, but use a different name to indicate that it's a python application. Create a new file `hello_mpi.py`:
+You can check the current status of the time by using `timedatectl status`.
+
+The time zone should automatically be set, but if it isn't, you can set it:
 
 ```
-#!/usr/bin/env python
-
-from mpi4py import MPI
-import sys
-
-size = MPI.COMM_WORLD.Get_size()
-rank = MPI.COMM_WORLD.Get_rank()
-name = MPI.Get_processor_name()
-
-sys.stdout.write(
-  "Hello World! I am process %d of %d on %s.\n"
-  % (rank, size, name))
+sudo timedatectl set-timezone <time zone>
 ```
 
-Copy the `sub_mpi.sh` you made for the C program into this directory, and edit the last line:
+If you are unsure what timezones are available, use `timedatectl list-timezones` to list out all available timezones - `grep` can be useful for narrowing the list down.
+
+The time is set using:
 
 ```
-mpirun python hello_mpi.py
+sudo timedatectl set-time 'Y:M:D HH:mm:ss'
+sudo timedatectl set-time 'Y:M:D'
+sudo timedatectl set-time 'HH:mm:ss'
 ```
 
-Submit the job to the cluster:
+The examples above show that you can either give it a full timestamp or a partial one. Keep in mind that time is represented using 24-hour time. You don't want to be 12 hours off!
+
+NOTE: `timedatectl` is unable to set the time if NTP is being used. Stop NTP service before attempting to set time.
+
+## Replacing timesyncd With chrony on the Server
+
+<span class="small">resources:
+[systemd-timesyncd](https://wiki.archlinux.org/title/Systemd-timesyncd),
+[chrony](https://chrony-project.org),
+[apt](https://linux.die.net/man/8/apt)
+</span>
+
+The first thing we need to do is stop and disable `systemd-timesyncd`.
 
 ```
-sbatch --nodes=4 --ntasks-per-node=4 sub_mpi.sh
+sudo systemctl stop systemd-timesyncd
+sudo systemctl disable systemd-timesyncd
 ```
 
-As before, you should see "Hello World" return 16 times.
+Now uninstall it using apt and then install the `chrony` package via dpkg.
 
-## MPI Examples
+```
+sudo apt remove systemd-timesyncd
+sudo dpkg -i /apps/pkgs/chrony*arm64.deb
+```
 
-MPI examples can be found on the [LLNL HPC Tutorials Page](https://hpc-tutorials.llnl.gov/mpi/exercise_1/). Experiment and run a few of these examples.
+`chrony` will need to be configured. First, stop `chrony`.
 
-## [Next Module - Parallel Storage](module-6)
+```
+sudo systemctl stop chrony
+```
+
+Now edit `/etc/chrony/chrony.conf`. Clear all lines and make sure it only contains these lines:
+
+```
+driftfile /var/lib/chrony/chrony.drift
+server 127.127.1.1
+local stratum 8
+allow all
+```
+
+The IP address `127.127.1.1` is the loopback address for NTP. You are telling `chrony` to sync with the system's clock driver. This isn't considered best practice, but for our purposes, it'll do the trick. Now restart `chrony`.
+
+```
+sudo systemctl start chrony
+```
+
+You can check the status of `chrony` using `chronyc tracking` and see if it's actually using the loopback address with `chronyc sources`.
+
+## Replacing timesyncd With chrony on the Nodes
+
+<span class="small">resources:
+[pdsh](https://linux.die.net/man/1/pdsh),
+[grep](https://linux.die.net/man/1/grep)
+</span>
+
+Repeat the above process to stop, disable, and uninstall `systemd-timesyncd`. When installing `chrony`. Do not do this on **'pi-hpc-terminal'**.
+
+You can use `pdsh` from **'pi-hpc-head01'** to issue commands to the compute nodes all at once. Instead of `apt remove`, you will need to use `apt-get -y remove` as `pdsh` is non-interactive. The nodes are configured in a way that you will be allowed to use `sudo`.
+
+```
+pdsh -w pi-hpc-compute[01-04] hostname
+```
+
+On each of the "client" nodes, you'll need to edit `/etc/chrony/chrony.conf` to be the following:
+
+```
+driftfile /var/lib/chrony/chrony.drift
+server 10.0.0.2 iburst
+```
+
+Because `pdsh` is not interactive, you will have to end up logging into each node individually to edit those files. However, the config file has been shared under `/apps/configs` - you can use `pdsh` to copy that file where it needs to be.
+
+```
+pdsh -w pi-hpc-compute[01-04] sudo cp /apps/configs/chrony-client.conf /etc/chrony/chrony.conf
+```
+
+Give the client nodes some time to come back into sync with the server. You can monitor this by using this command.
+
+```
+pdsh -w pi-hpc-compute0[1-4] chronyc tracking | grep "System time"
+```
+
+Once everybody is pretty much within 0 seconds of NTP time, we're ready for the next module.
+
+## [Next Module - Setup Scheduler](module-3)
