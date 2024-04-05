@@ -50,6 +50,8 @@ NOTE: `timedatectl` is unable to set the time if NTP is being used. Stop NTP ser
 
 ## Using the Hardware Clock
 
+- [Guide](https://thepihut.com/blogs/raspberry-pi-tutorials/17209332-adding-a-real-time-clock-to-your-raspberry-pi)
+
 By default, the RaspberryPi doesn't have a realtime clock. Installed on the head node is an i2c enabled realtime clock. we need to set this up in software in order for it to be funcitonal
 
 First lets enable the rPi's i2c functionality:
