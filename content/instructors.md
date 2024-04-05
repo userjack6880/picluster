@@ -93,6 +93,8 @@ cd /mnt/usb
 ./headnode.sh format
 ```
 
+Note: absolute path `/mnt/usb` is no longer necessary but is still used for coherence
+
 When it gets to the partitioning step, you will want to make the following:
 
 - Partition 1: 10 GB
