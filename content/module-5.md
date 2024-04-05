@@ -16,7 +16,7 @@ Our goal is to setup a time server and have every node sync time with it using [
 
 ## Selecting the Time Server
 
-Before we put hands on keyboards, we need to think about which node should be the time server. Off the bat, a compute or storage node is not appropriate - these should dedicate resources to performing calculations or providing high-speed storage. In our setup, it leaves us with the head node. This node will need to be the first one to be turned on, and should always be properly shutdown. Optionally, and preferred, you should set the time on this node every time you turn it on.
+Before we put hands on keyboards, we need to think about which node should be the time server. Off the bat, a compute or storage node is not appropriate - these should dedicate resources to performing calculations or providing high-speed storage. In our setup, it leaves us with the head node. This node will need to be the first one to be turned on, and should always be properly shutdown.
 
 ## Setting the Time
 
@@ -39,6 +39,7 @@ The time is set using:
 
 ```
 sudo timedatectl set-time 'Y:M:D HH:mm:ss'
+# or individually with: 
 sudo timedatectl set-time 'Y:M:D'
 sudo timedatectl set-time 'HH:mm:ss'
 ```
@@ -46,6 +47,39 @@ sudo timedatectl set-time 'HH:mm:ss'
 The examples above show that you can either give it a full timestamp or a partial one. Keep in mind that time is represented using 24-hour time. You don't want to be 12 hours off!
 
 NOTE: `timedatectl` is unable to set the time if NTP is being used. Stop NTP service before attempting to set time.
+
+## Using the Hardware Clock
+
+By default, the RaspberryPi doesn't have a realtime clock. Installed on the head node is an i2c enabled realtime clock. we need to set this up in software in order for it to be funcitonal
+
+First lets enable the rPi's i2c functionality:
+1. $`sudo raspi-config`
+2. choose 3 Interface options
+3. choose I5 I2C
+4. choose yes
+
+Now let's install the required packages with
+```
+sudo apt update && sudo apt install i2c-tools
+i2cdetect -y 1
+```
+you should see ID #68 present
+
+Now let's enable it with:
+```
+sudo modprobe rtc-ds1307
+echo ds1307 0x68 | sudo tee /sys/class/i2c-adapter/i2c-1/new_device
+sudo hwclock -r
+# if the rtc hasn't been used before. it should return jan 1, 2000
+sudo hwclock -w
+```
+if all went well, let's make the changes persistent:
+```
+echo rtc-ds1307 | sudo tee -a /etc/modules
+echo 'echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device' | sudo tee -a /etc/rc.local
+echo 'sudo hwclock -s' | sudo tee -a /etc/rc.local
+```
+
 
 ## Replacing timesyncd With chrony on the Server
 
