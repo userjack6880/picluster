@@ -1,10 +1,10 @@
 page
-Module 2 - Keeping Time
+Module 5 - Keeping Time
 Set up timesyncd to keep time.
 
 ---
 
-# Module 2 - Keeping Time
+# Module 5 - Keeping Time
 
 ## Objective
 
@@ -128,4 +128,4 @@ pdsh -w pi-hpc-compute0[1-4] chronyc tracking | grep "System time"
 
 Once everybody is pretty much within 0 seconds of NTP time, we're ready for the next module.
 
-## [Next Module - Setup Scheduler](module-3)
+## [Module 7 - The Scheduler](module-7)

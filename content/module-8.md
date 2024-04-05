@@ -1,10 +1,10 @@
 page
-Module 4 - Supporting Software
+Module 8 - Supporting Software
 Install Open MPI and mpi4py
 
 ---
 
-# Module 4 - Supporting Software
+# Module 8 - Supporting Software
 
 ## Objective
 
@@ -63,4 +63,4 @@ Perform the above steps using what you've learend in past modules using `pdsh`. 
 
 *Note: you do not need to extract or build* `mpi4py` *again since it was already extracted and built in a shared directory. Since the architecture on all the nodes are the same, you can simply install it.*
 
-## [Next Module - Hello Worlds](module-5)
+## [Next Module - Hello Worlds](module-9)

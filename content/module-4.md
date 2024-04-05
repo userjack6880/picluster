@@ -1,10 +1,10 @@
 page
-Module 1 - Sharing Storage
+Module 4 - Sharing Storage
 Setting up a simple NFS storage server.
 
 ---
 
-# Module 1 - Sharing Storage
+# Module 4 - Sharing Storage
 
 ## Objective
 
@@ -198,4 +198,4 @@ pi-hpc-head01:/mnt/shared   /shared       nfs4    defaults,user,exec          0 
 
 Mount the shares using `sudo mount -a` and you should see the `pkgs` directory under `/apps` and a home directory for `user` under `/home`.
 
-## [Next Module - Keeping Time](module-2)
+## [Next Module - Keeping Time](module-5)

@@ -1,14 +1,14 @@
 page
-Module 3 - Build and Install Slurm
-Build slurm packages and install it.
+Module 7 - The Scheduler
+Build and install slurm packages.
 
 ---
 
-# Module 3 - Setup Scheduler
+# Module 7 - The Scheduler
 
 ## Objective
 
-**Install, setup and configure Slurm**
+**The Scheduler**
 
 [Slurm Workload Manager](https://schedmd.com), or simply Slurm, resources to users for a duration of time, provides a framework for starting, executing, and monitoring work, and manages a queue of pending jobs. Slurm is essentially the de-facto job scheduler for Linux and is used by most of the world's supercomputers, and you will be installing this on your own cluster.
 
@@ -246,4 +246,4 @@ pi-hpc-compute03
 pi-hpc-compute04
 ```
 
-## [Next Module - Supporting Software](module-4)
+## [Next Module - Supporting Software](module-8)

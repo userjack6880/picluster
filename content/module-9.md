@@ -1,10 +1,10 @@
 page
-Module 5 - Hello Worlds
+Module 9 - Hello World
 Helloing all over the cluster.
 
 ---
 
-# Module 5 - Hello Worlds
+# Module 9 - Hello World
 
 ## Objective
 
@@ -106,4 +106,4 @@ As before, you should see "Hello World" return 16 times.
 
 MPI examples can be found on the [LLNL HPC Tutorials Page](https://hpc-tutorials.llnl.gov/mpi/exercise_1/). Experiment and run a few of these examples.
 
-## [Next Module - Parallel Storage](module-6)
+## [Next Module - Parallel Storage](module-11)

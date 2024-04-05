@@ -26,7 +26,7 @@ In this digial era, the demand for scalable and efficient computing solutions co
 - [Module 8 - Supporting Software](module-8)
 - [Module 9 - Hello World](module-9)
 - Module 10 - Benchmarking
-- Module 11 - Parallel Storage (Optional)
+- [Module 11 - Parallel Storage (Optional)](module-11)
 - Module 12 - GPU Compute (Optional)
 - Module 13 - Basics of Parallel Programming
 - Module 14 - Challenges
