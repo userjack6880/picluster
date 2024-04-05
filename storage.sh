@@ -15,23 +15,23 @@ then
 	useradd -d /home/user -g users -M -p '$5$cOTJhkxlC4$kEFPIJaKPriv16lcwNBsS4dVMT1sC/a9vFPNlZDHug1' -s /bin/bash -u 1001 user
 
 	# copy /etc/hosts
-	cp /mnt/usb/configs/hosts /etc/hosts
+	cp ./configs/hosts /etc/hosts
 
 	# copy /etc/sudoers
-	cp /mnt/usb/configs/sudoers /etc/sudoers
+	cp ./configs/sudoers /etc/sudoers
 
 	# use nmcli to set static IP
 	# nmcli connection modify 'Wired connection 1' ipv4.address 10.0.0.$(($1+50))/24
 	# nmcli connection modify 'Wired connection 1' ipv4.method manual
 
 	# copy dhcpcd.conf
-	cp /mnt/usb/configs/dhcpcd-storage$1.conf /etc/dhcpcd.conf
+	cp ./configs/dhcpcd-storage$1.conf /etc/dhcpcd.conf
 	sed -i "s/10.0.0.xx/10.0.0.$(($1+50))/g" /etc/dhcpcd.conf
 	chown root:netdev /etc/dhcpcd.conf
 	chmod 664 /etc/dhcpcd.conf
 
 	# copy fstab
-	cp /mnt/usb/configs/fstab /etc/fstab
+	cp ./configs/fstab /etc/fstab
 
 	# create mount points
 	mkdir /apps
