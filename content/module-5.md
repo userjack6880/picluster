@@ -33,7 +33,7 @@ The time zone should automatically be set, but if it isn't, you can set it:
 sudo timedatectl set-timezone <time zone>
 ```
 
-If you are unsure what timezones are available, use `timedatectl list-timezones` to list out all available timezones - `grep` can be useful for narrowing the list down.
+If you are unsure what time-zones are available, use `timedatectl list-timezones` to list out all available time-zones - `grep` can be useful for narrowing the list down.
 
 The time is set using:
 

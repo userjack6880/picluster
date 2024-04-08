@@ -10,7 +10,7 @@ Install and configure network storage
 
 **Install, setup and configure Storage Nodes with GlusterFS**
 
-[GlusterFS](https://docs.gluster.org/en/latest/Administrator-Guide/GlusterFS-Introduction/) (short for GNU Cluster FileSystem) is an open source cluster filesystem that uses a "Peer" based architecture and FUSE (filesystem in userspace) client. This way no one node is responsible for managing the system. GlusterFS allows us to pool together storage devices accross nodes as well as it allows us to write to the same file concurrently from different machines. We will be installing and configuring the storage nodes to be GlusterFS peers and configuring all other nodes to be GlusterFS clients.
+[GlusterFS](https://docs.gluster.org/en/latest/Administrator-Guide/GlusterFS-Introduction/) (short for GNU Cluster FileSystem) is an open source cluster filesystem that uses a "Peer" based architecture and FUSE (filesystem in userspace) client. This way no one node is responsible for managing the system. GlusterFS allows us to pool together storage devices across nodes as well as it allows us to write to the same file concurrently from different machines. We will be installing and configuring the storage nodes to be GlusterFS peers and configuring all other nodes to be GlusterFS clients.
 
 ## Install Glusterd on the Storage nodes
 
@@ -34,7 +34,7 @@ pdsh -g storage systemctl status glusterd
 ```
 
 ## Prepare the drives
-Since gluster stores its blocks on top of an existing filesystem, the drives need to be formatted and mounted automatically for gluster to use
+Since glusterd stores its blocks on top of an existing filesystem, the drives need to be formatted and mounted automatically for gluster to use
 
 ```
 pdsh -g storage mkfs.xfs -i size=512 /dev/sda1
@@ -45,7 +45,7 @@ pdsh -g storage mount -a && mount
 
 ## Probe Peers:
 
-In order for gluster to know how to reach the other servers, it needs to probe them.
+In order for glusterd to know how to reach the other servers, it needs to probe them.
 
 From a single storage node w/ an elevated prompt:
 ```
@@ -78,7 +78,8 @@ State: Peer in Cluster (Connected)
 ```
 
 ## Create the Storage Pool
-There are a number of architectures you could implement that would weigth data capacity with resiliency. Since gluster stores its blocks on top of an underlying filesystem, it's very possible to layer gluster with something liks ZFS. In our case, each node only has 1 drive, so we will be setting up a "Dispersed" which allows a combination of speed and redundancy. Other architecture schemes are described [here](https://docs.gluster.org/en/latest/Quick-Start-Guide/Architecture/#types-of-volumes)
+There are a number of architectures you could implement that would weigh data capacity with resiliency. Since gluster stores its blocks on top of an underlying filesystem, it's very possible to layer gluster with something like ZFS. In our case, each node only has 1 drive, so we will be setting up a "Dispersed" which allows a combination of speed and redundancy. Other architecture schemes are described [here](https://docs.gluster.org/en/latest/Quick-Start-Guide/Architecture/#types-of-volumes)
+**Note:** since gluster uses a peer architecture, any redundancy done on the gluster level will impact write performance. expect $\dfrac{link\ bandwidth}{no.\ of\ copies+1}$  
 
 On all storage nodes eg. On the head w/ pdsh:
 ```

@@ -1,6 +1,6 @@
 page
 Module 9 - Hello World
-Helloing all over the cluster.
+Hello-ing all over the cluster.
 
 ---
 

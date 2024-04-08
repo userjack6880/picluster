@@ -8,7 +8,7 @@ Module 10 - Benchmarking
 
 ## Objective
 
-TODO - linpack
+<!--TODO - linpack-->
 
 
 ## Module 11 - 
