@@ -143,8 +143,10 @@ Repeat the above process to stop, disable, and uninstall `systemd-timesyncd`. Wh
 
 You can use `pdsh` from **'pi-hpc-head01'** to issue commands to the compute nodes all at once. Instead of `apt remove`, you will need to use `apt-get -y remove` as `pdsh` is non-interactive. The nodes are configured in a way that you will be allowed to use `sudo`.
 
+since this is the first time we're using pdsh, let's make sure that the node definitions in `/etc/genders` are correct. the only changes you should make are the numbers for nodes. also, if storage nodes aren't present, comment out the line for storage
+
 ```
-pdsh -w pi-hpc-compute[01-04] hostname
+pdsh -g nodes hostname
 ```
 
 On each of the "client" nodes, you'll need to edit `/etc/chrony/chrony.conf` to be the following:
@@ -159,7 +161,7 @@ Note: here, `iburst` is very important; it tells chrony to immediately sync with
 Because `pdsh` is not interactive, you will have to end up logging into each node individually to edit those files. However, the config file has been shared under `/apps/configs` - you can use `pdsh` to copy that file where it needs to be.
 
 ```
-pdsh -w pi-hpc-compute[01-04] sudo cp /apps/configs/chrony-client.conf /etc/chrony/chrony.conf
+pdsh -g nodes sudo cp /apps/configs/chrony-client.conf /etc/chrony/chrony.conf
 ```
 
 Since this is the first time the nodes will have a timesync since they've been booted it, they'll be very off. you can force them to set the time to the server's time immediately by issuing:

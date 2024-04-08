@@ -39,7 +39,7 @@ sudo dpkg -i /apps/pkgs/slurm-head/*.deb
 From the head node, you can use `pdsh` to install required packages on the compute nodes.
 
 ```
-pdsh -w pi-hpc-compute[01-04] sudo dpkg -i /apps/pkgs/slurm-compute/*.deb
+pdsh -g nodes sudo dpkg -i /apps/pkgs/slurm-compute/*.deb
 ```
 
 ## Setup Slurm
@@ -115,7 +115,7 @@ sudo cp /etc/slurm/slurm.conf /shared/slurm.conf
 And on the nodes, move these files to their respective places:
 
 ```
-pdsh -w pi-hpc-compute[01-04] sudo cp /shared/slurm.conf /etc/slurm/slurm.conf
+pdsh -g nodes sudo cp /shared/slurm.conf /etc/slurm/slurm.conf
 ```
 
 ## Copy Munge Key to Nodes
@@ -128,10 +128,10 @@ To provide the necessary authentication between thea head node and compute nodes
 
 ```
 sudo cp /etc/munge/munge.key /shared/munge.key
-pdsh -w pi-hpc-compute[01-04] sudo cp /shared/munge.key /etc/munge/munge.key
-pdsh -w pi-hpc-compute[01-04] sudo chown munge:munge /etc/munge/munge.key
-pdsh -w pi-hpc-compute[01-04] sudo chmod 600 /etc/munge/munge.key
-pdsh -w pi-hpc-compute[01-04] sudo systemctl restart munge
+pdsh -g nodes sudo cp /shared/munge.key /etc/munge/munge.key
+pdsh -g nodes sudo chown munge:munge /etc/munge/munge.key
+pdsh -g nodes sudo chmod 600 /etc/munge/munge.key
+pdsh -g nodes sudo systemctl restart munge
 ```
 
 ## Setup Slurm Database
@@ -217,8 +217,8 @@ sudo sacctmgr -i add cluster <your cluster name>
 As with above, this should work:
 
 ```
-pdsh -w pi-hpc-compute[01-04] sudo systemctl enable slurmd
-pdsh -w pi-hpc-compute[01-04] sudo systemctl start slurmd
+pdsh -g nodes sudo systemctl enable slurmd
+pdsh -g nodes sudo systemctl start slurmd
 ```
 
 If all is good, the output of `sinfo -N -l` should look like the following:
