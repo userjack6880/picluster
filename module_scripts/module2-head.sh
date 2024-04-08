@@ -10,9 +10,9 @@ fi
 if [ -z $2 ]
 then
   echo "Storage range not provided, assuming no storage nodes"
-  sed -ri "s/(pi-hpc-storage.*)/#\1/" /etc/genders 
+  sed -ri "s/^(pi-hpc-storage.*)/#\1/" /etc/genders 
 else
-  sed -ri "s/#(pi-hpc-storage.*)/\1/" /etc/genders
+  sed -ri "s/^#(pi-hpc-storage.*)/\1/" /etc/genders
   sed -ri "s/storage\[..-..\]/storage[$1]/" /etc/genders 
 fi
 
