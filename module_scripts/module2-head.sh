@@ -1,7 +1,20 @@
 if [ -z $1 ]; then
-  echo "please provide range xx-xx";
-  exit 1;
-fi;
+  echo "please provide range xx-xx"
+  exit 1
+else
+  # since you so kindly provided the node numbers,
+  # lets update the /etc/genders file accordingly
+  sed -ri "s/compute\[..-..\]/compute[$1]/" /etc/genders 
+fi
+
+if [ -z $2 ]
+then
+  echo "Storage range not provided, assuming no storage nodes"
+  sed -ri "s/(pi-hpc-storage.*)/#\1/" /etc/genders 
+else
+  sed -ri "s/#(pi-hpc-storage.*)/\1/" /etc/genders
+  sed -ri "s/storage\[..-..\]/storage[$1]/" /etc/genders 
+fi
 
 # stop and uninstall systemd-timesyncd
 
@@ -17,6 +30,10 @@ dpkg -i /apps/pkgs/chrony*.deb
 systemctl stop chrony
 cp /apps/prep-scripts/configs/chrony-server.conf /etc/chrony/chrony.conf
 systemctl start chrony
+
+# since you so kindly provided the node numbers,
+# lets update the /etc/genders file accordingly
+sed -ri "s/compute\[..-..\]/compute[$1]/" /etc/genders
 
 # and time to do it on the compute nodes
 
