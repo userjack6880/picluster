@@ -8,6 +8,10 @@ Module 3 - Networking Configuration
 
 ## Objective
 
+to setup networking between nodes in a way that adheres with current hpc best-practices
+
+**NOTE: the changes made to the cluster in this document have not been reflected throughout the documents, but not much shouldl've chagned.**
+
 ## Installing and configuring isc-dhcp-server on the head:
 
 After basic installation, all the nodes are setup up with static IP's. This isn't desireable for a number of reasons including:
@@ -53,5 +57,5 @@ host pi-hpc-compute01 {
 
 
 
-## Module 4 - 
+## [Next Module - Sharing Storage through NFS](module-4)
 

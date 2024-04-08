@@ -18,7 +18,7 @@ In this digial era, the demand for scalable and efficient computing solutions co
 
 - Module 1 - Hardware Selection and Assembly
 - Module 2 - Operating System Installation
-- Module 3 - Networking Configuration
+- [Module 3 - Networking Configuration](module-3)
 - [Module 4 - Sharing Storage Through NFS](module-4)
 - [Module 5 - Keeping Time](module-5)
 - Module 6 - User Management
