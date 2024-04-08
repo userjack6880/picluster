@@ -54,8 +54,8 @@ then
 
 	# copy public/private keys
 	mkdir /home/admin/.ssh
-	cp /mnt/usb/configs/admin_privkey /home/admin/.ssh/id_rsa
-	cp /mnt/usb/configs/admin_pubkey /home/admin/.ssh/authorized_keys
+	cp ./configs/admin_privkey /home/admin/.ssh/id_rsa
+	cp ./configs/admin_pubkey /home/admin/.ssh/authorized_keys
 	chown -R admin:admin /home/admin/.ssh
 	chmod 600 /home/admin/.ssh/id_rsa
 	chmod 644 /home/admin/.ssh/authorized_keys
@@ -73,6 +73,11 @@ then
 	rm /var/cache/apt/archives/*.deb
 	apt-get -y --download-only install nfs-kernel-server chrony
 	cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs
+
+	mkdir /mnt/apps/pkgs/isc-dhcp-server
+	rm /var/cache/apt/archives/*.deb
+	apt-get -y --download-only install isc-dhcp-server
+	cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/isc-dhcp-server
 
 	mkdir /mnt/apps/pkgs/mariadb-server
 	rm /var/cache/apt/archives/*.deb
@@ -116,24 +121,30 @@ then
 	chmod -R 770 /apps/src/mpi4py
 
 	# make a copy of the files on this drive and save in apps/scripts and make it run only by root
-	cp -r /mnt/usb /mnt/apps/prep-scripts
+	cp -r . /mnt/apps/prep-scripts
 	chown -R root:root /mnt/apps/prep-scripts
 	chmod -R 700 /mnt/apps/prep-scripts
 
 	# copy /etc/hosts
-	cp /mnt/usb/configs/hosts /etc/hosts
+	cp ./configs/hosts /etc/hosts
 
 	# copy /etc/sudoers
-	cp /mnt/usb/configs/sudoers /etc/sudoers
+	cp ./configs/sudoers /etc/sudoers
 
 	# copy dhcpcd.conf
-	cp /mnt/usb/configs/dhcpcd-head.conf /etc/dhcpcd.conf
+	cp ./configs/dhcpcd-head.conf /etc/dhcpcd.conf
 	chown root:netdev /etc/dhcpcd.conf
 	chmod 664 /etc/dhcpcd.conf
 
+	# copy genders file
+	cp ./configs/genders /etc/genders
+
 	# copy chrony.conf to an accessible location
 	mkdir /mnt/apps/configs
-	cp /mnt/usb/configs/chrony-client.conf /mnt/apps/configs
+	cp ./configs/chrony-client.conf /mnt/apps/configs
+
+	# copy chrony.conf to an accessible location
+	cp ./configs/dhcpd.conf /mnt/apps/configs
 
 	# wait
 	echo "done!"

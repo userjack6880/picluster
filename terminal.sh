@@ -15,18 +15,18 @@ then
 	useradd -d /home/user -g users -m -p '$5$cOTJhkxlC4$kEFPIJaKPriv16lcwNBsS4dVMT1sC/a9vFPNlZDHug1' -s /bin/bash -u 1001 user
 
 	# copy /etc/hosts
-	cp /mnt/usb/configs/hosts /etc/hosts
+	cp ./configs/hosts /etc/hosts
 
 	# copy /etc/sudoers
-	cp /mnt/usb/configs/sudoers /etc/sudoers
+	cp ./configs/sudoers /etc/sudoers
 
 	# copy dhcpcd.conf
-	cp /mnt/usb/configs/dhcpcd-terminal.conf /etc/dhcpcd.conf
+	cp ./configs/dhcpcd-terminal.conf /etc/dhcpcd.conf
 	chown root:netdev /etc/dhcpcd.conf
 	chmod 664 /etc/dhcpcd.conf
 
 	# copy boot config
-	cp /mnt/usb/configs/terminal-boot.txt /boot/config.txt
+	cp ./configs/terminal-boot.txt /boot/config.txt
 	chmod 755 /boot/config.txt
 
 	# wait

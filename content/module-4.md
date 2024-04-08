@@ -1,10 +1,10 @@
 page
-Module 1 - Sharing Storage
+Module 4 - Sharing Storage
 Setting up a simple NFS storage server.
 
 ---
 
-# Module 1 - Sharing Storage
+# Module 4 - Sharing Storage
 
 ## Objective
 
@@ -16,10 +16,10 @@ A few things you will need to know:
 
 - There are two interactive users:
   - `admin` - this will be the user you will do administrative tasks with - this user has `sudo` access.
-  - `user` - this will be an unprivleged user
+  - `user` - this will be an unprivileged user
   - both users have the same password - `tuxcluster`
-- Your cluster will not have direct access to the internet. All packages you will need will be included on the pre-formated drive.
-- Your cluster will be accessible using a priavte IP range. The optional **'pi-hpc-terminal'** node will be configured to have an interface in this private range.
+- Your cluster will not have direct access to the internet. All packages you will need will be included on the pre-formatted drive.
+- Your cluster will be accessible using a private IP range. The optional **'pi-hpc-terminal'** node will be configured to have an interface in this private range.
   - It is suggested that you use `10.0.0.101` with a subnet of `255.255.255.0` if you aren't using a Pi Zero terminal.
 - The nodes will be assigned names and IP addresses as follows:
   - **pi-hpc-head01** - `10.0.0.2`
@@ -47,7 +47,7 @@ Take node of the disk you'll need to add a partition to. It'll be the (approxima
 Disk /dev/sda: 119.24 GiB, 128035676160 bytes, 250069780 sectors
 ```
 
-then your disk is `/dev/sda`.
+Then your disk is `/dev/sda`.
 
 Now, we need to add the partition.
 
@@ -198,4 +198,4 @@ pi-hpc-head01:/mnt/shared   /shared       nfs4    defaults,user,exec          0 
 
 Mount the shares using `sudo mount -a` and you should see the `pkgs` directory under `/apps` and a home directory for `user` under `/home`.
 
-## [Next Module - Keeping Time](module-2)
+## [Next Module - Keeping Time](module-5)
