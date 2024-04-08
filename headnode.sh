@@ -74,6 +74,11 @@ then
 	apt-get -y --download-only install nfs-kernel-server chrony
 	cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs
 
+	mkdir /mnt/apps/pkgs/isc-dhcp-server
+	rm /var/cache/apt/archives/*.deb
+	apt-get -y --download-only install isc-dhcp-server
+	cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/isc-dhcp-server
+
 	mkdir /mnt/apps/pkgs/mariadb-server
 	rm /var/cache/apt/archives/*.deb
 	apt-get -y --download-only install mariadb-server gawk
