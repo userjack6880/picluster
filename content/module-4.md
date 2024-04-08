@@ -47,7 +47,7 @@ Take node of the disk you'll need to add a partition to. It'll be the (approxima
 Disk /dev/sda: 119.24 GiB, 128035676160 bytes, 250069780 sectors
 ```
 
-then your disk is `/dev/sda`.
+Then your disk is `/dev/sda`.
 
 Now, we need to add the partition.
 

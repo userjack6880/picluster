@@ -57,27 +57,27 @@ The examples above show that you can either give it a full timestamp or a partia
 [Adding a Real Time Clock to your Raspberry Pi](https://thepihut.com/blogs/raspberry-pi-tutorials/17209332-adding-a-real-time-clock-to-your-raspberry-pi)
 </span>
 
-By default, the RaspberryPi doesn't have a realtime clock. Installed on the head node is an i2c enabled realtime clock. we need to set this up in software in order for it to be functional
+By default, the RaspberryPi doesn't have a realtime clock. Installed on the head node is an i2c enabled realtime clock. We need to set this up in software in order for it to be functional
 
 First lets enable the rPi's i2c functionality:
 1. `sudo raspi-config`
-2. select 3 Interface options
-3. select I5 I2C
-4. select yes
+2. Select 3 Interface options
+3. Select I5 I2C
+4. Select yes
 
 Now let's install the required packages and check for the device by issuing:
 ```
 sudo apt update && sudo apt install i2c-tools
 i2cdetect -y 1
 ```
-you should see ID #68 present
+You should see ID #68 present
 
 Now let's enable it with:
 ```
 sudo modprobe rtc-ds1307
 echo ds1307 0x68 | sudo tee /sys/class/i2c-adapter/i2c-1/new_device
 sudo hwclock -r
-# if the rtc hasn't been used before. it should return jan 1, 2000. ensure the system time is correct and correct it with:
+# if the rtc hasn't been used before. It should return jan 1, 2000. Ensure the system time is correct and correct it with:
 sudo hwclock -w
 ```
 if all went well, let's make the changes persistent:
@@ -143,7 +143,7 @@ Repeat the above process to stop, disable, and uninstall `systemd-timesyncd`. Wh
 
 You can use `pdsh` from **'pi-hpc-head01'** to issue commands to the compute nodes all at once. Instead of `apt remove`, you will need to use `apt-get -y remove` as `pdsh` is non-interactive. The nodes are configured in a way that you will be allowed to use `sudo`.
 
-since this is the first time we're using pdsh, let's make sure that the node definitions in `/etc/genders` are correct. the only changes you should make are the numbers for nodes. also, if storage nodes aren't present, comment out the line for storage
+Since this is the first time we're using pdsh, let's make sure that the node definitions in `/etc/genders` are correct. The only changes you should make are the numbers for nodes. Also, if storage nodes aren't present, comment out the line for storage
 
 ```
 pdsh -g nodes hostname
@@ -164,7 +164,7 @@ Because `pdsh` is not interactive, you will have to end up logging into each nod
 pdsh -g nodes sudo cp /apps/configs/chrony-client.conf /etc/chrony/chrony.conf
 ```
 
-Since this is the first time the nodes will have a timesync since they've been booted it, they'll be very off. you can force them to set the time to the server's time immediately by issuing:
+Since this is the first time the nodes will have a timesync since they've been booted it, they'll be very off. You can force them to set the time to the server's time immediately by issuing:
 ```
 pdsh -g nodes "sudo chronyc makestep"
 ```

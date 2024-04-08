@@ -1,6 +1,6 @@
 page
 Module 11 - Install And Setup GlusterFS
-install and configure network storage
+Install and configure network storage
 
 ---
 
@@ -10,11 +10,11 @@ install and configure network storage
 
 **Install, setup and configure Storage Nodes with GlusterFS**
 
-[GlusterFS](https://docs.gluster.org/en/latest/Administrator-Guide/GlusterFS-Introduction/) (short for GNU Cluster FileSystem) is an open source cluster filesystem that uses a "Peer" based architecture and FUSE (filesystem in userspace) client. this way no one node is responsible for managing the system. GlusterFS allows us to pool together storage devices accross nodes as well as it allows us to write to the same file concurrently from different machines. We will be installing and configuring the storage nodes to be GlusterFS peers and configuring all other nodes to be GlusterFS clients.
+[GlusterFS](https://docs.gluster.org/en/latest/Administrator-Guide/GlusterFS-Introduction/) (short for GNU Cluster FileSystem) is an open source cluster filesystem that uses a "Peer" based architecture and FUSE (filesystem in userspace) client. This way no one node is responsible for managing the system. GlusterFS allows us to pool together storage devices accross nodes as well as it allows us to write to the same file concurrently from different machines. We will be installing and configuring the storage nodes to be GlusterFS peers and configuring all other nodes to be GlusterFS clients.
 
 ## Install Glusterd on the Storage nodes
 
-The storage nodes will be storage daemon peers. any one can be reached to access the pool.
+The storage nodes will be storage daemon peers. Any one can be reached to access the pool.
 
 From the head node:
 
@@ -34,7 +34,7 @@ pdsh -g storage systemctl status glusterd
 ```
 
 ## Prepare the drives
-since gluster stores its blocks on top of an existing filesystem, the drives need to be formatted and mounted automatically for gluster to use
+Since gluster stores its blocks on top of an existing filesystem, the drives need to be formatted and mounted automatically for gluster to use
 
 ```
 pdsh -g storage mkfs.xfs -i size=512 /dev/sda1
@@ -45,14 +45,14 @@ pdsh -g storage mount -a && mount
 
 ## Probe Peers:
 
-in order for gluster to know how to reach the other servers, it needs to probe them.
+In order for gluster to know how to reach the other servers, it needs to probe them.
 
 From a single storage node w/ an elevated prompt:
 ```
 for i in {02..04}; do gluster peer probe pi-hpc-compute$i; done
 ```
 
-replace "04" in the loop bounds with however many storage nodes are present
+Replace "04" in the loop bounds with however many storage nodes are present
 
 now from any other storage node, run:
 ```
@@ -80,7 +80,7 @@ State: Peer in Cluster (Connected)
 ## Create the Storage Pool
 There are a number of architectures you could implement that would weigth data capacity with resiliency. Since gluster stores its blocks on top of an underlying filesystem, it's very possible to layer gluster with something liks ZFS. In our case, each node only has 1 drive, so we will be setting up a "Dispersed" which allows a combination of speed and redundancy. Other architecture schemes are described [here](https://docs.gluster.org/en/latest/Quick-Start-Guide/Architecture/#types-of-volumes)
 
-On all storage nodes eg. on the head w/ pdsh:
+On all storage nodes eg. On the head w/ pdsh:
 ```
 sudo mkdir -p /data/brick1/gv0
 ```
@@ -115,19 +115,19 @@ storage.fips-mode-rchecksum: on
 ```
 
 ## Testing the pool
-before we configure all the nodes to connected to the pool on boot, we should make sure the pool works. from any node:
+before we configure all the nodes to connected to the pool on boot, we should make sure the pool works. From any node:
 ```
 sudo mkdir /mnt/test
 sudo mount -t glusterfs pi-hpc-storage01:/gv0 /mnt/test
 ```
-You should be able to create and view files here. Once you're done. lets clean up w/
+You should be able to create and view files here. Once you're done. Lets clean up w/
 ```
 sudo umount /mnt/test
 sudo rmdir /mnt/test
 ```
 
 ## Configuring Clients
-now that the GlusterFS pool is running, we need to connect all other nodes to it. pdsh makes this easy.
+Now that the GlusterFS pool is running, we need to connect all other nodes to it. Pdsh makes this easy.
 
 ```
 sudo mkdir /mnt/scratch

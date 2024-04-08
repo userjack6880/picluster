@@ -72,7 +72,7 @@ Let the Pi go through it's initial boot cycle (boot, then reboot). Once it has f
 
 *The following should be done with an Internet connection:*
 
-if you plan on using a usb drive:
+If you plan on using a usb drive:
 ```
 sudo su
 mkdir /mnt/usb
@@ -83,7 +83,7 @@ cd /mnt/usb
 
 Ensure `ls /mnt/usb` yields the scripts and not a folder containing them.
 
-if you plan on using git:
+If you plan on using git:
 ```
 sudo su
 apt install git -y
