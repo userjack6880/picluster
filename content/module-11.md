@@ -79,7 +79,7 @@ State: Peer in Cluster (Connected)
 
 ## Create the Storage Pool
 There are a number of architectures you could implement that would weigh data capacity with resiliency. Since gluster stores its blocks on top of an underlying filesystem, it's very possible to layer gluster with something like ZFS. In our case, each node only has 1 drive, so we will be setting up a "Dispersed" which allows a combination of speed and redundancy. Other architecture schemes are described [here](https://docs.gluster.org/en/latest/Quick-Start-Guide/Architecture/#types-of-volumes)
-**Note:** since gluster uses a peer architecture, any redundancy done on the gluster level will impact write performance. expect $\dfrac{link\ bandwidth}{no.\ of\ copies+1}$  
+**Note:** since gluster uses a peer architecture, any redundancy done on the gluster level will impact write performance. expect less than (link speed)/(no of copies +1) <!--if/when inline latex is supported, use this instead: $\dfrac{link\ bandwidth}{no.\ of\ copies+1}$-->
 
 On all storage nodes eg. On the head w/ pdsh:
 ```
