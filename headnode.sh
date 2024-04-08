@@ -143,6 +143,9 @@ then
 	mkdir /mnt/apps/configs
 	cp ./configs/chrony-client.conf /mnt/apps/configs
 
+	# copy chrony.conf to an accessible location
+	cp ./configs/dhcpd.conf /mnt/apps/configs
+
 	# wait
 	echo "done!"
 	sleep 10
