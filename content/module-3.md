@@ -14,6 +14,11 @@ to setup networking between nodes in a way that adheres with current hpc best-pr
 
 ## Installing and configuring isc-dhcp-server on the head:
 
+<span class="small">resources:
+[isc-dhcp-server installation](https://ubuntu.com/server/docs/how-to-install-and-configure-isc-dhcp-server),
+[dhcpd.conf](https://linux.die.net/man/5/dhcpd.conf)
+</span>
+
 After basic installation, all the nodes are setup up with static IP's. This isn't desireable for a number of reasons including:
 1. Any changes in ip's must be reflected accross all nodes manually
 2. Nodes will not wait for the nead to be up before progressing past the network section of their bootstrap routine
