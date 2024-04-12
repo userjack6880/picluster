@@ -2,8 +2,10 @@
 if ping -c 1 72.14.177.74 &> /dev/null
 then
 
-	# update locales
+	# update locales (eww, purge the british)
 	perl -pi -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
+	sudo sed -ri 's/en_GB.UTF-8 UTF-8/# en_GB.UTF-8 UTF-8/' /etc/locale.gen
+	sudo sed -ri 's/LANG=en_GB.UTF-8/LANG=en_US.UTF-8/' /etc/default/locale
 
 	# update repos
 
