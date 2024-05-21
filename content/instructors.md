@@ -24,7 +24,7 @@ A few things you will need to know:
   - `admin` - this will be the user you will do administrative tasks with - this user has `sudo` access.
   - `user` - this will be an unprivleged user
   - both users have the same password - `tuxcluster`
-- Your cluster will not have direct access to the internet. All packages you will need will be included on the pre-formated drive.
+- Your cluster will not have direct access to the internet except during this initial setup stage. The setup scripts will ensure you have all the pacakges you'll need later.
 - Your cluster will be accessible using a priavte IP range. The optional **'pi-hpc-terminal'** node will be configured to have an interface in this private range.
   - It is suggested that you use `10.0.0.101` with a subnet of `255.255.255.0`/`CIDR /24` if you aren't using a Pi Zero terminal.
 - The nodes will be assigned names and IP addresses as follows:

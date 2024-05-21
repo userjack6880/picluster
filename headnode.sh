@@ -30,8 +30,8 @@ then
 	fi
 
 	# add to fstab
-	blkid | grep /dev/sda1 | awk '{ print $5 "\t/home\text4\tdefaults\t0\t2" }' >> -a /etc/fstab
-	blkid | grep /dev/sda2 | awk '{ print $5 "\t/mnt/apps\text4\tdefaults\t0\t2" }' >> -a /etc/fstab
+	blkid | grep /dev/sda1 | awk '{ print $5 "\t/home\text4\tdefaults\t0\t2" }' >> /etc/fstab
+	blkid | grep /dev/sda2 | awk '{ print $5 "\t/mnt/apps\text4\tdefaults\t0\t2" }' >> /etc/fstab
 
 	# mount all
 	mount -a
