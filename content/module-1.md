@@ -19,11 +19,9 @@ A few things you will need to know:
   - `user` - this will be an unprivleged user
   - both users have the same password - `tuxcluster`
 - Your cluster will not have direct access to the internet. All packages you will need will be included on the pre-formated drive.
-- Your cluster will be accessible using a priavte IP range. The optional **'pi-hpc-terminal'** node will be configured to have an interface in this private range.
-  - It is suggested that you use `10.0.0.101` with a subnet of `255.255.255.0` if you aren't using a Pi Zero terminal.
+- Your cluster will be accessible using a priavte IP range. It is suggested that you use `10.0.0.101` with a subnet of `255.255.255.0`.
 - The nodes will be assigned names and IP addresses as follows:
   - **pi-hpc-head01** - `10.0.0.2`
-  - **pi-hpc-terminal** - `10.0.0.101`
   - **pi-hpc-compute[01-40]** - `10.0.0.11-50`
   - **pi-hpc-storage[01-40]** - `10.0.0.51-90`
 
@@ -60,7 +58,7 @@ At this point, you can press `m` to view your options. The key ones you'll need 
 - `n` : add a new partition
 - `w` : write table to disk and exit
 
-You will want to create a *primary* partition, it will be the third partition on the drive, and will go from the last free sector to the end of the disk. Essentially all default options.
+You will want to create a *primary* partition, it will be the third partition on the drive, and will go from the last free sector to the end of the disk (i.e. the default values). Essentially all default options.
 
 Note: `fdisk` may complain about an existing filesystem signature on the partition - this is fine, as this system may have been reused and some residual partitioning signatures are left behind - acknowledge it and continue on.
 
@@ -103,7 +101,13 @@ Now, find the partition id of the partition - we will need this to add it to `/e
 sudo blkid /dev/sda3
 ```
 
-The output should include a portion similar to `PARTUUID="6B728F42-03"`. Add this to `/etc/fstab` using `vim`. The line you will need to add will look like the ones above it, except with the partition id you just found. The `fstab` file lists all available disk partitions, file systems, and datasources and where they are mounted on the system's file structure.
+The output should include a portion similar to `PARTUUID="6B728F42-03"`. Add this to `/etc/fstab` using the `vim` editor (remember to use `sudo`!). The line should look like this:
+
+```
+PARTUUID="6B728F42-03"  /mnt/shared      ext4    defaults     0      2
+```
+
+The `fstab` file lists all available disk partitions, file systems, and datasources and where they are mounted on the system's file structure. In our case, we are mounting the partition of the disk we just formatted to `/mnt/shared` using the `ext4` filesystem.
 
 Once you've added the new line, mount the file system:
 
@@ -170,7 +174,7 @@ If you want to make a change to `/etc/exports` after the NFS server has been sta
 [ping](https://linux.die.net/man/8/ping)
 </span>
 
-The following will need to be done on all nodes (excluding **'pi-hpc-terminal'**) except the storage nodes - those will be preconfigured.
+The following will need to be done on all nodes *except for* the **head node**. You can access the rest of the nodes from the head-node by using `ssh` and the hostname of the node (e.g. `pi-hpc-compute01`). This section can be destructive, so be sure you are not on the head node when doing these steps.
 
 The first step will be to remove the local home directory for `admin`:
 
@@ -197,5 +201,7 @@ pi-hpc-head01:/mnt/shared   /shared       nfs4    defaults,user,exec          0 
 ```
 
 Mount the shares using `sudo mount -a` and you should see the `pkgs` directory under `/apps` and a home directory for `user` under `/home`.
+
+Repeat above for every other node.
 
 ## [Next Module - Keeping Time](module-2)

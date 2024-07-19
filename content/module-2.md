@@ -99,7 +99,7 @@ You can check the status of `chrony` using `chronyc tracking` and see if it's ac
 [grep](https://linux.die.net/man/1/grep)
 </span>
 
-Repeat the above process to stop, disable, and uninstall `systemd-timesyncd`. When installing `chrony`. Do not do this on **'pi-hpc-terminal'**.
+Repeat the above process to stop, disable, and uninstall `systemd-timesyncd`. When installing `chrony`.
 
 You can use `pdsh` from **'pi-hpc-head01'** to issue commands to the compute nodes all at once. Instead of `apt remove`, you will need to use `apt-get -y remove` as `pdsh` is non-interactive. The nodes are configured in a way that you will be allowed to use `sudo`.
 

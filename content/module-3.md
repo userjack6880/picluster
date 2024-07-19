@@ -12,7 +12,7 @@ Build slurm packages and install it.
 
 [Slurm Workload Manager](https://schedmd.com), or simply Slurm, resources to users for a duration of time, provides a framework for starting, executing, and monitoring work, and manages a queue of pending jobs. Slurm is essentially the de-facto job scheduler for Linux and is used by most of the world's supercomputers, and you will be installing this on your own cluster.
 
-## Install MariaDB
+## Install MariaDB on the Head Node
 
 <span class="small">resources:
 [mariadb](https://mariadb.org/documentation/)
@@ -57,7 +57,7 @@ sudo gzip -d /etc/slurm/slurm.conf.simple.gz
 sudo mv /etc/slurm/slurm.conf.simple /etc/slurm/slurm.conf
 ```
 
-Now edit the config to reflect your configuration (changed and added lines are shown):
+Now edit the config to reflect your configuration (only *changed and added lines* are shown):
 
 ```
 ## General
@@ -106,7 +106,7 @@ sudo chown slurm:slurm /etc/slurm/slurmdbd.conf
 sudo chmod 600 /etc/slurm/slurmdbd.conf
 ```
 
-Now copy these files to where all of the nodes can get the files:
+Now copy the slurm config to where all of the nodes can see it:
 
 ```
 sudo cp /etc/slurm/slurm.conf /shared/slurm.conf

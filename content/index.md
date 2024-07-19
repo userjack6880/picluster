@@ -16,6 +16,7 @@ Instructions are provided assuming you are using the recommended hardware this g
 - 1 Raspberry Pi 4B - Head Node
   - 2 GB+ RAM
   - 120 GB+ SSD connected via USB
+  - External Real-Time Clock (RTC)
 - 4+ Raspberry Pi 4B (up to 40) - Compute Nodes
   - 4 GB+ RAM
 - Network Switch
