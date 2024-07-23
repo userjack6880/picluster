@@ -38,8 +38,8 @@ If you are unsure what timezones are available, use `timedatectl list-timezones`
 The time is set using:
 
 ```
-sudo timedatectl set-time 'Y:M:D HH:mm:ss'
-sudo timedatectl set-time 'Y:M:D'
+sudo timedatectl set-time 'YYY-MM-DD HH:mm:ss'
+sudo timedatectl set-time 'YYY-MM-DD'
 sudo timedatectl set-time 'HH:mm:ss'
 ```
 
