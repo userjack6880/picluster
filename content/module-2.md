@@ -123,7 +123,7 @@ pdsh -w pi-hpc-compute[01-04] sudo cp /apps/configs/chrony-client.conf /etc/chro
 Give the client nodes some time to come back into sync with the server. You can monitor this by using this command.
 
 ```
-pdsh -w pi-hpc-compute0[1-4] chronyc tracking | grep "System time"
+pdsh -w pi-hpc-compute[01-04] chronyc tracking | grep "System time"
 ```
 
 Once everybody is pretty much within 0 seconds of NTP time, we're ready for the next module.
