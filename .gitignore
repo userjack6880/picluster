@@ -5,3 +5,4 @@ images/
 index.php
 .DS_Store
 .obsidian/
+*.img*

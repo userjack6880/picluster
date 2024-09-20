@@ -18,18 +18,18 @@ then
 
 	# move admin home directory to /var/tmp
 
-	cp -r /home/admin /var/tmp
-	rm -r /home/admin
+	# cp -r /home/admin /var/tmp
+	# rm -r /home/admin
 
 	# create mount points
 	mkdir /mnt/apps
 
-	# if formatting disks, do it here
-	if [ "$1" == "format" ]; then
-		fdisk /dev/sda
-		mke2fs -t ext4 /dev/sda1
-		mke2fs -t ext4 /dev/sda2
-	fi
+	# # if formatting disks, do it here
+	# if [ "$1" == "format" ]; then
+	# 	fdisk /dev/sda
+	# 	mke2fs -t ext4 /dev/sda1
+	# 	mke2fs -t ext4 /dev/sda2
+	# fi
 
 	# add to fstab
 	blkid | grep /dev/sda1 | awk '{ print $5 "\t/home\text4\tdefaults\t0\t2" }' >> -a /etc/fstab
@@ -44,8 +44,8 @@ then
 
 	# copy admin home back to the new /home
 
-	cp -r /var/tmp/admin /home
-	rm -r /var/tmp/admin
+	# cp -r /var/tmp/admin /home
+	# rm -r /var/tmp/admin
 
 	# fix permissions
 
@@ -133,10 +133,10 @@ then
 	# copy /etc/sudoers
 	cp ./configs/sudoers /etc/sudoers
 
-	# copy dhcpcd.conf
-	cp ./configs/dhcpcd-head.conf /etc/dhcpcd.conf
-	chown root:netdev /etc/dhcpcd.conf
-	chmod 664 /etc/dhcpcd.conf
+	# # copy dhcpcd.conf
+	# cp ./configs/dhcpcd-head.conf /etc/dhcpcd.conf
+	# chown root:netdev /etc/dhcpcd.conf
+	# chmod 664 /etc/dhcpcd.conf
 
 	# copy genders file
 	cp ./configs/genders /etc/genders
@@ -145,8 +145,8 @@ then
 	mkdir /mnt/apps/configs
 	cp ./configs/chrony-client.conf /mnt/apps/configs
 
-	# copy chrony.conf to an accessible location
-	cp ./configs/dhcpd.conf /mnt/apps/configs
+	# # copy chrony.conf to an accessible location
+	# cp ./configs/dhcpd.conf /mnt/apps/configs
 
 	# wait
 	echo "done!"
