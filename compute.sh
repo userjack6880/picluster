@@ -23,10 +23,10 @@ then
 	cp ./configs/sudoers /etc/sudoers
 
 	# # copy dhcpcd.conf
-	cp ./configs/dhcpcd-compute.conf /etc/dhcpcd.conf
-	sed -i "s/10.0.0.xx/10.0.0.$(($1+10))/g" /etc/dhcpcd.conf
-	chown root:netdev /etc/dhcpcd.conf
-	chmod 664 /etc/dhcpcd.conf
+	# cp ./configs/dhcpcd-compute.conf /etc/dhcpcd.conf
+	# sed -i "s/10.0.0.xx/10.0.0.$(($1+10))/g" /etc/dhcpcd.conf
+	# chown root:netdev /etc/dhcpcd.conf
+	# chmod 664 /etc/dhcpcd.conf
 
 	# use nmcli to set static IP
 	# nmcli connection modify 'Wired connection 1' ipv4.address 10.0.0.$(($1+10))/24
