@@ -32,7 +32,9 @@ then
 	# rm -r /home/admin
 
 	# create mount points
-	mkdir /mnt/apps
+	# mkdir /mnt/apps
+	# removing the /apps prefix since it's no longer on another block device
+	mkdir /apps
 
 	# # if formatting disks, do it here
 	# if [ "$1" == "format" ]; then
@@ -42,8 +44,9 @@ then
 	# fi
 
 	# add to fstab
-	blkid | grep /dev/sda1 | awk '{ print $5 "\t/home\text4\tdefaults\t0\t2" }' >> -a /etc/fstab
-	blkid | grep /dev/sda2 | awk '{ print $5 "\t/mnt/apps\text4\tdefaults\t0\t2" }' >> -a /etc/fstab
+	# not needed for single drive
+	# blkid | grep /dev/sda1 | awk '{ print $5 "\t/home\text4\tdefaults\t0\t2" }' >> -a /etc/fstab
+	# blkid | grep /dev/sda2 | awk '{ print $5 "\t/mnt/apps\text4\tdefaults\t0\t2" }' >> -a /etc/fstab
 
 	# mount all
 	mount -a
@@ -59,8 +62,9 @@ then
 
 	# fix permissions
 
-	chown -R admin:admin /home/admin
-	chown -R root:admin /mnt/apps
+	# not ndeded since the home directory is staying on /
+	# chown -R admin:admin /home/admin
+	# chown -R root:admin /mnt/apps
 
 	chmod g+w /mnt/apps
 
@@ -71,71 +75,84 @@ then
 	chown -R admin:admin /home/admin/.ssh
 	chmod 600 /home/admin/.ssh/id_rsa
 	chmod 644 /home/admin/.ssh/authorized_keys
+	# make ssh to root possible
+	mkdir /root/.ssh
+	cp /home/rocky/.ssh/* /root/.ssh/
 
 	# create additional users
-	useradd -d /home/user -g users -M -p '$5$cOTJhkxlC4$kEFPIJaKPriv16lcwNBsS4dVMT1sC/a9vFPNlZDHug1' -s /bin/bash -u 1001 user
-	mkdir /home/user
-	cp /home/admin/.bashrc /home/user/.bashrc
-	cp /home/admin/.profile /home/user/.profile
-	chown -R user:users /home/user
+	# -m will make and set the home directory
+	useradd -m -g users -p '$5$cOTJhkxlC4$kEFPIJaKPriv16lcwNBsS4dVMT1sC/a9vFPNlZDHug1' -s /bin/bash -u 1001 user
+	#        ^- uneeded w/ -m
+	# mkdir /home/user
+	# cp /home/admin/.bashrc /home/user/.bashrc
+	# cp /home/admin/.profile /home/user/.profile
+	# chown -R user:users /home/user
 
-	# download needed packages to /apps/pkgs
-	mkdir /mnt/apps/pkgs
-	rm -r /mnt/apps/pkgs/*.deb
-	rm /var/cache/apt/archives/*.deb
-	apt-get -y --download-only install nfs-kernel-server chrony
-	cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs
-
-	mkdir /mnt/apps/pkgs/isc-dhcp-server
-	rm /var/cache/apt/archives/*.deb
-	apt-get -y --download-only install isc-dhcp-server
-	cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/isc-dhcp-server
-
-	mkdir /mnt/apps/pkgs/mariadb-server
-	rm /var/cache/apt/archives/*.deb
-	apt-get -y --download-only install mariadb-server gawk
-	cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/mariadb-server
-
-	mkdir /mnt/apps/pkgs/slurm-head
-	rm /var/cache/apt/archives/*.deb
-	apt-get -y --download-only install slurm-wlm slurmdbd slurm-client 
-	cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/slurm-head
-
-	mkdir /mnt/apps/pkgs/slurm-compute
-	rm /var/cache/apt/archives/*.deb
-	apt-get -y --download-only install slurmd slurm-client
-	cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/slurm-compute
-
-	mkdir /mnt/apps/pkgs/openmpi
-	rm /var/cache/apt/archives/*.deb
-	apt-get -y --download-only install openmpi-bin openmpi-common libopenmpi-dev libopenmpi3 libltdl7
-	cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/openmpi
-
-	mkdir /mnt/apps/pkgs/glusterfs-server
-	rm /var/cache/apt/archives/*.deb
-	apt-get -y --download-only install glusterfs-server
-	cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/glusterfs-server
-
-	mkdir /mnt/apps/pkgs/glusterfs-client
-	rm /var/cache/apt/archives/*.deb
-	apt-get -y --download-only install glusterfs-client
-	cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/glusterfs-client
-
-	# mkdir /mnt/apps/pkgs/mpich
+	# # download needed packages to /apps/pkgs
+	# mkdir /mnt/apps/pkgs
+	# rm -r /mnt/apps/pkgs/*.deb
 	# rm /var/cache/apt/archives/*.deb
-	# apt-get -y --download-only install mpich
-	# cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/mpich
+	# apt-get -y --download-only install nfs-kernel-server chrony
+	# cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs
 
-	mkdir /mnt/apps/src
-	mkdir /mnt/apps/src/mpi4py
+	# mkdir /mnt/apps/pkgs/isc-dhcp-server
+	# rm /var/cache/apt/archives/*.deb
+	# apt-get -y --download-only install isc-dhcp-server
+	# cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/isc-dhcp-server
+
+	# mkdir /mnt/apps/pkgs/mariadb-server
+	# rm /var/cache/apt/archives/*.deb
+	# apt-get -y --download-only install mariadb-server gawk
+	# cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/mariadb-server
+
+	# mkdir /mnt/apps/pkgs/slurm-head
+	# rm /var/cache/apt/archives/*.deb
+	# apt-get -y --download-only install slurm-wlm slurmdbd slurm-client 
+	# cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/slurm-head
+
+	# mkdir /mnt/apps/pkgs/slurm-compute
+	# rm /var/cache/apt/archives/*.deb
+	# apt-get -y --download-only install slurmd slurm-client
+	# cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/slurm-compute
+
+	# mkdir /mnt/apps/pkgs/openmpi
+	# rm /var/cache/apt/archives/*.deb
+	# apt-get -y --download-only install openmpi-bin openmpi-common libopenmpi-dev libopenmpi3 libltdl7
+	# cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/openmpi
+
+	# mkdir /mnt/apps/pkgs/glusterfs-server
+	# rm /var/cache/apt/archives/*.deb
+	# apt-get -y --download-only install glusterfs-server
+	# cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/glusterfs-server
+
+	# mkdir /mnt/apps/pkgs/glusterfs-client
+	# rm /var/cache/apt/archives/*.deb
+	# apt-get -y --download-only install glusterfs-client
+	# cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/glusterfs-client
+
+	# # mkdir /mnt/apps/pkgs/mpich
+	# # rm /var/cache/apt/archives/*.deb
+	# # apt-get -y --download-only install mpich
+	# # cp /var/cache/apt/archives/*.deb /mnt/apps/pkgs/mpich
+
+	mkdir -p /mnt/apps/src/mpi4py
 	wget https://github.com/mpi4py/mpi4py/releases/download/3.1.5/mpi4py-3.1.5.tar.gz -P /apps/src/mpi4py
 	chown -R root:users /apps/src/mpi4py
 	chmod -R 770 /apps/src/mpi4py
 
-	# make a copy of the files on this drive and save in apps/scripts and make it run only by root
-	cp -r . /mnt/apps/prep-scripts
-	chown -R root:root /mnt/apps/prep-scripts
-	chmod -R 700 /mnt/apps/prep-scripts
+	# # make a copy of the files on this drive and save in apps/scripts and make it run only by root
+	# cp -r . /mnt/apps/prep-scripts
+	# chown -R root:root /mnt/apps/prep-scripts
+	# chmod -R 700 /mnt/apps/prep-scripts
+
+	# this is actually much easier to do in rocky # source: https://superuser.com/questions/1244789/is-it-possible-to-download-rpm-files-in-fedora-for-offline-usage-see-descripti
+	dnf install -y --downloadonly --downloaddir=/apps/pkgs/mariadb-server mariadb-server gawk
+	dnf install -y --downloadonly --downloaddir=/apps/pkgs/slurm-head slurm{,-slurmctld,-slurmdbd,-perlapi}
+	dnf install -y --downloadonly --downloaddir=/apps/pkgs/slurm-compute slurm-slurmd
+	dnf install -y --downloadonly --downloaddir=/apps/pkgs/openmpi openmpi-devel
+	dnf install -y --downloadonly --downloaddir=/apps/pkgs/glusterfs-server glusterfs
+	dnf install -y --downloadonly --downloaddir=/apps/pkgs/glusterfs-client glusterfs-fuse
+
 
 	# copy /etc/hosts
 	cp ./configs/hosts /etc/hosts
