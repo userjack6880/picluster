@@ -3,18 +3,28 @@ if ping -c 1 72.14.177.74 &> /dev/null
 then
 
 	# update locales (eww, purge the british)
-	perl -pi -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
-	sudo sed -ri 's/en_GB.UTF-8 UTF-8/# en_GB.UTF-8 UTF-8/' /etc/locale.gen
-	sudo sed -ri 's/LANG=en_GB.UTF-8/LANG=en_US.UTF-8/' /etc/default/locale
+	# these aren't needed in rocky
+	# perl -pi -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
+	# sudo sed -ri 's/en_GB.UTF-8 UTF-8/# en_GB.UTF-8 UTF-8/' /etc/locale.gen
+	# sudo sed -ri 's/LANG=en_GB.UTF-8/LANG=en_US.UTF-8/' /etc/default/locale
 
 	# update repos
 
-	apt-get update
-	apt-get -y upgrade
-	apt-get -y install vim pdsh python3-distutils python3-dev
+	# apt-get update
+	# apt-get -y upgrade
+	# apt-get -y install vim pdsh python3-distutils python3-dev
 
-	# configure pdsh
-	echo "ssh" > /etc/pdsh/rcmd_default
+	# replaced with this (I added epel)
+	dnf config-manager --set-enabled crb
+	dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+	dnf update
+	dnf install -y vim pdsh python3-distutils-extra python3-devel git
+
+
+	# # configure pdsh
+	# echo "ssh" > /etc/pdsh/rcmd_default
+	# pdsh for 
+	echo 'export PDSH_RCMD_DEFAULT=ssh' > /etc/profile.d/pdsh.sh
 
 	# move admin home directory to /var/tmp
 
