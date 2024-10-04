@@ -18,7 +18,7 @@ then
 	dnf config-manager --set-enabled crb
 	dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 	dnf update
-	dnf install -y vim pdsh python3-distutils-extra python3-devel git
+	dnf install -y vim pdsh pdsh-rcmd-ssh pdsh-mod-genders python3-distutils-extra python3-devel git
 
 
 	# # configure pdsh
