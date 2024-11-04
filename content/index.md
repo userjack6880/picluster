@@ -16,17 +16,32 @@ In this digital era, the demand for scalable and efficient computing solutions c
 
 # Modules
 
-- Module 1 - Hardware Selection and Assembly    <!--john needs to do this-->
-- Module 2 - Operating System Installation      <!--if you get this started, I can take it from there-->
-- [Module 3 - Networking Configuration](module-3)
-- [Module 4 - Sharing Storage Through NFS](module-4)
-- [Module 5 - Keeping Time](module-5)
-- Module 6 - User Management                    <!--either tess or drew could work on this-->
-- [Module 7 - The Scheduler](module-7)
-- [Module 8 - Supporting Software](module-8)
-- [Module 9 - Hello World](module-9)
-- Module 10 - Benchmarking                      <!--tess or drew-->
-- [Module 11 - Parallel Storage (Optional)](module-11)
-- Module 12 - GPU Compute (Optional)            <!--plans need to be finalized for this-->
-- Module 13 - Basics of Parallel Programming    <!--john-->
-- Module 14 - Challenges                        <!--also john-->
+<!-- wk 1: -->
+- [Module 1 - Hardware Selection and Assembly](modules/hardware-selection.md)    <!--john needs to do this-->
+- [Module 2 - Operating System Installation](modules/os-install.md)
+- [Module 3 - NFS Shares](modules/nfs.md)
+- [Module 4 - TimeServer](modules/chrony.md)
+- Module 5 - Warewulf
+- [Module 6 - The Scheduler](modules/slurm.md)
+- [Module 7 - Users/Accounting](modules/accounting.md)
+<!-- end wk 1 -->
+<!-- wk 2: -->
+- Module 8 - Telemetry
+- Module 9 - Grafana
+<!-- end wk 2 -->
+<!-- wk 3: -->
+- [Module 10 - Supporting Software](modules/supporting-software.md)
+- [Module 11 - Hello World](modules/hello-world.md)
+- Module 12 - Basics of Parallel Programming    <!--john-->
+- Module 13 - Basic Optimization
+<!-- end wk 3 -->
+<!-- wk 4: -->
+- Module 14 - Profiling
+- Module 15 - Benchmarking                      <!--tess or drew-->
+<!-- end wk 4 -->
+
+
+<!-- not rn 
+<!-- - [Module 11 - Parallel Storage (Optional)](module-11) -->
+<!-- - Module 12 - GPU Compute (Optional)            plans need to be finalized for this -->
+<!-- - Module 14 - Challenges                        also john -->

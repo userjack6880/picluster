@@ -6,3 +6,5 @@ index.php
 .DS_Store
 .obsidian/
 *.img*
+pi-hpc-head01-rocky.img.xz
+picluster-bullseye-best.img.zst
