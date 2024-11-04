@@ -20,8 +20,9 @@ In this digital era, the demand for scalable and efficient computing solutions c
 - [Module 1 - Hardware Selection and Assembly](modules/hardware-selection.md)    <!--john needs to do this-->
 - [Module 2 - Operating System Installation](modules/os-install.md)
 - [Module 3 - NFS Shares](modules/nfs.md)
-- [Module 4 - TimeServer](modules/chrony.md)
-- [Module 5 - Warewulf]()
+    <!-- Tess needs to update chrony.md w/ the results of learning the pi5 -->
+- [Module 4 - Warewulf]()
+- [Module 5 - TimeServer](modules/chrony.md)
 - [Module 6 - The Scheduler](modules/slurm.md)
 - [Module 7 - Users/Accounting](modules/accounting.md)
 <!-- end wk 1 -->
