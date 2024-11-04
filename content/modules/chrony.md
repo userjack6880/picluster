@@ -102,11 +102,11 @@ The first thing we need to do is stop and disable `systemd-timesyncd`.
 sudo systemctl disable --now systemd-timesyncd
 ```
 
-Now uninstall it using apt and then install the `chrony` package via dpkg.
+Now uninstall it using dnf and then install the `chrony` package via rpm.
 
 ```
-sudo apt remove systemd-timesyncd
-sudo dpkg -i /apps/pkgs/chrony*arm64.deb
+sudo dnf remove systemd-timesyncd
+sudo rpm -i /apps/pkgs/chrony*.rpm
 ```
 
 `chrony` will need to be configured. First, stop `chrony`.
@@ -139,17 +139,23 @@ You can check the status of `chrony` using `chronyc tracking` and see if it's ac
 [grep](https://linux.die.net/man/1/grep)
 </span>
 
-Repeat the above process to stop, disable, and uninstall `systemd-timesyncd`. When installing `chrony`. Do not do this on **'pi-hpc-terminal'**.
-
-You can use `pdsh` from **'pi-hpc-head01'** to issue commands to the compute nodes all at once. Instead of `apt remove`, you will need to use `apt-get -y remove` as `pdsh` is non-interactive. The nodes are configured in a way that you will be allowed to use `sudo`.
-
-Since this is the first time we're using pdsh, let's make sure that the node definitions in `/etc/genders` are correct. The only changes you should make are the numbers for nodes. Also, if storage nodes aren't present, comment out the line for storage
-
+Enter the Node container chroot:
 ```
+sudo wwctl container exec base-9.4 /bin/bash
+```
+
+Repeat the above process to stop, disable, and uninstall `systemd-timesyncd`. and to install `chrony`. 
+<!-- Do not do this on **'pi-hpc-terminal'**. -->
+
+<!-- You can use `pdsh` from **'pi-hpc-head01'** to issue commands to the compute nodes all at once. Instead of `apt remove`, you will need to use `apt-get -y remove` as `pdsh` is non-interactive. The nodes are configured in a way that you will be allowed to use `sudo`. -->
+
+<!-- Since this is the first time we're using pdsh, let's make sure that the node definitions in `/etc/genders` are correct. The only changes you should make are the numbers for nodes. Also, if storage nodes aren't present, comment out the line for storage -->
+
+<!-- ```
 pdsh -g nodes hostname
-```
+``` -->
 
-On each of the "client" nodes, you'll need to edit `/etc/chrony/chrony.conf` to be the following:
+Next, you'll need to edit `/etc/chrony/chrony.conf` to be the following:
 
 ```
 driftfile /var/lib/chrony/chrony.drift
@@ -158,17 +164,19 @@ server 10.0.0.2 iburst
 
 Note: here, `iburst` is very important; it tells chrony to immediately sync with the server upon boot.
 
-Because `pdsh` is not interactive, you will have to end up logging into each node individually to edit those files. However, the config file has been shared under `/apps/configs` - you can use `pdsh` to copy that file where it needs to be.
+<!-- Because `pdsh` is not interactive, you will have to end up logging into each node individually to edit those files. However, the config file has been shared under `/apps/configs` - you can use `pdsh` to copy that file where it needs to be. -->
 
-```
+<!-- ```
 pdsh -g nodes sudo cp /apps/configs/chrony-client.conf /etc/chrony/chrony.conf
-```
+``` -->
 
-Since this is the first time the nodes will have a timesync since they've been booted it, they'll be very off. You can force them to set the time to the server's time immediately by issuing:
+<!-- Since this is the first time the nodes will have a timesync since they've been booted it, they'll be very off. You can force them to set the time to the server's time immediately by issuing:
 ```
 pdsh -g nodes "sudo chronyc makestep"
-```
+``` -->
 
-Once everybody is pretty much within 0 seconds of NTP time, we're ready for the next module.
+`exit` the container and wait for it to rebuild, and reboot the nodes
+
+Once everybody is booted and pretty much within 0 seconds of NTP time, we're ready for the next module.
 
 ## [Module 7 - The Scheduler](module-7)
