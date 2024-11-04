@@ -10,7 +10,7 @@ Setting up a simple NFS storage server.
 
 **Setup an NFS shared file system**
 
-While distributed filesytems (such as Lustre, GPFS, and others) are commonly used in clustered computing environments, [NFS (Network File System)](https://en.wikipedia.org/wiki/Network_File_System) is still used for filesharing between systems within a network. Your objective is to create, format, and share a partition, along with two other pre-created filesystems, between all of the nodes within our cluster.
+While distributed filesytems (such as Lustre, GPFS, and others) are commonly used in clustered computing environments, [NFS (Network File System)](https://en.wikipedia.org/wiki/Network_File_System) is still used for filesharing between systems within a network. Your objective is to create commonly used NFS shares to be used by all of the nodes within our cluster.
 
 A few things you will need to know:
 
@@ -29,7 +29,7 @@ A few things you will need to know:
 
 All nodes are accessible via [`ssh`](https://linux.die.net/man/1/ssh) using the `admin` user.
 
-## Partitioning the Hard Drive
+<!-- ## Partitioning the Hard Drive
 
 <span class="small">resources:
 [fdisk](https://linux.die.net/man/8/fdisk)
@@ -122,7 +122,7 @@ Finally, to make it easier to access, create a symbolic link to this path in the
 
 ```
 sudo ln -s /mnt/shared /shared
-```
+``` -->
 
 ## Setup and Configure the NFS Server
 
@@ -163,7 +163,9 @@ You should get an `active (exited)` status. At this point, `/home`, `/mnt/apps`,
 
 If you want to make a change to `/etc/exports` after the NFS server has been started, you can set the new exports using `sudo exportfs -a`.
 
-## Setup and Configure Clients
+<!-- the following section is handled by warewulf's default config -->
+
+<!-- ## Setup and Configure Clients
 
 <span class="small">resources:
 [rm](https://linux.die.net/man/1/rm),
@@ -196,6 +198,6 @@ pi-hpc-head01:/mnt/apps     /apps         nfs4    defaults,user,exec          0 
 pi-hpc-head01:/mnt/shared   /shared       nfs4    defaults,user,exec          0 0
 ```
 
-Mount the shares using `sudo mount -a` and you should see the `pkgs` directory under `/apps` and a home directory for `user` under `/home`.
+Mount the shares using `sudo mount -a` and you should see the `pkgs` directory under `/apps` and a home directory for `user` under `/home`. -->
 
 ## [Next Module - Keeping Time](module-5)
