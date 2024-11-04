@@ -23,10 +23,10 @@ Open MPI is an open source implementation of the Message Passing Interface devel
 Install OpenMPI and supporting packages, including development packages:
 
 ```
-sudo dpkg -i /apps/pkgs/openmpi/*.deb
+sudo rpm -i /apps/pkgs/openmpi/*.rpm
 ```
 
-## Install mpi4py on Head Node
+## (Optional) Install mpi4py on Head Node
 
 <span class="small">resources:
 [mpi4py](https://mpi4py.readthedocs.io),
