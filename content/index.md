@@ -21,23 +21,23 @@ In this digital era, the demand for scalable and efficient computing solutions c
 - [Module 2 - Operating System Installation](modules/os-install.md)
 - [Module 3 - NFS Shares](modules/nfs.md)
 - [Module 4 - TimeServer](modules/chrony.md)
-- Module 5 - Warewulf
+- [Module 5 - Warewulf]()
 - [Module 6 - The Scheduler](modules/slurm.md)
 - [Module 7 - Users/Accounting](modules/accounting.md)
 <!-- end wk 1 -->
 <!-- wk 2: -->
-- Module 8 - Telemetry
-- Module 9 - Grafana
+- [Module 8 - Telemetry]()
+- [Module 9 - Grafana]()
 <!-- end wk 2 -->
 <!-- wk 3: -->
 - [Module 10 - Supporting Software](modules/supporting-software.md)
 - [Module 11 - Hello World](modules/hello-world.md)
-- Module 12 - Basics of Parallel Programming    <!--john-->
-- Module 13 - Basic Optimization
+- [Module 12 - Basics of Parallel Programming]()    <!--john-->
+- [Module 13 - Basic Optimization]()
 <!-- end wk 3 -->
 <!-- wk 4: -->
-- Module 14 - Profiling
-- Module 15 - Benchmarking                      <!--tess or drew-->
+- [Module 14 - Profiling]()
+- [Module 15 - Benchmarking]()                      <!--tess or drew-->
 <!-- end wk 4 -->
 
 
