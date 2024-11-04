@@ -26,12 +26,12 @@ it can be difficult to access the Pi's SSD from another computer. a decent worka
 
 ## From a Script
 *NOTE*: it is recommended that you use the ready-made images as these have been tested to work through the whole project. they also don't require internet once they've been written to the Pi's
-- flash the latest version of rasbian lite to an sd card using the RPi Imager
+- flash the latest version of rockylinux for RPi from [here](https://rockylinux.org/download)
 - connect the Pi to a network and power
-- run `curl -LO https://github.com/userjack6880/picluster/raw/refs/heads/ww-wip/headnode.sh | sudo bash`
+- run `curl -L https://github.com/userjack6880/picluster/raw/refs/heads/ww-wip/headnode.sh | sudo bash`
 - the node will reboot when done
 
 
 
-## Module 3 - Networking Configuration
+<!-- ## Module 3 - Networking Configuration -->
 
