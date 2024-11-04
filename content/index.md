@@ -23,6 +23,7 @@ In this digital era, the demand for scalable and efficient computing solutions c
     <!-- Tess needs to update chrony.md w/ the results of learning the pi5 -->
 - [Module 4 - Warewulf]()
 - [Module 5 - TimeServer](modules/chrony.md)
+    <!-- waiting on vince to get back to know how to do this step -->
 - [Module 6 - The Scheduler](modules/slurm.md)
 - [Module 7 - Users/Accounting](modules/accounting.md)
 <!-- end wk 1 -->
