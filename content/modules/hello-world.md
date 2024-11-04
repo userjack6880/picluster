@@ -65,7 +65,7 @@ sbatch --nodes=4 --ntasks-per-node=4 sub_mpi.sh
 
 This should submit a job, and it should return "Hello World" 16 times with a different number after the phrase.
 
-## Implementing Hello World with Python
+## Implementing Hello World with Python (if you installed it)
 
 <span class="small">resources:
 [mpirun](https://www.open-mpi.org/doc/current/man1/mpirun.1.php)
