@@ -48,6 +48,10 @@ This should create a new file called `a.out`. This is your program. Finally, cre
 ```
 #!/bin/bash
 
+# Define submission allocation
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=4
+
 cd $SLURM_SUBMIT_DIR
 
 # print the hostname of the submission node
@@ -60,7 +64,7 @@ mpirun a.out
 Finally, submit a new job to the cluster.
 
 ```
-sbatch --nodes=4 --ntasks-per-node=4 sub_mpi.sh
+sbatch sub_mpi.sh
 ```
 
 This should submit a job, and it should return "Hello World" 16 times with a different number after the phrase.
@@ -97,7 +101,7 @@ mpirun python hello_mpi.py
 Submit the job to the cluster:
 
 ```
-sbatch --nodes=4 --ntasks-per-node=4 sub_mpi.sh
+sbatch sub_mpi.sh
 ```
 
 As before, you should see "Hello World" return 16 times.
