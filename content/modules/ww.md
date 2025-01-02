@@ -38,3 +38,24 @@ Add the following line to the end of `~/.bashrc`:
 ```
 export PATH=$PATH:/opt/warewulf/bin
 ```
+Then, Modify the following lines in `/opt/warewulf/etc/warewulf/warewulf.conf to be:
+```
+ipaddr: 10.0.0.2
+netmask: 255.255.255.0
+network: 10.0.0.0
+    range start: 10.0.0.201
+    range end: 10.0.0.255
+nfs:
+    enabled: false
+```
+Now start all warewulf services with:
+```
+wwctl configure --all
+systemctl enable --now warewulfd
+```
+
+## Setting up the Container:
+Originally, warewulf used what they called "Virtual Node FileSystems"(vnfs) which were created from a chroot. While they're still refered to as vnfs', the advent of containerization has made creating and distributing these much easier.
+
+
+## Setting up Profiles:
