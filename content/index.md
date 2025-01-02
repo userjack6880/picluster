@@ -16,28 +16,28 @@ In this digital era, the demand for scalable and efficient computing solutions c
 
 # Modules
 
-<!-- wk 1: -->
+### wk 1:
 - [Module 1 - Hardware Selection and Assembly](modules/hardware-selection.md)    <!--john needs to do this-->
 - [Module 2 - Operating System Installation](modules/os-install.md)
 - [Module 3 - NFS Shares](modules/nfs.md)
     <!-- Tess needs to update chrony.md w/ the results of learning the pi5 -->
-- [Module 4 - Warewulf]()
+- [Module 4 - Warewulf](modules/ww.md)
 - [Module 5 - TimeServer](modules/chrony.md)
     <!-- waiting on vince to get back to know how to do this step -->
 - [Module 6 - The Scheduler](modules/slurm.md)
 - [Module 7 - Users/Accounting](modules/accounting.md)
 <!-- end wk 1 -->
-<!-- wk 2: -->
+### wk 2:
 - [Module 8 - Telemetry]()
 - [Module 9 - Grafana]()
 <!-- end wk 2 -->
-<!-- wk 3: -->
+### wk 3:
 - [Module 10 - Supporting Software](modules/supporting-software.md)
 - [Module 11 - Hello World](modules/hello-world.md)
 - [Module 12 - Basics of Parallel Programming]()    <!--john-->
 - [Module 13 - Basic Optimization]()
 <!-- end wk 3 -->
-<!-- wk 4: -->
+### wk 4:
 - [Module 14 - Profiling]()
 - [Module 15 - Benchmarking]()                      <!--tess or drew-->
 <!-- end wk 4 -->
