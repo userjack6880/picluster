@@ -55,7 +55,28 @@ systemctl enable --now warewulfd
 ```
 
 ## Setting up the Container:
-Originally, warewulf used what they called "Virtual Node FileSystems"(vnfs) which were created from a chroot. While they're still refered to as vnfs', the advent of containerization has made creating and distributing these much easier.
-
+Originally, warewulf used what they called "Virtual Node FileSystems"(vnfs) which were created from a chroot. While they're still refered to as vnfs', the advent of containerization has made creating and distributing these much easier. Since this guide is for offline use. we've provided the OCI container we need as a .tar file. we'll need to import it into our warewulf config:
+```
+wwctl container import /apps/images/base-rocky-9.4.tar base-rocky-9.4
+```
 
 ## Setting up Profiles:
+each node has it's own configuration but all nodes will share most of their configuration. we'll use a profile to ease the setting of these configurations:
+```
+wwctl profile add picluster
+wwctl profile set --cluster picluster
+wwctl profile set --container base-rocky-9.4
+```
+
+## Defining Nodes:
+Once we have our profiles defined, we're ready to define our nodes in the same way:
+```
+wwctl node add pi-hpc-node01
+wwctl node set --ipaddr 10.0.0.11 --discoverable
+# do the above for each node, incrementing the ip and hostname
+wwctl node set --profile picluster --all
+```
+
+## Power On the Nodes:
+At this point. power on the nodes. they should begin booting and pulling their images. we'll configure these images in future steps.
+
