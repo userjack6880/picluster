@@ -108,18 +108,16 @@ It should automount those partitions. Once it comes back from the reboot, check 
 - `/home` should contain two user directories - `admin` and `user`.
 - a `df -h` should show that `/dev/sda1` is mounted under `/home` and `/dev/sda2` is mounted under `/mnt/apps`
 
-### Compute Nodes
+### Compute & Storage Nodes
 
-As with before, let them go through their cycles and insert the USB drive last. Mount the disk like before. Note that because there are no external disks, the USB drive will be `/dev/sda1`.
-
-Run the compute script:
-
-```
-cd /mnt/usb
-./compute.sh [node_number]
-```
-
-Replace `[node_number]` with the number of the compute (01-04 at time of writing). To avoid a problem with hostnames later, ensure the preceeding 0 is included for single digit node numbers, e.g. `./compute.sh 01`.
+Since the compute and storage nodes will be netbooting, they do not require an SD card image; However, an SD card must be used once to flash the correct bootloader settings
+1. insert your desired SD card
+2. open the RPi imager
+3. Choose Device  -> RaspberryPi 4/5 depending on your model
+4. Choose OS      -> Misc. Utility Images -> Bootloader -> Network Boot  
+5. Choose Storage -> select the SD card. (it'll probably be bootfs if it's been imaged for RPi's in the past)
+6. Write
+7. Once finished, 
 
 ### Terminal Node
 
