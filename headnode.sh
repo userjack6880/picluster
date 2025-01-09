@@ -53,7 +53,7 @@ then
 
 	# create symlinks
 
-	ln -s /mnt/apps /apps
+	# ln -s /mnt/apps /apps
 
 	# copy admin home back to the new /home
 
@@ -66,7 +66,8 @@ then
 	# chown -R admin:admin /home/admin
 	# chown -R root:admin /mnt/apps
 
-	chmod g+w /mnt/apps
+	# chmod g+w /mnt/apps
+	chmod g+w /apps
 
 	# copy public/private keys
 	mkdir /home/admin/.ssh
@@ -174,6 +175,11 @@ then
 
 	# # copy chrony.conf to an accessible location
 	# cp ./configs/dhcpd.conf /mnt/apps/configs
+
+	# copy network configurations
+	cp ./configs/head-node.nmconnection /etc/NetworkManager/system-connections/
+	chown root:root /etc/NetworkManager/system-connections/head-node.nmconnection
+	chmod 600 /etc/NetworkManager/system-connections/head-node.nmconnection
 
 	# wait
 	echo "done!"

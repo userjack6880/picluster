@@ -1,0 +1,18 @@
+[connection]
+id=Picluster Head Networking
+uuid=3c879119-2475-4a81-9d14-becf4bc05e01
+type=ethernet
+interface-name=eth0
+
+[ethernet]
+
+[ipv4]
+address1=10.0.0.2/24,10.0.0.1
+dns=8.8.8.8;
+method=manual
+
+[ipv6]
+addr-gen-mode=default
+method=link-local
+
+[proxy]
