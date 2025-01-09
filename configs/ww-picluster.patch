@@ -1,0 +1,51 @@
+diff --git a/etc/warewulf.conf b/etc/warewulf.conf
+index a9afbccb..ea74f26f 100644
+--- a/etc/warewulf.conf
++++ b/etc/warewulf.conf
+@@ -1,6 +1,6 @@
+ WW_INTERNAL: 45
+-ipaddr: 10.0.0.1
+-netmask: 255.255.252.0
++ipaddr: 10.0.0.2
++netmask: 255.255.255.0
+ network: 10.0.0.0
+ warewulf:
+   port: 9873
+@@ -11,8 +11,8 @@ warewulf:
+   syslog: false
+ dhcp:
+   enabled: true
+-  range start: 10.0.1.1
+-  range end: 10.0.1.255
++  range start: 10.0.0.200
++  range end: 10.0.0.255
+   systemd name: dhcpd
+ tftp:
+   enabled: true
+@@ -29,10 +29,10 @@ nfs:
+     export options: rw,sync
+     mount options: defaults
+     mount: true
+-  - path: /opt
+-    export options: ro,sync,no_root_squash
+-    mount options: defaults
+-    mount: false
++#  - path: /opt
++#    export options: ro,sync,no_root_squash
++#    mount options: defaults
++#    mount: false
+   systemd name: nfs-server
+ container mounts:
+   - source: /etc/resolv.conf
+diff --git a/overlays/host/rootfs/etc/dhcp/dhcpd.conf.ww b/overlays/host/rootfs/etc/dhcp/dhcpd.conf.ww
+index 4489c748..bcfd2bbe 100644
+--- a/overlays/host/rootfs/etc/dhcp/dhcpd.conf.ww
++++ b/overlays/host/rootfs/etc/dhcp/dhcpd.conf.ww
+@@ -54,6 +54,7 @@ subnet {{$.Network}} netmask {{$.Netmask}} {
+ {{- if ne .Dhcp.Template "static" }}
+     range {{$.Dhcp.RangeStart}} {{$.Dhcp.RangeEnd}};
+     next-server {{.Ipaddr}};
++    option tftp-server-name "{{.Ipaddr}}";
+ {{- end }}
+ }
+ 

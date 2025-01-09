@@ -13,12 +13,15 @@ dnf -y --setopt=install_weak_deps=False --nodocs install dhcp-server tftp-server
 # clone warewulf from github
 mkdir /opt/warewulf
 git clone https://github.com/warewulf/warewulf.git /opt/warewulf/src
-cd /opt/warewulf/src
-git checkout v4.5.8
+git checkout v4.5.8 -C /opt/warewulf/src
+git apply ./configs/ww-picluster.patch -C /opt/warewulf/src
 
+cd /opt/warewulf/src
 make clean defaults PREFIX=/opt/warewulf
 make all
 make install
+
+echo "export PATH=$PATH:/opt/warewulf/bin" > /etc/profile.d/warewulf.sh
 
 
 ## new warewulf wants to use grub but not us
@@ -26,7 +29,8 @@ make install
 ##  need to install the ipxe stuff....
 ##  in the install dir  edit cause we changed warewulf location install
 
-./scripts/build-ipxe.sh
+# Will throw errors due to trying to build other architectures:
+TARGETS=bin-arm64-efi/snponly.efi ./scripts/build-ipxe.sh
 
 
 ##  MANUALLY  MANUALLY  MANUALLY  MANUALLY  MANUALLY  MANUALLY
