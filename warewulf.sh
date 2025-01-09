@@ -2,6 +2,8 @@
 ##  search for MANUALLY to see actions needed
 
 ################################################################################
+BASEDIR=$( dirname $0 )
+################################################################################
 
 ##  warewulf - install
 
@@ -13,10 +15,10 @@ dnf -y --setopt=install_weak_deps=False --nodocs install dhcp-server tftp-server
 # clone warewulf from github
 mkdir /opt/warewulf
 git clone https://github.com/warewulf/warewulf.git /opt/warewulf/src
-git checkout v4.5.8 -C /opt/warewulf/src
-git apply ./configs/ww-picluster.patch -C /opt/warewulf/src
-
 cd /opt/warewulf/src
+git checkout v4.5.8
+git apply $BASEDIR/configs/ww-picluster.patch
+
 make clean defaults PREFIX=/opt/warewulf
 make all
 make install
