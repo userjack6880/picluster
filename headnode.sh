@@ -176,6 +176,9 @@ then
 	# # copy chrony.conf to an accessible location
 	# cp ./configs/dhcpd.conf /mnt/apps/configs
 
+	# set hostname
+	echo "pi-hpc-head01" > /etc/hostname
+
 	# copy network configurations
 	cp ./configs/head-node.nmconnection /etc/NetworkManager/system-connections/
 	chown root:root /etc/NetworkManager/system-connections/head-node.nmconnection
