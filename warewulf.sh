@@ -8,7 +8,7 @@ BASEDIR=$( dirname $0 )
 ##  warewulf - install
 
 ##  install services required for warewulf
-dnf -y --setopt=install_weak_deps=False --nodocs install dhcp-server tftp-server nfs-utils golang unzip
+dnf -y --setopt=install_weak_deps=False --nodocs install dhcp-server tftp-server nfs-utils golang unzip ipxe-bootimgs-aarch64
 
 ##########
 
@@ -23,6 +23,9 @@ make clean defaults PREFIX=/opt/warewulf
 make all
 make install
 
+# point warewulf to ipxe images:
+# sed -i 's/\/opt\/warewulf\/share\/ipxe/\/usr\/share\/ipxe/' /opt/warewulf/etc/warewulf/warewulf.conf
+
 echo "export PATH=$PATH:/opt/warewulf/bin" > /etc/profile.d/warewulf.sh
 
 
@@ -32,7 +35,7 @@ echo "export PATH=$PATH:/opt/warewulf/bin" > /etc/profile.d/warewulf.sh
 ##  in the install dir  edit cause we changed warewulf location install
 
 # Will throw errors due to trying to build other architectures:
-TARGETS=bin-arm64-efi/snponly.efi ./scripts/build-ipxe.sh
+# TARGETS=bin-arm64-efi/snponly.efi ./scripts/build-ipxe.sh
 
 
 ##  MANUALLY  MANUALLY  MANUALLY  MANUALLY  MANUALLY  MANUALLY
@@ -40,3 +43,5 @@ TARGETS=bin-arm64-efi/snponly.efi ./scripts/build-ipxe.sh
 # cp -i /usr/local/warewulf/share/ipxe/bin-x86_64-efi-snponly.efi /var/lib/tftpboot/warewulf/ipxe-snponly-x86_64.efi
 
 cd -
+
+systemctl enable dhcpd tftp warewulfd
