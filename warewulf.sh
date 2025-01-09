@@ -6,7 +6,7 @@
 ##  warewulf - install
 
 ##  install services required for warewulf
-dnf -y --setopt=install_weak_deps=False --nodocs install dhcp-server tftp-server nfs-utils golang
+dnf -y --setopt=install_weak_deps=False --nodocs install dhcp-server tftp-server nfs-utils golang unzip
 
 ##########
 
