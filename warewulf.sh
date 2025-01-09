@@ -13,7 +13,7 @@ dnf -y --setopt=install_weak_deps=False --nodocs install dhcp-server tftp-server
 # clone warewulf from github
 mkdir /opt/warewulf
 git clone https://github.com/warewulf/warewulf.git /opt/warewulf/src
-cd !$
+cd /opt/warewulf/src
 git checkout v4.5.8
 
 make clean defaults PREFIX=/opt/warewulf
