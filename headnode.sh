@@ -192,6 +192,8 @@ cp ./configs/head-node.nmconnection /etc/NetworkManager/system-connections/
 chown root:root /etc/NetworkManager/system-connections/head-node.nmconnection
 chmod 600 /etc/NetworkManager/system-connections/head-node.nmconnection
 
+nmcli connection up head-node
+
 # wait
 echo "done!"
 sleep 10

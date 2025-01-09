@@ -1,5 +1,5 @@
 [connection]
-id=Picluster Head Networking
+id=head-node
 uuid=3c879119-2475-4a81-9d14-becf4bc05e01
 type=ethernet
 interface-name=eth0
