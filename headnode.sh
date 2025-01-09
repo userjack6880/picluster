@@ -2,6 +2,9 @@
 if ping -c 1 72.14.177.74 &> /dev/null
 then
 
+	# grow FS to avoid running out of space during installation:
+	rootfs-expand
+
 	# update locales (eww, purge the british)
 	# these aren't needed in rocky
 	# perl -pi -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
