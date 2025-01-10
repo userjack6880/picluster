@@ -12,19 +12,17 @@ The modules will go through each step on how to setup a Raspberry Pi compute clu
 
 Additionally, modules will have an introduction explaining the purpose of the module, and what topics will be covered. In addition to the introduction, at the end there will be some discussions questions that for instructors and students to go over once the module is finished.
 
-The modules are intended to be performed *in order*, so skipping modules is not advised.
+Unless otherwise indicated, the modules are intended to be performed *in order*, so skipping modules is not advised.
 
 ## Materials
 
-It is suggested that at minimum that 4 Raspberry Pi 4B compute modules be purchased for these modules with external storage being provided for at least one. At least one network switch to allow all of the compute modules to connect to each other is recommended, and some way to access to cluster, via a laptop or a direct montior/keyboard connection to one of the compute modules.
+It is suggested that at minimum 4 Raspberry Pi 4B SBC's be purchased for these modules with adaquate storage being provided for at least one (a large SD card or external drive). 1 SD card will be required for setup regardless of head node storage choice. At least one network switch to allow all of the SBC's to connect to each other is required, as well as some way to access to cluster, via a laptop or a direct montior/keyboard connection to one of the SBC's.
 
 The following list of materials were used as the reference hardware:
 
-Additionally, it is recommended that a USB drive be purchased. It will be needed to copy the configuration scripts located [here](https://j3b.in/pihpc/scripts.zip) and extract onto the drive. Ensure the contents are in the root of the drive or scripts will not function.
+***TODO: Placeholder BOM***
 
 Finally, get the official [Raspberry Pi Imager](https://www.raspberrypi.com/software/).
-
-Optionally, you can use git to download a copy of these scripts (and this documentation). Git is not installed with Raspberry Pi OS by default - this can be installed using 'sudo apt get install git'.
 
 A few things you will need to know:
 
@@ -32,7 +30,7 @@ A few things you will need to know:
   - `admin` - this will be the user you will do administrative tasks with - this user has `sudo` access.
   - `user` - this will be an unprivleged user
   - both users have the same password - `tuxcluster`
-- Your cluster will not have direct access to the internet. All packages you will need will be included on the pre-formated drive.
+- Your cluster will not have direct access to the internet. All packages you will need will be included on the pre-formated drive. feel free to read [this](modules/internet.md) if networking is desired after the fact.
 - Your cluster will be accessible using a priavte IP range. The optional **'pi-hpc-terminal'** node will be configured to have an interface in this private range.
   - It is suggested that you use `10.0.0.101` with a subnet of `255.255.255.0`/`CIDR /24` if you aren't using a Pi Zero terminal.
 - The nodes will be assigned names and IP addresses as follows:
