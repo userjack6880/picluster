@@ -90,6 +90,9 @@ cp /home/rocky/.ssh/* /root/.ssh/
 
 # create additional users
 # -m will make and set the home directory
+sed -i 's/rocky/admin/g' /etc/passwd /etc/group /etc/shadow
+usermod -p '$5$cOTJhkxlC4$kEFPIJaKPriv16lcwNBsS4dVMT1sC/a9vFPNlZDHug1'
+mv /home/{rocky,admin}
 useradd -m -g users -p '$5$cOTJhkxlC4$kEFPIJaKPriv16lcwNBsS4dVMT1sC/a9vFPNlZDHug1' -s /bin/bash -u 1001 user
 #        ^- uneeded w/ -m
 # mkdir /home/user
