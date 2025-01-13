@@ -20,6 +20,9 @@ docker save base-rocky9-dracut -o /mnt/oci.tar
 wwctl container import /mnt/oci.tar base-rocky9-dracut
 umount /mnt
 
+### run ww configure to bootstrap all services: #######################
+wwctl configure -a
+
 ### profile setup (including dracut) ##################################
 wwctl profile set --container base-rocky9-dracut default --yes
 wwctl profile set --ipxe dracut default --yes
@@ -34,6 +37,3 @@ wwctl overlay build
 
 ### clean up docker stuff: ############################################
 podman system prune -af # for space considerations
-
-### run ww configure to bootstrap all services: #######################
-wwctl configure -a
