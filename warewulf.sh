@@ -1,47 +1,34 @@
-##  can not run automatically but should be able to cut/paste most
-##  search for MANUALLY to see actions needed
-
-################################################################################
+##########################################################################
 BASEDIR=$( dirname $0 )
-################################################################################
+##########################################################################
 
-##  warewulf - install
-
-##  install services required for warewulf
+### install services required for warewulf: ##############################
 dnf -y --setopt=install_weak_deps=False --nodocs install dhcp-server tftp-server nfs-utils golang unzip ipxe-bootimgs-aarch64
 
-##########
+### disable firewalld: ###################################################
+systemctl disable --now firewalld
 
-# clone warewulf from github
+### clone and build warewulf: ############################################
 mkdir /opt/warewulf
 git clone https://github.com/warewulf/warewulf.git /opt/warewulf/src
 cd /opt/warewulf/src
 git checkout v4.5.8
 git apply $BASEDIR/configs/ww-picluster.patch
-
 make clean defaults PREFIX=/opt/warewulf
 make all
 make install
 
-# point warewulf to ipxe images:
+### point warewulf to ipxe images: #######################################
 sed -i 's/\/opt\/warewulf\/share\/ipxe/\/usr\/share\/ipxe/' /opt/warewulf/etc/warewulf/warewulf.conf
 
+### add warewulf to path: ################################################
 echo "export PATH=$PATH:/opt/warewulf/bin" > /etc/profile.d/warewulf.sh
 
+### add raspi's special uefi pxeboot: ####################################
+curl -o rpi-uefi.zip -L https://github.com/pftf/RPi4/releases/download/v1.38/RPi4_UEFI_Firmware_v1.38.zip
+unzip rpi-uefi.zip -d /var/lib/tftpboot/
 
-## new warewulf wants to use grub but not us
-##  see https://github.com/warewulf/warewulf/releases   for the new grub vs ipxe stuff
-##  need to install the ipxe stuff....
-##  in the install dir  edit cause we changed warewulf location install
-
-# Will throw errors due to trying to build other architectures:
-# TARGETS=bin-arm64-efi/snponly.efi ./scripts/build-ipxe.sh
-
-
-##  MANUALLY  MANUALLY  MANUALLY  MANUALLY  MANUALLY  MANUALLY
-##  looks like a bug with the name of efi file referenced in dhcp and one installed for ipex
-# cp -i /usr/local/warewulf/share/ipxe/bin-x86_64-efi-snponly.efi /var/lib/tftpboot/warewulf/ipxe-snponly-x86_64.efi
-
+### return to previous location: #########################################
 cd -
 
 systemctl enable dhcpd tftp warewulfd
