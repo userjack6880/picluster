@@ -42,7 +42,7 @@ cp /home/rocky/.ssh/* /root/.ssh/
 ### change rocky to admin as per docs: ###
 sed -i 's/rocky/admin/g' /etc/passwd /etc/group /etc/shadow
 # sed is used since usage of usermod requires no running processes belonging to the user
-usermod -p '$5$cOTJhkxlC4$kEFPIJaKPriv16lcwNBsS4dVMT1sC/a9vFPNlZDHug1'
+usermod -p '$5$cOTJhkxlC4$kEFPIJaKPriv16lcwNBsS4dVMT1sC/a9vFPNlZDHug1' admin
 mv /home/{rocky,admin}
 
 ### create additional users: ###
@@ -60,7 +60,7 @@ dnf install -y --downloadonly --downloaddir=/apps/pkgs/glusterfs-client glusterf
 
 ### Clone source for mpi4pi: ###
 mkdir -p /mnt/apps/src/mpi4py
-wget https://github.com/mpi4py/mpi4py/releases/download/3.1.5/mpi4py-3.1.5.tar.gz -P /apps/src/mpi4py
+curl -L https://github.com/mpi4py/mpi4py/releases/download/3.1.5/mpi4py-3.1.5.tar.gz | tar xz -C /apps/src/mpi4py
 chown -R root:users /apps/src/mpi4py
 chmod -R 770 /apps/src/mpi4py
 
