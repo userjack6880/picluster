@@ -1,39 +1,39 @@
-###################################################################
+#######################################################################
 BASEDIR=$( dirname $0 )
-###################################################################
+#######################################################################
 
-### reload env in case running w/out reboot: ######################
+### reload env in case running w/out reboot: ##########################
 source /etc/profile
 
-### install docker(podman in a trenchcoat on rocky): ##############
+### install docker(podman in a trenchcoat on rocky): ##################
 dnf install -y docker
 
-### build container: ##############################################
+### build container: ##################################################
 cd $BASEDIR/docker
 docker build . -t base-rocky9-dracut
 cd -
 
-### import container to ww: #######################################
+### import container to ww: ###########################################
 # we'll store the intermediate file in a tmpfs
 mount -t tmpfs tmpfs /mnt 
 docker save base-rocky9-dracut -o /mnt/oci.tar
 wwctl container import /mnt/oci.tar base-rocky9-dracut
 umount /mnt
 
-### profile setup (including dracut) ##############################
+### profile setup (including dracut) ##################################
 wwctl profile set --container base-rocky9-dracut default --yes
 wwctl profile set --ipxe dracut default --yes
 wwctl profile set --netdev eth0 default --yes
 
-### add nodes #####################################################
+### add nodes #########################################################
 wwctl node add pi-hpc-compute-[01-04] -I 10.0.0.11 --discoverable --yes
 
-### build containers and overlays: ################################
+### build containers and overlays: ####################################
 wwctl container syncuser --write --build base-rocky9-dracut
 wwctl overlay build
 
-### clean up docker stuff: ########################################
+### clean up docker stuff: ############################################
 podman system prune -af # for space considerations
 
-### run ww configure to bootstrap all services: ###################
+### run ww configure to bootstrap all services: #######################
 wwctl configure -a
