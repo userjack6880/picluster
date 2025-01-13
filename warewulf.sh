@@ -45,5 +45,3 @@ echo "export PATH=$PATH:/opt/warewulf/bin" > /etc/profile.d/warewulf.sh
 cd -
 
 systemctl enable dhcpd tftp warewulfd
-
-curl -o /opt/warewulf/warewulf-dracut.rpm -L https://github.com/warewulf/warewulf/releases/download/v4.5.8/warewulf-dracut-4.5.8-1.el9.noarch.rpm
