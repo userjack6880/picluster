@@ -13,7 +13,7 @@ cd -
 ### import container to ww: #######################################
 # we'll store the intermediate file in a tmpfs
 mount -t tmpfs tmpfs /mnt 
-docker save base-rocky9-dracut /mnt/oci.tar
+docker save base-rocky9-dracut -o /mnt/oci.tar
 wwctl container import /mnt/oci.tar base-rocky9-dracut
 umount /mnt
 
