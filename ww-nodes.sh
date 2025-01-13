@@ -18,9 +18,9 @@ wwctl container import /mnt/oci.tar base-rocky9-dracut
 umount /mnt
 
 ### profile setup (including dracut) ##############################
-wwctl profile set --container base-rocky9-dracut default
-wwctl profile set --ipxe dracut default
-wwctl profile set --netdev eth0 default
+wwctl profile set --container base-rocky9-dracut default --yes
+wwctl profile set --ipxe dracut default --yes
+wwctl profile set --netdev eth0 default --yes
 
 ### add nodes #####################################################
 wwctl node add pi-hpc-compute-[01-04] -I 10.0.0.11 --discoverable --yes
