@@ -7,11 +7,11 @@ wwctl container import docker://ghcr.io/warewulf/warewulf-rockylinux:9 rockylinu
 wwctl container syncuser --write rockylinux-9-dracut
 
 ##################### container dracut setup ######################
-wwctl container exec rockylinux-9-dracut --bind /opt:/opt /bin/bash
+wwctl container exec rockylinux-9-dracut --bind /opt:/opt /bin/bash -c "\
 dnf update -y
 dnf install -y /opt/warewulf/warewulf-dracut.rpm
 dracut --force --no-hostonly --add wwinit --regenerate-all
-exit
+exit"
 
 ################ profile setup (including dracut) #################
 wwctl profile set --container rockylinux-9-dracut default

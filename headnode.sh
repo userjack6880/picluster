@@ -25,7 +25,7 @@ rootfs-expand
 # replaced with this (I added epel)
 dnf config-manager --set-enabled crb
 dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
-# dnf update -y
+dnf update -y # necessary. sshd breaks w/out it
 dnf install -y vim pdsh pdsh-rcmd-ssh pdsh-mod-genders python3-distutils-extra python3-devel git
 
 
@@ -192,7 +192,7 @@ cp ./configs/head-node.nmconnection /etc/NetworkManager/system-connections/
 chown root:root /etc/NetworkManager/system-connections/head-node.nmconnection
 chmod 600 /etc/NetworkManager/system-connections/head-node.nmconnection
 
-nmcli connection up head-node
+# nmcli connection up head-node
 
 # wait
 echo "done!"
