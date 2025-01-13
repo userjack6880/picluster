@@ -23,4 +23,4 @@ wwctl profile set --ipxe dracut default
 wwctl profile set --netdev eth0 default
 
 ### add nodes #####################################################
-wwctl node add pi-hpc-compute-[01-04] -I 10.0.0.11 --discoverable
+wwctl node add pi-hpc-compute-[01-04] -I 10.0.0.11 --discoverable --yes
