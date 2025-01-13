@@ -2,6 +2,9 @@
 BASEDIR=$( dirname $0 )
 ###################################################################
 
+### reload env in case running w/out reboot: ######################
+source /etc/profile
+
 ### install docker(podman in a trenchcoat on rocky): ##############
 dnf install -y docker
 
