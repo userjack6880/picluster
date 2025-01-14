@@ -29,7 +29,7 @@ wwctl profile set --ipxe dracut default --yes
 wwctl profile set --netdev eth0 default --yes
 
 ### add nodes #########################################################
-wwctl node add pi-hpc-compute-[01-04] -I 10.0.0.11 --discoverable --yes
+wwctl node add pi-hpc-compute[01-04] -I 10.0.0.11 --discoverable
 
 ### build containers and overlays: ####################################
 wwctl container syncuser --write --build base-rocky9-dracut
