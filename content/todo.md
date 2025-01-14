@@ -6,8 +6,6 @@ Done:
     - sets up networking, grabs packages, etc.
 - warewulf.sh
     - builds and installs warewulf as well as dependencies
-
-Wip:
 - ww-nodes.sh
     - builds compute node container
     - imports into ww
