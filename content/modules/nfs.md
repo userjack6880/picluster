@@ -72,7 +72,7 @@ You should get an `active (exited)` status. At this point, `/home`, `/mnt/apps`,
 If you want to make a change to `/etc/exports` after the NFS server has been started, you can set the new exports running `exportfs -a` as root.
 
 ## Setting up NFS using warewulf (Required)
-Warewulf is heavily container it uses many containerized practices for both the compute nodes and the head. One such practice is the use of overlays for configurable files such as `/etc/exports`. We can use warewulf's configuration file to automatically do everything we've just explained.
+Warewulf is heavily container oriented, so it uses many containerized practices for both the compute nodes and the head. One such practice is the use of overlays for configurable files such as `/etc/exports`. We can use warewulf's configuration file to automatically do everything we've just explained.
 
 Edit /opt/warewulf/etc/warewulf/warewulf.conf to look like the following:
 ```
