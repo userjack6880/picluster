@@ -28,7 +28,6 @@ Write:
 - basics of optimization
 
 Edit:
-- timeserver (warewulf)
 - warewulf (remove installation)
 - slurm (ww node install)
 
@@ -39,3 +38,4 @@ Done:
 - instructors
 - nfs shares (warewulf changes)
 - os installation
+- timeserver (warewulf)
