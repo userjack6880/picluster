@@ -13,25 +13,31 @@ Create a Base environment to start from when going through the modules
 Provided are ready to run images for boards we test, as well as scripts to configure base Raspbian images to our starting point.
 
 ## From Ready-Made images
-- download the image that matches your board model from [here](place.holder)
-- If using the linux command linde: run `cat {the image} | gz -d | dd of=/dev/sdX bs=4k conv=fsync status=progress` where `/dev/sdX` is the block device of your SD/SSD
-- If using the the RPi imager, select your model, then custom image, select the image, then write.
+1. Download the image that matches your board model from [here](TODO: Placeholder)
+2. Open Rpi imager
+3. Choose device -> select your device
+4. Choose OS -> Use Custom -> navigate to the downloaded image
+5. Select next. 
+
 #### Considerations for using an SSD
-it can be difficult to access the Pi's SSD from another computer. a decent workaround is the following:
-- Flash the default raspbian lite image to an SD card or USB stick
-- Boot the Pi
-- Establish networking. If you're connected directly to the pi, you will need to add manual IP's in the same subnet on both the pi and your machine
-- ssh to the pi and run `lsblk` to determine the disk name
-- Run `cat {image} | gz -d | ssh pi@{pi's hostname or ip} dd of=/dev/sdX bs=4k conv=fsync status=progress`
+In some exclosures, it can be difficult to access the SSD from another computer. a decent workaround is the following:
+1. Flash the default raspbian lite image to an SD card or USB stick using the Rpi Imager
+2. Insert the SD card and power on the Pi
+3. Establish networking. If you're connected directly to the pi, you will need to add manual IP's in the same subnet on both the pi and your machine
+4. ssh to the pi and run `lsblk` to determine the disk name
+5. Run the following command where 'X' is the drive revealed by lsblk. This can take a while. 
+```
+cat {image} | xz -d | ssh pi@{pi's hostname or ip} 'dd of=/dev/sdX bs=4k conv=fsync status=progress'
+```
 
 ## From a Script
-*NOTE*: it is recommended that you use the ready-made images as these have been tested to work through the whole project. they also don't require internet once they've been written to the Pi's
-- flash the latest version of rockylinux for RPi from [here](https://rockylinux.org/download)
-- connect the Pi to a network and power
-- run `curl -L https://github.com/userjack6880/picluster/raw/refs/heads/ww-wip/headnode.sh | sudo bash`
-- the node will reboot when done
-
-
-
-<!-- ## Module 3 - Networking Configuration -->
-
+*NOTE*: Use of these scripts is not recommended. While they are what we use to generate the ready-made images, things can change between the release of sources after we publish images and issues can arise. ***You've been warned***
+1. Flash the latest version of rockylinux for RPi from [their website](https://rockylinux.org/download)
+2. Connect the Pi to a network and power
+3. Clone the github repo to the pi. typically `/opt/picluster`
+4. Run `/opt/picluster/headnode.sh` as root
+5. The node will reboot when done
+6. Follow the guide [here](content/internet.md) to setup an internet connection w/ the head node's networking setup
+7. Run `/opt/picluster/warewulf.sh` as root
+8. Run `/opt/picluster/ww-nodes.sh` as root
+9. Reboot
