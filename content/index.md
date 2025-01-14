@@ -27,20 +27,24 @@ In this digital era, the demand for scalable and efficient computing solutions c
 <!-- TODO: waiting on vince to get back to know how to do this step -->
 - [Module 6 - The Scheduler](modules/slurm.md)
 - [Module 7 - Users/Accounting](modules/accounting.md)
+
 ### wk 2:
 - [Module 8 - Telemetry]()
 - [Module 9 - Grafana]()
+
 ### wk 3:
 - [Module 10 - Supporting Software](modules/supporting-software.md)
 - [Module 11 - Hello World](modules/hello-world.md)
-- [Module 12 - Basics of Parallel Programming]()    <!--john-->
+- [Module 12 - Basics of Parallel Programming]()
+<!-- TODO: John-->
 - [Module 13 - Basic Optimization]()
+
 ### wk 4:
 - [Module 14 - Profiling]()
-- [Module 15 - Benchmarking]()                      <!--tess or drew-->
+- [Module 15 - Benchmarking]()
+<!-- TODO: tess or drew-->
 
-
-<!-- not rn 
+<!-- TODO: not rn 
 <!-- - [Module 11 - Parallel Storage (Optional)](module-11) -->
 <!-- - Module 12 - GPU Compute (Optional)            plans need to be finalized for this -->
 <!-- - Module 14 - Challenges                        also john -->
