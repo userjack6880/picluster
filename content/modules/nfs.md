@@ -76,6 +76,7 @@ Warewulf is heavily container it uses many containerized practices for both the 
 
 Edit /opt/warewulf/etc/warewulf/warewulf.conf to look like the following:
 ```
+...
 nfs:
     enabled: true
     export paths:
@@ -92,6 +93,7 @@ nfs:
           mount options: defaults
           mount: true
     systemd name: nfs-server
+...
 ```
 
 Now run the following command as root to populate the changes to the host system:
