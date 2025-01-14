@@ -1,10 +1,10 @@
 page
-Module 4 - Warewulf Installation
+Module 4 - Warewulf Overview
 
 
 ---
 
-# Module 4 - Warewulf Installation
+# Module 4 - Warewulf Overview
 
 ## Objective
 Understand how Warewulf(ww) is setup on the Head Node and how it works.

@@ -13,6 +13,7 @@ Install Open MPI and mpi4py
 Now that Slurm is installed, we need ways to program in a parallel clustered fashion. The [Message Passing Interface](https://en.wikipedia.org/wiki/Message_Passing_Interface) (MPI) is a standardized and portable standard that's designed to function on parallel computing architectures for C, C++, and Fortran. Additionally, there are packages available that extend this to other langauges, such as [Python](https://www.python.org).
 
 ## Install Open MPI on Head Node
+<!-- TODO: Building OpenMPI -->
 
 <span class="small">resources:
 [Open MPI](https://www.open-mpi.org)
