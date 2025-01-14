@@ -20,14 +20,14 @@ Done:
 ## Documentation:
 Write:
 - Hardware Selection
-- accounting (tess?)
-- analytics
+- Analytics
 - parallel programming
-- benchmarking (HPL, LLM?)
 - profiling
 - basics of optimization
 
-Edit:
+After Deadline:
+- accounting (tess?)
+- benchmarking (HPL, LLM?)
 
 Possible Additions:
 - spack ???
