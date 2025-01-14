@@ -10,59 +10,51 @@ Build and install slurm packages.
 
 **The Scheduler**
 
-[Slurm Workload Manager](https://schedmd.com), or simply Slurm, resources to users for a duration of time, provides a framework for starting, executing, and monitoring work, and manages a queue of pending jobs. Slurm is essentially the de-facto job scheduler for Linux and is used by most of the world's supercomputers, and you will be installing this on your own cluster.
+[Slurm Workload Manager](https://schedmd.com), or simply Slurm, allocates resources to users for a duration of time, provides a framework for starting, executing, and monitoring work, and manages a queue of pending jobs. Slurm is essentially the de-facto job scheduler for Linux and is used by most of the world's supercomputers, this guide will show you how to install it on your own cluster.
 
 ## Install MariaDB
-
 <span class="small">resources:
 [mariadb](https://mariadb.org/documentation/)
 </span>
 
 While Slurm does work without MariaDB, it's fairly common to set it up to use MariaDB as it's useful for archiving account records and easily accessing these records.
-
 ```
-sudo dpkg -i /apps/pkgs/mariadb-server/*.deb
+sudo dnf install /apps/pkgs/mariadb-server/*.rpm
 ```
 
-Note: `dpkg` may complain about failures the first time you run this - running it a second time will usually be successful.
+Note: `dnf` may complain about failures the first time you run this - running it a second time will usually be successful.
 
 ## Install Slurm on the Head Node
-
-The head node will be responsible for accepting jobs from users, scheduling jobs on the cluster, and keeping a record of all jobs that ran. Packages installed are `slurm-wlm`, `slurmdbd`, and `slurm-client` and their dependencies.
-
+The head node will be responsible for accepting jobs from users, scheduling jobs on the cluster, and keeping a record of all jobs that ran. Packages installed are `slurm`, `slurmdbd`, and `slurmctld` and their dependencies.
 ```
-sudo dpkg -i /apps/pkgs/slurm-head/*.deb
+sudo dnf install /apps/pkgs/slurm-head/*.rpm
 ```
 
-## Install Slurm on the Compute Nodes
-
-From the head node, you can use `pdsh` to install required packages on the compute nodes.
-
+## Setup Munge
+I gotta be honest. I pulled a sneaky on ya'. when you installed the slurm packages, I snuck munge in as well. Munge is a cryptographic authentication suite that uses a "key" and the current time. we need to create a key before slurm will start. thankfully the folks who make munge were kind enough to include a script. as root, run the following
 ```
-pdsh -g nodes sudo dpkg -i /apps/pkgs/slurm-compute/*.deb
+create-munge-key
 ```
 
 ## Setup Slurm
-
 <span class="small">resources:
 [slurmd](https://man.archlinux.org/man/slurmd.8.en),
 [Slurm control group](https://slurm.schedmd.com/cgroups.html)
 </span>
 
-Copy then extract the example template config file to `/etc/slurm`.
-
+Copy then extract the example template config file to `/etc/slurm` as root
 ```
-sudo cp /usr/share/doc/slurm-client/examples/slurm.conf.simple.gz /etc/slurm
-sudo gzip -d /etc/slurm/slurm.conf.simple.gz
-sudo mv /etc/slurm/slurm.conf.simple /etc/slurm/slurm.conf
+cp /usr/share/doc/slurm-client/examples/slurm.conf.simple.gz /etc/slurm
+gzip -d /etc/slurm/slurm.conf.simple.gz
+mv /etc/slurm/slurm.conf.simple /etc/slurm/slurm.conf
 ```
 
 Now edit the config to reflect your configuration (changed and added lines are shown):
-
 ```
 ## General
 SlurmctldHost=pi-hpc-head01
 MpiDefault=pmi2
+# ^- this will need to be updated to pmix
 ProctrackType=proctrack/linuxproc
 
 ## Logging and Accounting
@@ -76,7 +68,6 @@ JobAcctGatherType=jobacct_gather/linux
 NodeName=pi-hpc-head01 CPUs=<num_cpus> Sockets=<sockets> CoresPerSocket=<num_cores> ThreadsPerCore=<threads> RealMemory=<memory> State=UNKNOWN
 NodeName=pi-hpc-compute[01-04] CPUs=<num_cpus> Sockets=<sockets> CoresPerSocket=<num_cores> ThreadsPerCore=<threads> RealMemory=<memory> State=UNKNOWN
 PartitionName=<partition_name> Nodes=pi-hpc-compute[01-04] Default=YES MaxTime=INFINITE State=UP
-
 ```
 
 We won't go into too much detail about what all the options mean just yet. The goal is to get the cluster working. You may chose what you want to call your cluster and what the default partition is called.
@@ -84,7 +75,6 @@ We won't go into too much detail about what all the options mean just yet. The g
 To get the values for `NodeName`, you can run `/usr/sbin/slurmd -C` on the compute nodes and get those values. Multiple `NodeName` entries can be added if your cluster has different architectures.
 
 Finally, we need to create the `/etc/slurm/slurmdbd.conf` file for the Slurm database:
-
 ```
 AuthType=auth/munge
 DbdHost=pi-hpc-head01
@@ -100,30 +90,32 @@ StorageLoc=slurm_acct_db
 ```
 
 You can set the `StoragePass` password to be anything you want. Just remember what this is. Now, change the permissions of `slurmdbd.conf` to read/writeable only by the `slurm` user:
-
 ```
 sudo chown slurm:slurm /etc/slurm/slurmdbd.conf
 sudo chmod 600 /etc/slurm/slurmdbd.conf
 ```
 
 Now copy these files to where all of the nodes can get the files:
-
 ```
 sudo cp /etc/slurm/slurm.conf /shared/slurm.conf
 ```
 
-And on the nodes, move these files to their respective places:
-
+## Install Slurm on the Compute Nodes
+Inside the warewulf contianer chroot, install the required packages.
 ```
-pdsh -g nodes sudo cp /shared/slurm.conf /etc/slurm/slurm.conf
+sudo dnf install /apps/pkgs/slurm-compute/*.rpm
 ```
+Now, move the config files to their respective places:
+```
+cp /shared/slurm.conf /etc/slurm/slurm.conf
+```
+And finally exit and rebuild the contianer with `exit`
 
 ## Copy Munge Key to Nodes
 
 <span class="small">resources:
 [munge](https://linux.die.net/man/7/munge)
 </span>
-
 To provide the necessary authentication between thea head node and compute nodes, all nodes will need the same `munge.key`. Copy the files to the nodes and restart `munge` on all the nodes.
 
 ```
