@@ -91,13 +91,14 @@ StorageLoc=slurm_acct_db
 
 You can set the `StoragePass` password to be anything you want. Just remember what this is. Now, change the permissions of `slurmdbd.conf` to read/writeable only by the `slurm` user:
 ```
-sudo chown slurm:slurm /etc/slurm/slurmdbd.conf
-sudo chmod 600 /etc/slurm/slurmdbd.conf
+chown slurm:slurm /etc/slurm/slurmdbd.conf
+chmod 600 /etc/slurm/slurmdbd.conf
 ```
 
 Now copy these files to where all of the nodes can get the files:
 ```
-sudo cp /etc/slurm/slurm.conf /shared/slurm.conf
+cp /etc/slurm/slurm.conf /shared/slurm.conf
+cp /etc/munge/munge.key /shared/munge.key
 ```
 
 ## Install Slurm on the Compute Nodes
@@ -105,11 +106,14 @@ Inside the warewulf contianer chroot, install the required packages.
 ```
 sudo dnf install /apps/pkgs/slurm-compute/*.rpm
 ```
-Now, move the config files to their respective places:
+Now, move the slurm config files and the munge key to their respective places:
 ```
 cp /shared/slurm.conf /etc/slurm/slurm.conf
+cp /shared/munge.key /etc/munge/munge.key
+chown munge:munge /etc/munge/munge.key
+chmod 600 /etc/munge/munge.key
 ```
-And finally exit and rebuild the contianer with `exit`
+And finally, exit and rebuild the contianer with `exit`
 
 ## Copy Munge Key to Nodes
 
@@ -118,61 +122,37 @@ And finally exit and rebuild the contianer with `exit`
 </span>
 To provide the necessary authentication between thea head node and compute nodes, all nodes will need the same `munge.key`. Copy the files to the nodes and restart `munge` on all the nodes.
 
-```
-sudo cp /etc/munge/munge.key /shared/munge.key
-pdsh -g nodes sudo cp /shared/munge.key /etc/munge/munge.key
-pdsh -g nodes sudo chown munge:munge /etc/munge/munge.key
-pdsh -g nodes sudo chmod 600 /etc/munge/munge.key
-pdsh -g nodes sudo systemctl restart munge
-```
-
 ## Setup Slurm Database
-
 First, log into `mysql` as `root`:
-
 ```
-sudo mysql
+mysql
 ```
-
 The prompt should now show `MariaDB [(none)]> `. Create the `slurm_acct_db`:
-
 ```
 create database slurm_acct_db;
 ```
-
 Confirm that it was created:
-
 ```
 show databases;
 ```
-
 Now create the `slurm` mysql user and set the password (use the one you used to configure `/etc/slurm/slurmdbd.conf`):
-
 ```
 create user 'slurm'@'localhost';
 set password for 'slurm'@'localhost' = password('<yourpassword>');
 ```
-
 Grant this user privileges for `slurm_acct_db`:
-
 ```
 grant all privileges on slurm_acct_db.* to 'slurm'@'localhost';
 ```
-
 You can exit out using `exit` (semi-colon is not needed). Now, check to see if the `slurm` user is able to log in and see the database.
-
 ```
 mysql -u slurm -p
 ```
-
 Type in your password, and if you able to get the `MariaDB [(none)]> ` prompt, then show databases again.
-
 ```
 show databases;
 ```
-
 Your output should be:
-
 ```
 +--------------------+
 | Database           |
@@ -184,37 +164,30 @@ Your output should be:
 ```
 
 ## Start Slurm on the Head Node
-
 If everything is good, then the following should work.
-
 ```
-sudo systemctl enable slurmd slurmctld slurmdbd
-sudo systemctl start slurmd slurmctld slurmdbd
+systemctl enable slurmd slurmctld slurmdbd
+systemctl start slurmd slurmctld slurmdbd
 ```
 
 If you encounter errors, you can look at `systemctl status [service]`, where `[service]` is either `slurmd`, `slurmctld`, `slurmdbd`. Additionally, there should be logs under `/var/log/slurm`. 
 
 Finally, setup accounting and create the cluster within `sacctmgr`. It may already be created and give you an error. This is fine.
-
 ```
-sudo sacctmgr -i add cluster <your cluster name>
+sacctmgr -i add cluster <your cluster name>
 ```
 
 ## Start Slurm on the Compute Nodes
-
 <span class="small">resources:
 [srun](https://slurm.schedmd.com/srun.html)
 </span>
 
-As with above, this should work:
-
+Reboot the nodes with the updated image. Slurm should start. to manually start it, run the following:
 ```
-pdsh -g nodes sudo systemctl enable slurmd
 pdsh -g nodes sudo systemctl start slurmd
 ```
 
-If all is good, the output of `sinfo -N -l` should look like the following:
-
+If all is good, the output of `sinfo -Nl` should look like the following:
 ```
 NODELIST          NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT AVAIL_FE REASON              
 pi-hpc-compute01      1   pi-hpc*        idle 4       1:4:1   3794        0      1   (null) none                
@@ -224,13 +197,11 @@ pi-hpc-compute04      1   pi-hpc*        idle 4       1:4:1   3794        0     
 ```
 
 Finally, you should be able to run commands on the compute ndoes without using `pdsh`:
-
 ```
-sudo srun --nodes=4 hostname
+srun --nodes=4 hostname
 ```
 
-Output would look like this:
-
+Output should look like this:
 ```
 pi-hpc-compute02
 pi-hpc-compute01
