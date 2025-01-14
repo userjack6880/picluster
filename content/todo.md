@@ -28,7 +28,6 @@ Write:
 - basics of optimization
 
 Edit:
-- slurm (ww node install)
 
 Possible Additions:
 - spack ???
@@ -39,3 +38,4 @@ Done:
 - os installation
 - timeserver (warewulf)
 - warewulf (remove installation)
+- slurm (ww node install)
