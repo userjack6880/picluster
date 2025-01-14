@@ -12,7 +12,7 @@ Set up timesyncd to keep time.
 
 Because of the intercommunication between storage, compute, and head nodes, it's important that every node in the system is in lockstep with each other. An additional complication with our setup is that not only is it isolated from the internet (so it can't grab the time automatically), Raspberry Pi 4's and Pi Zero's do not have a hardware clock, so we'll have to add one.
 
-Our goal is to setup a time server and have every node sync time with it using [NTP](https://en.wikipedia.org/wiki/Network_Time_Protocol). While Raspbian comes with `systemd-timesyncd`, we're going to replace it with `chrony` as it can act as both a time server(head) and client(nodes).
+Our goal is to setup a time server and have every node sync time with it using the [NTP](https://en.wikipedia.org/wiki/Network_Time_Protocol) protocol. While Raspbian comes with `systemd-timesyncd`, we're going to replace it with `chrony` as it can act as both a NTP server(head) and client(nodes).
 
 ## Selecting the Time Server
 
@@ -39,20 +39,21 @@ The time is set using:
 
 ```
 # if an ntp server is already running, stop if first with:
-sudo service systemd-timesyncd stop
+sudo systemctl stop systemd-timesyncd
 # then change the time w/
-sudo timedatectl set-time 'Y:M:D HH:mm:ss'
+sudo timedatectl set-time "YYYY:MM:DD HH:mm:ss"
 # or individually with: 
-sudo timedatectl set-time 'Y:M:D'
-sudo timedatectl set-time 'HH:mm:ss'
-# finally remember to restart the NTP service again w/:
-sudo service systemd-timesyncd start
+sudo timedatectl set-time "YYYY:MM:DD"
+sudo timedatectl set-time "HH:mm:ss"
+# finally remember to start the NTP service again w/:
+sudo systemctl start systemd-timesyncd
 ```
 
 The examples above show that you can either give it a full timestamp or a partial one. Keep in mind that time is represented using **24-hour time**. You don't want to be 12 hours off!
 
 ## Using the Hardware Clock
 
+### RaspberryPi 4b
 <span class="small">resources:
 [Adding a Real Time Clock to your Raspberry Pi](https://thepihut.com/blogs/raspberry-pi-tutorials/17209332-adding-a-real-time-clock-to-your-raspberry-pi)
 </span>
@@ -67,7 +68,7 @@ First lets enable the rPi's i2c functionality:
 
 Now let's install the required packages and check for the device by issuing:
 ```
-sudo apt update && sudo apt install i2c-tools
+sudo dnf update && sudo apt install i2c-tools
 i2cdetect -y 1
 ```
 You should see ID #68 present
@@ -87,6 +88,7 @@ echo 'echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device' | sudo tee -a 
 echo 'sudo hwclock -s' | sudo tee -a /etc/rc.local
 ```
 
+### RaspberryPi 5
 
 ## Replacing timesyncd With chrony on the Server
 
@@ -106,10 +108,10 @@ Now uninstall it using dnf and then install the `chrony` package via rpm.
 
 ```
 sudo dnf remove systemd-timesyncd
-sudo rpm -i /apps/pkgs/chrony*.rpm
+sudo dnf install /apps/pkgs/chrony*.rpm
 ```
 
-`chrony` will need to be configured. First, stop `chrony`.
+next we'll need to do some configuration. First, stop `chrony`.
 
 ```
 sudo systemctl stop chrony
