@@ -6,7 +6,8 @@ BASEDIR=$( dirname $0 )
 source /etc/profile
 
 ### install docker(podman in a trenchcoat on rocky): ##################
-dnf install -y docker
+dnf install -y docker # last time we use dnf
+dnf clean all # remove cache for image size
 
 ### build container: ##################################################
 cd $BASEDIR/docker
@@ -37,3 +38,4 @@ wwctl overlay build
 
 ### clean up docker stuff: ############################################
 podman system prune -af # for space considerations
+rm -r /root/.cache

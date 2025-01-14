@@ -17,6 +17,7 @@ git apply $BASEDIR/configs/ww-picluster.patch
 make clean defaults PREFIX=/opt/warewulf
 make all
 make install
+go clean -modcache
 
 ### point warewulf to ipxe images: #######################################
 sed -i 's/\/opt\/warewulf\/share\/ipxe/\/usr\/share\/ipxe/' /opt/warewulf/etc/warewulf/warewulf.conf
