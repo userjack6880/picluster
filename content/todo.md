@@ -28,7 +28,6 @@ Write:
 - basics of optimization
 
 Edit:
-- nfs shares (warewulf changes)
 - timeserver (warewulf)
 - warewulf (remove installation)
 - slurm (ww node install)
@@ -37,4 +36,5 @@ Possible Additions:
 - spack ???
 
 Done:
+- nfs shares (warewulf changes)
 - os installation
