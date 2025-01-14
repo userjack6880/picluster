@@ -36,5 +36,6 @@ Possible Additions:
 - spack ???
 
 Done:
+- instructors
 - nfs shares (warewulf changes)
 - os installation
