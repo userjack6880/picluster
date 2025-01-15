@@ -61,7 +61,8 @@ Let the Pi go through it's initial boot cycle (boot, then reboot). Once it has f
 *The following should be done with an Internet connection:*
 
 If you plan on using a usb drive:
-```
+
+```bash
 sudo su
 mkdir /mnt/usb
 mount /dev/sdb1 /mnt/usb
@@ -72,7 +73,8 @@ cd /mnt/usb
 Ensure `ls /mnt/usb` yields the scripts and not a folder containing them.
 
 If you plan on using git:
-```
+
+```bash
 sudo su
 apt install git -y
 mkdir /mnt/usb
@@ -101,7 +103,8 @@ It should automount those partitions. Once it comes back from the reboot, check 
 As with before, let them go through their cycles and (if used) insert the USB drive last. Run this section for *every* compute node.
 
 If you plan on using a usb drive:
-```
+
+```bash
 sudo su
 mkdir /mnt/usb
 mount /dev/sdb1 /mnt/usb
@@ -112,7 +115,8 @@ cd /mnt/usb
 Ensure `ls /mnt/usb` yields the scripts and not a folder containing them.
 
 If you plan on using git:
-```
+
+```bash
 sudo su
 apt install git -y
 mkdir /mnt/usb
