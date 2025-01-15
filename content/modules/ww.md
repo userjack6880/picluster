@@ -12,7 +12,7 @@ Understand how Warewulf(ww) is setup on the Head Node and how it works.
 
 ## References
 
-<span class="small">resources:
+<span class="small">
 - [Linux Boot Process](https://en.wikipedia.org/wiki/Booting_process_of_Linux)
 - [WareWulf Docs](https://warewulf.org/docs/v4.5.x/)
 - [PXE](https://en.wikipedia.org/wiki/Preboot_Execution_Environment)
