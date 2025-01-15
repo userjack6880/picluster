@@ -6,9 +6,7 @@ Setting up a simple NFS storage server.
 
 # Module 4 - Sharing Storage
 
-## Objective
-
-**Setup an NFS shared file system**
+## Objective: Setup an NFS shared file system
 
 While distributed filesytems (such as Lustre, GPFS, and others) are commonly used in clustered computing environments, [NFS (Network File System)](https://en.wikipedia.org/wiki/Network_File_System) is still used for filesharing between systems within a network. Your objective is to create commonly used NFS shares to be used by all of the nodes within our cluster.
 
@@ -32,6 +30,7 @@ A few things you will need to know:
 All nodes are accessible via [`ssh`](https://linux.die.net/man/1/ssh) using `admin:tuxcluster` as the username:password.
 
 ## Setting up NFS shares normally (Optional)
+
 **Note: Performing the following steps is not necessary or permanent. The instructions exist only as a teaching aid.**
 
 <span class="small">resources:
@@ -44,13 +43,13 @@ While typically packages on a RHEL-based system would be installed using `dnf` o
 
 The first step will be to install the NFS server package.
 
-```
+```bash
 sudo dnf install /apps/pkgs/nfs-kernel-server*.rpm
 ```
 
 Now, create the export entries in `/etc/exports` using `vim`
 
-```
+```bash
 /home           10.0.0.0/24(rw,async,root_squash)
 /mnt/apps       10.0.0.0/24(ro,async,root_squash)
 /mnt/shared     10.0.0.0/24(rw,async,root_squash)
@@ -60,7 +59,7 @@ This will allow any computer in the `10.0.0.0` subnet (`10.0.0.1` - `10.0.0.254`
 
 Now, start the NFS server:
 
-```
+```bash
 sudo systemctl start nfs-server
 sudo systemctl status nfs-server
 sudo exportfs -a
@@ -72,10 +71,12 @@ You should get an `active (exited)` status. At this point, `/home`, `/mnt/apps`,
 If you want to make a change to `/etc/exports` after the NFS server has been started, you can set the new exports running `exportfs -a` as root.
 
 ## Setting up NFS using warewulf (Required)
+
 Warewulf is heavily container oriented, so it uses many containerized practices for both the compute nodes and the head. One such practice is the use of overlays for configurable files such as `/etc/exports`. We can use warewulf's configuration file to automatically do everything we've just explained.
 
 Edit /opt/warewulf/etc/warewulf/warewulf.conf to look like the following:
-```
+
+```bash
 ...
 nfs:
     enabled: true
@@ -97,7 +98,8 @@ nfs:
 ```
 
 Now run the following command as root to populate the changes to the host system:
-```
+
+```bash
 wwctl configure nfs
 ```
 
