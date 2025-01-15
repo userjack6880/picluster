@@ -6,9 +6,7 @@ Set up timesyncd to keep time.
 
 # Module 5 - Keeping Time
 
-## Objective
-
-**Set up chronyd to keep time**
+## Objective: Setup chronyd to keep time
 
 Because of the intercommunication between storage, compute, and head nodes, it's important that every node in the system is in lockstep with each other. An additional complication with our setup is that not only is it isolated from the internet (so it can't grab the time automatically), Raspberry Pi 4's and Pi Zero's do not have a hardware clock, so we'll have to add one.
 
@@ -29,7 +27,7 @@ You can check the current status of the time by using `timedatectl`.
 
 The time zone should automatically be set, but if it isn't, you can set it:
 
-```
+```bash
 sudo timedatectl set-timezone <time zone>
 ```
 
@@ -37,7 +35,7 @@ If you are unsure what time-zones are available, use `timedatectl list-timezones
 
 The time is set using:
 
-```
+```bash
 # if an ntp server is already running, stop if first with:
 sudo systemctl stop systemd-timesyncd
 # then change the time w/
@@ -54,6 +52,7 @@ The examples above show that you can either give it a full timestamp or a partia
 ## Using the Hardware Clock
 
 ### RaspberryPi 4b
+
 <span class="small">resources:
 [Adding a Real Time Clock to your Raspberry Pi](https://thepihut.com/blogs/raspberry-pi-tutorials/17209332-adding-a-real-time-clock-to-your-raspberry-pi)
 </span>
@@ -61,28 +60,34 @@ The examples above show that you can either give it a full timestamp or a partia
 By default, the RaspberryPi doesn't have a realtime clock. Installed on the head node is an i2c enabled realtime clock. We need to set this up in software in order for it to be functional
 
 First lets enable the rPi's i2c functionality:
+
 1. `sudo raspi-config`
 2. Select 3 Interface options
 3. Select I5 I2C
 4. Select yes
 
 Now let's install the required packages and check for the device by issuing:
-```
+
+```bash
 sudo dnf update && sudo apt install i2c-tools
 i2cdetect -y 1
 ```
+
 You should see ID #68 present
 
 Now let's enable it with:
-```
+
+```bash
 sudo modprobe rtc-ds1307
 echo ds1307 0x68 | sudo tee /sys/class/i2c-adapter/i2c-1/new_device
 sudo hwclock -r
 # if the rtc hasn't been used before. It should return jan 1, 2000. Ensure the system time is correct and correct it with:
 sudo hwclock -w
 ```
+
 if all went well, let's make the changes persistent:
-```
+
+```bash
 echo rtc-ds1307 | sudo tee -a /etc/modules
 echo 'echo ds1307 0x68 > /sys/class/i2c-adapter/i2c-1/new_device' | sudo tee -a /etc/rc.local
 echo 'sudo hwclock -s' | sudo tee -a /etc/rc.local
@@ -100,23 +105,27 @@ echo 'sudo hwclock -s' | sudo tee -a /etc/rc.local
 </span>
 
 The first thing we need to do is stop and disable `systemd-timesyncd`.
-```
+
+```bash
 sudo systemctl disable --now systemd-timesyncd
 ```
 
 Now uninstall it using dnf and then install the `chrony` package via rpm.
-```
+
+```bash
 sudo dnf remove systemd-timesyncd
 sudo dnf install /apps/pkgs/chrony/*.rpm
 ```
 
 next we'll need to do some configuration. First, stop `chrony`.
-```
+
+```bash
 sudo systemctl stop chronyd
 ```
 
 Now edit `/etc/chrony/chrony.conf`. Clear all lines and make sure it only contains these lines:
-```
+
+```bash
 driftfile /var/lib/chrony/chrony.drift
 server 127.127.1.1  #sync to local server
 local stratum 8     #allow much variance before errors are thrown
@@ -125,7 +134,8 @@ allow all           #host server for nodes
 <!-- TODO: add an internet timesync server for head to sync w/ when connected to internet -->
 
 The IP address `127.127.1.1` is the loopback address for NTP. You are telling `chrony` to sync with the system's clock driver. This isn't considered best practice, but for our purposes, it'll do the trick. Now restart `chrony`.
-```
+
+```bash
 sudo systemctl start chronyd
 ```
 
@@ -139,7 +149,8 @@ You can check the status of `chrony` using `chronyc tracking` and see if it's ac
 </span>
 
 Enter the Node container chroot:
-```
+
+```bash
 sudo wwctl container exec base-rocky9-dracut /bin/bash
 ```
 
@@ -148,7 +159,8 @@ sudo wwctl container exec base-rocky9-dracut /bin/bash
 Repeat the above process to stop, disable, and uninstall `systemd-timesyncd`. and to install `chrony`. 
 
 Next, you'll need to edit `/etc/chrony/chrony.conf` to be the following:
-```
+
+```bash
 driftfile /var/lib/chrony/chrony.drift
 server 10.0.0.2 iburst
 ```
