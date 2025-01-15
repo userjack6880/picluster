@@ -10,10 +10,12 @@ Module 4 - Warewulf Overview
 Understand how Warewulf(ww) is setup on the Head Node and how it works.
 
 ## References:
+<span class="small">resources:
 - [Linux Boot Process](https://en.wikipedia.org/wiki/Booting_process_of_Linux)
 - [WareWulf Docs](https://warewulf.org/docs/v4.5.x/)
 - [PXE](https://en.wikipedia.org/wiki/Preboot_Execution_Environment)
 - [iPXE](https://ipxe.org/docs)
+</span>
 
 ## What is WarewWulf?
 Warewulf is a purpose-built stateless booting system built for large-scale HPC's. It's what the HPC2 uses to boot and maintain the state of thousands(literally) of cluster nodes. it does this by maintaining a "Golden Image" of a compute node as desired and sending it to each node when it boots. This means that every time a node reboots. it's entirely wiped and returned to the desired state. There are some advantages and some drawbacks to this approach. Careful consideration must be taken when building these images so that they will consistently work on all nodes. 
