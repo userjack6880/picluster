@@ -1,14 +1,12 @@
 page
-Module 5 - Hello Worlds
-Helloing all over the cluster.
+Module 9 - Hello World
+Hello-ing all over the cluster.
 
 ---
 
-# Module 5 - Hello Worlds
+# Module 9 - Hello World
 
-## Objective
-
-**Implement the basic "hello world" program using C and Python**
+## Objective: Implement the basic "hello world" program using C and Python
 
 There are many ways to tackle a problem. Even a basic "hello world" program that runs across multiple compute nodes can have more than one way to solve it. Two examples will be shown.
 
@@ -21,7 +19,7 @@ There are many ways to tackle a problem. Even a basic "hello world" program that
 
 Log in as the `user` user instead of `admin` this time. Under `/shared`, create a new directory (you can name it something like `hello_mpi_c` or `hello_world_c`). Change to this directory and create a new file, `hello_mpi.c`:
 
-```
+```bash
 #include <stdio.h>
 #include <mpi.h>
 
@@ -39,14 +37,18 @@ int main(int argc, char** argv) {
 
 Now, compile the program.
 
-```
+```bash
 mpicc hello_mpi.c
 ```
 
 This should create a new file called `a.out`. This is your program. Finally, create a shell script used to submit this program to Slurm (name it `sub_mpi.sh`):
 
-```
+```bash
 #!/bin/bash
+
+# Define submission allocation
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=4
 
 cd $SLURM_SUBMIT_DIR
 
@@ -59,13 +61,13 @@ mpirun a.out
 
 Finally, submit a new job to the cluster.
 
-```
-sbatch --nodes=4 --ntasks-per-node=4 sub_mpi.sh
+```bash
+sbatch sub_mpi.sh
 ```
 
 This should submit a job, and it should return "Hello World" 16 times with a different number after the phrase.
 
-## Implementing Hello World with Python
+## Implementing Hello World with Python (if you installed it)
 
 <span class="small">resources:
 [mpirun](https://www.open-mpi.org/doc/current/man1/mpirun.1.php)
@@ -73,7 +75,7 @@ This should submit a job, and it should return "Hello World" 16 times with a dif
 
 Create a new directory under `/shared` like you did before, but use a different name to indicate that it's a python application. Create a new file `hello_mpi.py`:
 
-```
+```bash
 #!/usr/bin/env python
 
 from mpi4py import MPI
@@ -90,14 +92,14 @@ sys.stdout.write(
 
 Copy the `sub_mpi.sh` you made for the C program into this directory, and edit the last line:
 
-```
+```bash
 mpirun python hello_mpi.py
 ```
 
 Submit the job to the cluster:
 
-```
-sbatch --nodes=4 --ntasks-per-node=4 sub_mpi.sh
+```bash
+sbatch sub_mpi.sh
 ```
 
 As before, you should see "Hello World" return 16 times.
@@ -106,4 +108,4 @@ As before, you should see "Hello World" return 16 times.
 
 MPI examples can be found on the [LLNL HPC Tutorials Page](https://hpc-tutorials.llnl.gov/mpi/exercise_1/). Experiment and run a few of these examples.
 
-## [Next Module - Parallel Storage](module-6)
+## [Next Module - Parallel Storage](module-11)
