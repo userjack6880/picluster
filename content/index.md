@@ -14,9 +14,10 @@ In this digital era, the demand for scalable and efficient computing solutions c
 
 [Instructors: Read This First](instructors)
 
-## Modules
+# Modules
 
-### wk 1:
+## wk 1
+
 - [Module 1 - Hardware Selection and Assembly](modules/hardware-selection)
 <!-- TODO: john needs to do this-->
 - [Module 2 - Operating System Installation](modules/os-install)
@@ -28,20 +29,23 @@ In this digital era, the demand for scalable and efficient computing solutions c
 - [Module 6 - The Scheduler](modules/slurm)
 - [Module 7 - Users/Accounting](modules/accounting)
 
-### wk 2:
-- [Module 8 - Telemetry]()
-- [Module 9 - Grafana]()
+## wk 2
 
-### wk 3:
+- [Module 8 - Telemetry](placeholder)
+- [Module 9 - Grafana](placeholder)
+
+## wk 3
+
 - [Module 10 - Supporting Software](modules/supporting-software)
 - [Module 11 - Hello World](modules/hello-world)
-- [Module 12 - Basics of Parallel Programming]()
+- [Module 12 - Basics of Parallel Programming](placeholder)
 <!-- TODO: John-->
-- [Module 13 - Basic Optimization]()
+- [Module 13 - Basic Optimization](placeholder)
 
-### wk 4:
-- [Module 14 - Profiling]()
-- [Module 15 - Benchmarking]()
+## wk 4
+
+- [Module 14 - Profiling](placeholder)
+- [Module 15 - Benchmarking](placeholder)
 <!-- TODO: tess or drew-->
 
 <!-- TODO: not rn 
