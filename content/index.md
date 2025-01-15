@@ -18,7 +18,7 @@ In this digital era, the demand for scalable and efficient computing solutions c
 
 ## wk 1
 
-- [Module 1 - Hardware Selection and Assembly](modules/hardware-selection)
+- [Module 1 - Hardware Selection and Assembly](placeholder)
 <!-- TODO: john needs to do this-->
 - [Module 2 - Operating System Installation](modules/os-install)
 - [Module 3 - NFS Shares](modules/nfs)
@@ -27,7 +27,7 @@ In this digital era, the demand for scalable and efficient computing solutions c
 - [Module 5 - TimeServer](modules/chrony)
 <!-- TODO: waiting on vince to get back to know how to do this step -->
 - [Module 6 - The Scheduler](modules/slurm)
-- [Module 7 - Users/Accounting](modules/accounting)
+- [Module 7 - Users/Accounting](placeholder)
 
 ## wk 2
 
