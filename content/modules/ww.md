@@ -10,7 +10,9 @@ Module 4 - Warewulf Overview
 Understand how Warewulf(ww) is setup on the Head Node and how it works.
 
 ## References:
+- [Linux Boot Process](https://en.wikipedia.org/wiki/Booting_process_of_Linux)
 - [WareWulf Docs](https://warewulf.org/docs/v4.5.x/)
+- [PXE](https://en.wikipedia.org/wiki/Preboot_Execution_Environment)
 - [iPXE](https://ipxe.org/docs)
 
 ## What is WarewWulf?
