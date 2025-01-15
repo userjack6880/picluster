@@ -37,7 +37,7 @@ cat {image} | xz -d | ssh pi@{pi's hostname or ip} 'dd of=/dev/sdX bs=4k conv=fs
 3. Clone the github repo to the pi. typically `/opt/picluster`
 4. Run `/opt/picluster/headnode.sh` as root
 5. The node will reboot when done
-6. Follow the guide [here](content/internet.md) to setup an internet connection w/ the head node's networking setup
+6. Follow the guide [here](content/internet) to setup an internet connection w/ the head node's networking setup
 7. Run `/opt/picluster/warewulf.sh` as root
 8. Run `/opt/picluster/ww-nodes.sh` as root
 9. Reboot

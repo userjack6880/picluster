@@ -30,7 +30,7 @@ A few things you will need to know:
   - `admin` - this will be the user you will do administrative tasks with - this user has `sudo` access.
   - `user` - this will be an unprivleged user
   - both users have the same password - `tuxcluster`
-- Your cluster will not have direct access to the internet. All packages you will need will be included on the pre-formated drive. feel free to read [this](modules/internet.md) if networking is desired after the fact.
+- Your cluster will not have direct access to the internet. All packages you will need will be included on the pre-formated drive. feel free to read [this](modules/internet) if networking is desired after the fact.
 - Your cluster will be accessible using a priavte IP range of 10.0.0.0/24
   - the head node runs a dhcp server which will automatically give client devices an ip in the range of `10.0.0.200-254`
 - The nodes are assigned names and IP addresses as follows:

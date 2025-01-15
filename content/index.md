@@ -17,24 +17,24 @@ In this digital era, the demand for scalable and efficient computing solutions c
 ## Modules
 
 ### wk 1:
-- [Module 1 - Hardware Selection and Assembly](modules/hardware-selection.md)
+- [Module 1 - Hardware Selection and Assembly](modules/hardware-selection)
 <!-- TODO: john needs to do this-->
-- [Module 2 - Operating System Installation](modules/os-install.md)
-- [Module 3 - NFS Shares](modules/nfs.md)
+- [Module 2 - Operating System Installation](modules/os-install)
+- [Module 3 - NFS Shares](modules/nfs)
 <!-- TODO: Tess needs to update chrony.md to reflect pi5 changes -->
-- [Module 4 - Warewulf](modules/ww.md)
-- [Module 5 - TimeServer](modules/chrony.md)
+- [Module 4 - Warewulf](modules/ww)
+- [Module 5 - TimeServer](modules/chrony)
 <!-- TODO: waiting on vince to get back to know how to do this step -->
-- [Module 6 - The Scheduler](modules/slurm.md)
-- [Module 7 - Users/Accounting](modules/accounting.md)
+- [Module 6 - The Scheduler](modules/slurm)
+- [Module 7 - Users/Accounting](modules/accounting)
 
 ### wk 2:
 - [Module 8 - Telemetry]()
 - [Module 9 - Grafana]()
 
 ### wk 3:
-- [Module 10 - Supporting Software](modules/supporting-software.md)
-- [Module 11 - Hello World](modules/hello-world.md)
+- [Module 10 - Supporting Software](modules/supporting-software)
+- [Module 11 - Hello World](modules/hello-world)
 - [Module 12 - Basics of Parallel Programming]()
 <!-- TODO: John-->
 - [Module 13 - Basic Optimization]()
