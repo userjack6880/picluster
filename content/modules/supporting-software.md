@@ -24,10 +24,12 @@ Open MPI is an open source implementation of the Message Passing Interface(MPI) 
 While it's possible to install the binary release from the distribution repository, this is a rapidly evolving field, and as such, it's recommended to build it from source. Furthermore, since we are using slurm, building openmpi with slurm allows a number of integrations the standalone binary lacks. Finally, manually building also allows us to place the binaries in a location accessible to all nodes, that way we only need to install once.
 
 ## Building OpenMPI from source (Recommended)
+
 The source tarball for the latest release of OpenMPI as of head-node creation is located in `/apps/src/openmpi`
 
 As a non-elevated user in a directory of your choice:
-```
+
+```bash
 # extract the tarball and enter dir
 tar -xf /apps/src/openmpi/*.tar.*
 cd openmpi*
@@ -41,13 +43,17 @@ echo 'PATH=$PATH:/apps/openmpi/bin' | sudo tee /etc/profile.d/openmpi.sh
 ```
 
 # Installing OpenMPI from distro repo's (Not Recommended)
+
 Install OpenMPI and supporting packages, including development packages:
-```
+
+```bash
 sudo rpm install /apps/pkgs/openmpi/*.rpm
 ```
+
 **Note: this will also need to be installed in the compute node image. Instructions [Here](ww.md)**
 
 ## (Optional) Install mpi4py on Head Node
+
 <span class="small">resources:
 [mpi4py](https://mpi4py.readthedocs.io),
 [pip](https://pip.pypa.io/en/stable/),
@@ -59,18 +65,21 @@ sudo rpm install /apps/pkgs/openmpi/*.rpm
 `mpi4py` gives Python the ability to exploit MPI and makes Python practical for cluster computing. Since we won't have direct access to the web, `pip` will not be available, and we will need to manually build and install `mpi4py`.
 
 The source files have already been downloaded and are located under `/apps/src/mpi4py`. Extract the files:
-```
+
+```bash
 gzip -d mpi4py*.tar.gz
 tar -xf mpi4py*.tar
 ```
 
 Now go into the directory that was just created and build `mpi4py`:
-```
+
+```bash
 python setup.py build
 ```
 
 This will take a while. Once it completes, install using `sudo`:
-```
+
+```bash
 sudo python setup.py install
 ```
 
