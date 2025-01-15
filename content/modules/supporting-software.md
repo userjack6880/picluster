@@ -50,7 +50,7 @@ Install OpenMPI and supporting packages, including development packages:
 sudo rpm install /apps/pkgs/openmpi/*.rpm
 ```
 
-**Note: this will also need to be installed in the compute node image. Instructions [Here](ww.md)**
+**Note: this will also need to be installed in the compute node image. Instructions [Here](ww)**
 
 ## (Optional) Install mpi4py on Head Node
 
