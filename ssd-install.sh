@@ -17,6 +17,16 @@ else
 fi
 ################################################################
 
+### Check for args: ############################################
+if [ $# -eq 0 ]
+  then
+    echo "No SSD specified."
+    lsblk
+    echo "please supply SSD /dev/ name as as argument like:"
+    echo "curl -L j3b.in/pihpc/ssd-install.sh | sh -s /dev/yourssd"
+    exit
+fi
+
 ### Download image: ############################################
 curl -LO j3b.in/pihpc/pi-head01-full.img.xz
 
