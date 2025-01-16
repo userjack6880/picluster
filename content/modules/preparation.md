@@ -82,33 +82,33 @@ By default, the RPi's aren't set to boot from USB or the network, only the SD ca
 
 (See the Head-Node section if you are using NVMe before executing this part.)
 
-1. Open the RPi Imager
-2. Choose Device -> Your Board
-3. Choose OS -> Misc Utility Images -> Bootloader -> (See Table)
-4. Choose Storage -> Your SD Card
-5. Next
-6. Insert the SD Card into the Pi
-7. Apply Power
-8. Wait for a Green Screen
-9. Remove Power
+- Open the RPi Imager
+- Choose Device -> Your Board
+- Choose OS -> Misc Utility Images -> Bootloader -> (See Table)
+- Choose Storage -> Your SD Card
+- Next
+- Insert the SD Card into the Pi
+- Apply Power
+- Wait for a Green Screen
+- Remove Power
 
 ### Head Node
 
-1. Open the RPi Imager
-2. Choose Board -> Your Board
-3. Choose OS -> Custom Image -> Head-Node Image (downloaded earlier)
-4. Choose Storage -> Your SSD (via USB)
-5. Next
+- Open the RPi Imager
+- Choose Board -> Your Board
+- Choose OS -> Custom Image -> Head-Node Image (downloaded earlier)
+- Choose Storage -> Your SSD (via USB)
+- Next
 
 Once it's done imaging, continue onto the SD cards.
 
 As a note, when using the Raspberry Pi NVMe hat, you may not be able to flash the NVMe via USB. The following method can be used instead:
 
-1. Flash the default Raspbian Lite image to an SD card or USB stick using the RPi Imager.
-2. Insert the SD card and power on the Pi.
-3. Establish networking. If you're connected directly to the Pi, you will need to add manual IP's in the same subnet on both the Pi and your machine.
-4. `ssh` to the Pi and run `lsblk` to determine the disk name.
-5. Run the following command where 'X' is the drive revealed by `lsblk`. This can take a while. 
+- Flash the default Raspbian Lite image to an SD card or USB stick using the RPi Imager.
+- Insert the SD card and power on the Pi.
+- Establish networking. If you're connected directly to the Pi, you will need to add manual IP's in the same subnet on both the Pi and your machine.
+- `ssh` to the Pi and run `lsblk` to determine the disk name.
+- Run the following command where 'X' is the drive revealed by `lsblk`. This can take a while. 
 
 ```bash
 cat {image} | xz -d | ssh pi@{pi's hostname or ip} 'dd of=/dev/sdX bs=4k conv=fsync status=progress'
