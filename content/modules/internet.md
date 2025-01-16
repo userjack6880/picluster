@@ -14,7 +14,7 @@ while the clutser was designed to be used offline, there is an easy way to setup
 
 the easiest way to get internet on the cluster is to share a client computer's (Currently LINUX only) internet with the picluster. This is achieved by setting up ip forwarding and a NAT on the client
 
-While having it connected to the cluster via ethernet (currently not easy to do WiFi->WiFi), issue the following commands ***OR*** run [this](placeholder) script as root:
+While having it connected to the cluster via ethernet (currently not easy to do WiFi->WiFi), issue the following commands ***OR*** run [this](https://github.com/userjack6880/picluster/raw/refs/heads/main/create_NAT_picluster.sh) script as root:
 
 ```bash
 TODO: placeholder
