@@ -75,3 +75,4 @@ Done:
 ## Other
 
 - Ensure Module # Line Up
+- fix module scripts

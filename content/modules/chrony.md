@@ -171,4 +171,4 @@ Note: here, `iburst` is very important; it tells chrony to immediately sync with
 
 Once everybody is booted and pretty much within 0 seconds of NTP time, we're ready for the next module.
 
-## [Module 7 - The Scheduler](module-7)
+## [Module 7 - The Scheduler](slurm)

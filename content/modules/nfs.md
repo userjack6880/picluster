@@ -105,4 +105,4 @@ wwctl configure nfs
 
 That's it. Warewulf handles the rest.
 
-## [Next Module - Keeping Time](module-5)
+## [Next Module - Keeping Time](chrony)

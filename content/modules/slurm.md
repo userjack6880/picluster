@@ -250,4 +250,4 @@ pi-hpc-compute03
 pi-hpc-compute04
 ```
 
-## [Next Module - Supporting Software](module-8)
+## [Next Module - Supporting Software](supporting-software)

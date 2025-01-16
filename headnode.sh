@@ -9,6 +9,10 @@ else
 fi
 ################################################################
 
+##########################################################################
+BASEDIR=$( dirname $0 )
+##########################################################################
+
 # grow root FS to avoid running out of space during installation:
 rootfs-expand
 
@@ -30,8 +34,8 @@ chmod g+w /apps
 
 ### copy public/private keys: ##
 mkdir /home/admin/.ssh
-cp ./configs/admin_privkey /home/admin/.ssh/id_rsa
-cp ./configs/admin_pubkey /home/admin/.ssh/authorized_keys
+cp $BASEDIR/configs/admin_privkey /home/admin/.ssh/id_rsa
+cp $BASEDIR/configs/admin_pubkey /home/admin/.ssh/authorized_keys
 chown -R admin:admin /home/admin/.ssh
 chmod 600 /home/admin/.ssh/id_rsa
 chmod 644 /home/admin/.ssh/authorized_keys
@@ -71,17 +75,17 @@ chown -R root:users /apps/src/mpi4py
 chmod -R 770 /apps/src/mpi4py
 
 ### copy needed configs: ###
-cp ./configs/hosts /etc/hosts
-cp ./configs/sudoers /etc/sudoers
-cp ./configs/genders /etc/genders
+cp $BASEDIR/configs/hosts /etc/hosts
+cp $BASEDIR/configs/sudoers /etc/sudoers
+cp $BASEDIR/configs/genders /etc/genders
 mkdir /mnt/apps/configs
-cp ./configs/chrony-client.conf /mnt/apps/configs
+cp $BASEDIR/configs/chrony-client.conf /mnt/apps/configs
 
 ### set hostname: ###
 echo "pi-hpc-head01" > /etc/hostname
 
 ### Setup Networking as per docs: ###
-cp ./configs/head-node.nmconnection /etc/NetworkManager/system-connections/
+cp $BASEDIR/configs/head-node.nmconnection /etc/NetworkManager/system-connections/
 chown root:root /etc/NetworkManager/system-connections/head-node.nmconnection
 chmod 600 /etc/NetworkManager/system-connections/head-node.nmconnection
 
