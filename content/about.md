@@ -13,6 +13,7 @@ If you have any questions, comments, or suggestions for improvement, feel free t
 Website content is licensed under CC BY-NC-SA 4.0. Code written by our contributors is distributed under MIT.
 
 ## Contributions
-John Bradley - Project Manager, Creator
-Drew Helgerson - Content, Code
-Matt Brockhaus - Curriculum Guidance
+
+- **John Bradley** - Project Manager, Creator
+- **Drew Helgerson** - Content, Code
+- **Matt Brockhaus** - Curriculum Guidance
