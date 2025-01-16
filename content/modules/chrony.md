@@ -1,5 +1,5 @@
 page
-Module 5 - Keeping Time
+Keeping Time
 Set up timesyncd to keep time.
 
 ---
@@ -171,4 +171,4 @@ Note: here, `iburst` is very important; it tells chrony to immediately sync with
 
 Once everybody is booted and pretty much within 0 seconds of NTP time, we're ready for the next module.
 
-## [Module 7 - The Scheduler](slurm)
+## [Next Module - Scheduling Processes](slurm)

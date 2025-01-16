@@ -1,6 +1,6 @@
 page
 Cluster Preparation
-Cluster Preparation
+Prepare your cluster.
 
 ---
 
@@ -122,3 +122,5 @@ Attach the head node's SSD and power, optionally a keybaord and monitor. Wait fo
 ## Automatically Running Through the Modules
 
 A series of scripts are also included under `/opt/picluster/scripts`. These will run through the module automatically. -->
+
+## [Next Module - Sharing Storage](nfs)

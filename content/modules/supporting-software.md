@@ -1,5 +1,5 @@
 page
-Module 8 - Supporting Software
+Supporting Software
 Install Open MPI and mpi4py
 
 ---
@@ -84,4 +84,4 @@ This will take a while. Once it completes, install using `sudo`:
 sudo python setup.py install
 ```
 
-## [Next Module - Hello Worlds](module-9)
+## [Next Module - Hello World(s)!](hello-world)

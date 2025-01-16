@@ -1,10 +1,10 @@
 page
-Module 9 - Hello World
+Hello World(s)!
 Hello-ing all over the cluster.
 
 ---
 
-# Module 9 - Hello World
+# Hello World(s)!
 
 ## Objective: Implement the basic "hello world" program using C and Python
 
@@ -107,5 +107,3 @@ As before, you should see "Hello World" return 16 times.
 ## MPI Examples
 
 MPI examples can be found on the [LLNL HPC Tutorials Page](https://hpc-tutorials.llnl.gov/mpi/exercise_1/). Experiment and run a few of these examples.
-
-## [Next Module - Parallel Storage](module-11)
