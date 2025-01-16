@@ -28,7 +28,7 @@ if [ $# -eq 0 ]
 fi
 
 ### Download image: ############################################
-curl -LO j3b.in/pihpc/pi-head01-full.img.xz
+curl -LO j3b.in/pihpc/pi-hpc-head01-full.img.xz
 
 ### decompress and write to SSD: ###############################
 cat pi-hpc-head01-full.img.xz | xz -d | dd of=$1 bs=50M status=progress conv=fsync
