@@ -4,7 +4,7 @@ Set up timesyncd to keep time.
 
 ---
 
-# Module 5 - Keeping Time
+# Keeping Time
 
 ## Objective: Setup chronyd to keep time
 

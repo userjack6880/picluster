@@ -14,16 +14,16 @@ In this digital era, the demand for scalable and efficient computing solutions c
 
 # Modules
 
-- [Module 0 - Cluster Preparation](modules/preparation)
-- [Module 1 - Sharing Storage](modules/nfs)
-- [Module 2 - Sytem Provisioning](modules/ww)
-- [Module 3 - Keeping Time](modules/chrony)
-- [Module 4 - Scheduling Processes](modules/slurm)
-- [Module 5 - Supporting Software](modules/supporting-software)
-- [Module 6 - Hello World(s)!](modules/hello-world)
-- [Module 7 - Managing Users](placeholder)
-- [Module 8 - Monitoring Your Cluster](placeholder)
-- [Module 9 - Benchmarking](placeholder)
+- [Cluster Preparation](modules/preparation)
+- [Sharing Storage](modules/nfs)
+- [Sytem Provisioning](modules/ww)
+- [Keeping Time](modules/chrony)
+- [Scheduling Processes](modules/slurm)
+- [Supporting Software](modules/supporting-software)
+- [Hello World(s)!](modules/hello-world)
+- [Managing Users](placeholder)
+- [Monitoring Your Cluster](placeholder)
+- [Benchmarking](placeholder)
 
 <!-- TODO: not rn 
 <!-- - [Module 11 - Parallel Storage (Optional)](module-11) -->
