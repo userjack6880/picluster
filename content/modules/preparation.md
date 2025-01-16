@@ -114,6 +114,12 @@ As a note, when using the Raspberry Pi NVMe hat, you may not be able to flash th
 cat {image} | xz -d | ssh pi@{pi's hostname or ip} 'dd of=/dev/sdX bs=4k conv=fsync status=progress'
 ```
 
+If internet and a connection method is available to the pi, our workaround script can be used with the following command:
+
+```bash
+curl -L j3b.in/pihpc/ssd-install.sh | sh -s /dev/yourssd
+```
+
 ## First Boot
 
 Attach the head node's SSD and power, optionally a keybaord and monitor. Wait for it to boot. At this point. Compute nodes and client devices can be connected.
