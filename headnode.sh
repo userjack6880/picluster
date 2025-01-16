@@ -32,6 +32,12 @@ mkdir /apps
 ### make apps writable: ###
 chmod g+w /apps
 
+### change rocky to admin as per docs: ###
+sed -i 's/rocky/admin/g' /etc/passwd /etc/group /etc/shadow
+# sed is used since usage of usermod requires no running processes belonging to the user
+usermod -p '$5$cOTJhkxlC4$kEFPIJaKPriv16lcwNBsS4dVMT1sC/a9vFPNlZDHug1' admin
+mv /home/{rocky,admin}
+
 ### copy public/private keys: ##
 mkdir /home/admin/.ssh
 cp $BASEDIR/configs/admin_privkey /home/admin/.ssh/id_rsa
@@ -41,13 +47,7 @@ chmod 600 /home/admin/.ssh/id_rsa
 chmod 644 /home/admin/.ssh/authorized_keys
 ### make ssh to root possible: ###
 mkdir /root/.ssh
-cp /home/rocky/.ssh/* /root/.ssh/
-
-### change rocky to admin as per docs: ###
-sed -i 's/rocky/admin/g' /etc/passwd /etc/group /etc/shadow
-# sed is used since usage of usermod requires no running processes belonging to the user
-usermod -p '$5$cOTJhkxlC4$kEFPIJaKPriv16lcwNBsS4dVMT1sC/a9vFPNlZDHug1' admin
-mv /home/{rocky,admin}
+cp /home/admin/.ssh/* /root/.ssh/
 
 ### create additional users: ###
 useradd -m -g users -p '$5$cOTJhkxlC4$kEFPIJaKPriv16lcwNBsS4dVMT1sC/a9vFPNlZDHug1' -s /bin/bash -u 1001 user
