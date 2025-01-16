@@ -75,7 +75,7 @@ This should submit a job, and it should return "Hello World" 16 times with a dif
 
 Create a new directory under `/shared` like you did before, but use a different name to indicate that it's a python application. Create a new file `hello_mpi.py`:
 
-```bash
+```python
 #!/usr/bin/env python
 
 from mpi4py import MPI
