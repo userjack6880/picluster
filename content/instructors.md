@@ -42,11 +42,13 @@ A few things you will need to know:
 | pi-hpc-storage[01-40] | `10.0.0.51-90` |
 
 ### Downloads
+
 [Head-Node Image](https://j3b.in/pihpc/pi-hpc-head01-full.img.xz): the image needed to prepare the head node is available in a compressed, raw disk image format.
 
 [Github Repo](https://github.com/userjack6880/picluster/tree/ww-wip): while it's not recommended, the scripts required to create the head-node image can be viewed, on the github.
 
 ## Configuring the Bootloaders
+
 By default, the RPi's aren't set to boot from USB or the network, only the SD card. we must flash their firmware with the correct option. The following table outlines which boot mode each device needs:
 
 | - | RPi 4 | RPi 5 |
@@ -56,6 +58,7 @@ By default, the RPi's aren't set to boot from USB or the network, only the SD ca
 | Storage | Network | Network |
 
 For Each Pi:
+
 1. Open the RPi imager
 2. Choose Device -> your board
 3. Choose OS -> Misc utility images -> Bootloader -> (See matrix)
