@@ -25,8 +25,8 @@ Provided are ready to run images for boards we test, as well as scripts to confi
 ### Considerations for using an SSD
 
 In some exclosures, it can be difficult to access the SSD from another computer. a decent workaround is the following:
-1. Flash the default raspbian lite image to an SD card or USB stick using the Rpi Imager
 
+1. Flash the default raspbian lite image to an SD card or USB stick using the Rpi Imager
 2. Insert the SD card and power on the Pi
 3. Establish networking. If you're connected directly to the pi, you will need to add manual IP's in the same subnet on both the pi and your machine
 4. ssh to the pi and run `lsblk` to determine the disk name
