@@ -73,7 +73,7 @@ By default, the RPi's aren't set to boot from USB or the network, only the SD ca
 
 | Node      | RPi 4   | RPi 5   |
 | --------- | ------- | ------- |
-| Head Node | USB/SD  | NVMe/SD |
+| Head Node | SD Card | SD Card |
 | Compute   | Network | Network |
 
 <!-- | Storage   | Network | Network | -->
