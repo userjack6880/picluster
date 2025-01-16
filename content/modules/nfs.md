@@ -1,10 +1,10 @@
 page
-Module 4 - Sharing Storage
+Sharing Storage
 Setting up a simple NFS storage server.
 
 ---
 
-# Module 4 - Sharing Storage
+# Sharing Storage
 
 ## Objective: Setup an NFS shared file system
 
@@ -105,4 +105,4 @@ wwctl configure nfs
 
 That's it. Warewulf handles the rest.
 
-## [Next Module - Keeping Time](chrony)
+## [Next Module - Sytem Provisioning](ww)

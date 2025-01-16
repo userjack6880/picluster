@@ -1,10 +1,10 @@
 page
-Module 5 - Keeping Time
+Keeping Time
 Set up timesyncd to keep time.
 
 ---
 
-# Module 5 - Keeping Time
+# Keeping Time
 
 ## Objective: Setup chronyd to keep time
 
@@ -167,8 +167,8 @@ server 10.0.0.2 iburst
 
 Note: here, `iburst` is very important; it tells chrony to immediately sync with the server upon boot.
 
-`exit` the container and wait for it to rebuild, and reboot the nodes
+Now `exit` the container and wait for it to rebuild, and reboot the nodes
 
 Once everybody is booted and pretty much within 0 seconds of NTP time, we're ready for the next module.
 
-## [Module 7 - The Scheduler](slurm)
+## [Next Module - Scheduling Processes](slurm)

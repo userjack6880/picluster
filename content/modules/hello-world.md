@@ -1,10 +1,10 @@
 page
-Module 9 - Hello World
+Hello World(s)!
 Hello-ing all over the cluster.
 
 ---
 
-# Module 9 - Hello World
+# Hello World(s)!
 
 ## Objective: Implement the basic "hello world" program using C and Python
 
@@ -75,7 +75,7 @@ This should submit a job, and it should return "Hello World" 16 times with a dif
 
 Create a new directory under `/shared` like you did before, but use a different name to indicate that it's a python application. Create a new file `hello_mpi.py`:
 
-```bash
+```python
 #!/usr/bin/env python
 
 from mpi4py import MPI
@@ -108,4 +108,4 @@ As before, you should see "Hello World" return 16 times.
 
 MPI examples can be found on the [LLNL HPC Tutorials Page](https://hpc-tutorials.llnl.gov/mpi/exercise_1/). Experiment and run a few of these examples.
 
-## [Next Module - Parallel Storage](module-11)
+## [Next Module - Managing Users](users)

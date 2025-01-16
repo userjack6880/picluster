@@ -1,10 +1,10 @@
 page
-Module 7 - The Scheduler
+Scheduling Processes
 Build and install slurm packages.
 
 ---
 
-# Module 7 - The Scheduler
+# Scheduling Processes
 
 ## Objective
 

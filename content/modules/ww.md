@@ -1,10 +1,10 @@
 page
-Module 4 - Warewulf Overview
-Module 4 - Warewulf Overview
+System Provisioning
+An overview of Warewulf.
 
 ---
 
-# Module 4 - Warewulf Overview
+# System Provisioning
 
 ## Objective
 
@@ -82,3 +82,5 @@ wwctl overlay build [node]
 ## Power On the Nodes
 
 At this point, power on the nodes. They should begin booting and pulling their images. We'll configure these images in future steps.
+
+## [Next Module - Keeping Time](chrony)
