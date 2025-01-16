@@ -47,7 +47,7 @@ chmod 600 /home/admin/.ssh/id_rsa
 chmod 644 /home/admin/.ssh/authorized_keys
 ### make ssh to root possible: ###
 mkdir /root/.ssh
-cp /home/rocky/.ssh/* /root/.ssh/
+cp /home/admin/.ssh/* /root/.ssh/
 
 ### create additional users: ###
 useradd -m -g users -p '$5$cOTJhkxlC4$kEFPIJaKPriv16lcwNBsS4dVMT1sC/a9vFPNlZDHug1' -s /bin/bash -u 1001 user
