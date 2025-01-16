@@ -1,10 +1,10 @@
 page
-Notes for Instructors
-Notes for Instructors
+Cluster Preparation
+Cluster Preparation
 
 ---
 
-# Notes for Instructors
+# Cluster Preparation
 
 ## Module Format
 
@@ -15,8 +15,6 @@ Additionally, modules will have an introduction explaining the purpose of the mo
 Unless otherwise indicated, the modules are intended to be performed *in order*, so skipping modules is not advised.
 
 ## Materials
-
-It is suggested that at minimum 5 Raspberry Pi 4B's or 5's be purchased for these modules with adaquate storage provided for at least one (a large SD card or external drive). 1 SD card will be required for setup regardless of head node storage choice. At least one network switch to allow all of the SBC's to connect to each other is required, as well as some way to access to cluster, via a laptop or a direct montior/keyboard connection to one of the SBC's.
 
 The following is a minimum list of required materials:
 
@@ -41,7 +39,7 @@ The following is a minimum list of required materials:
 | [Long USB C](https://www.amazon.com/dp/B0765B253T)                    | 1 Cable   | [Long USB C](https://www.amazon.com/dp/B0CLLTGBFM)                         | 1 Cable     | Power Head Node           |
 | [32 GB MicroSD Card](https://www.amazon.com/dp/B09WRHRDLZ)            | 5 Cards   | (Same as 4th Gen)                                                          | 5 Cards     | OS Storage                |
 
-Links are to recommended specific listing, quantitites are dependent on what is purchased. Head node enclosures should include an expansion board to provide a storage interface.
+Links are to recommended specific listing, quantitites are dependent on what is purchased. Head node enclosures should include an expansion board to provide a storage interface. This can be expanded to up to 40 compute nodes if desired. Quantities need to be adjusted for larger clusters.
 
 ### Downloads
 
@@ -66,7 +64,7 @@ Links are to recommended specific listing, quantitites are dependent on what is 
 | --------------------- | -------------- |
 | pi-hpc-head01         | `10.0.0.2`     |
 | pi-hpc-compute[01-40] | `10.0.0.11-50` |
-| pi-hpc-storage[01-40] | `10.0.0.51-90` |
+<!-- | pi-hpc-storage[01-40] | `10.0.0.51-90` | we're ignoring storage for now -->
 
 ## Configuring the Bootloaders
 
@@ -74,32 +72,13 @@ By default, the RPi's aren't set to boot from USB or the network, only the SD ca
 
 | Node      | RPi 4   | RPi 5   |
 | --------- | ------- | ------- |
-| Head-Node | USB/SD  | NVMe/SD |
+| Head Node | USB/SD  | NVMe/SD |
 | Compute   | Network | Network |
-| Storage   | Network | Network |
-
-### Head-Node
-
-1. Open the RPi Imager
-2. Choose Board -> Your Board
-3. Choose OS -> Custom Image -> Head-Node Image (downloaded earlier)
-4. Choose Storage -> Your SSD (via USB)
-5. Next
-
-As a note, when using the Raspberry Pi NVMe hat, you may not be able to flash the NVMe via USB. The following method can be used instead:
-
-1. Flash the default raspbian lite image to an SD card or USB stick using the RPi Imager
-2. Insert the SD card and power on the Pi
-3. Establish networking. If you're connected directly to the pi, you will need to add manual IP's in the same subnet on both the pi and your machine
-4. ssh to the pi and run `lsblk` to determine the disk name
-5. Run the following command where 'X' is the drive revealed by lsblk. This can take a while. 
-
-```bash
-cat {image} | xz -d | ssh pi@{pi's hostname or ip} 'dd of=/dev/sdX bs=4k conv=fsync status=progress'
-```
-
+<!-- | Storage   | Network | Network | -->
 
 ### All Nodes
+
+(See the Head-Node section if you are using NVMe before executing this part.)
 
 1. Open the RPi Imager
 2. Choose Device -> Your Board
@@ -111,10 +90,33 @@ cat {image} | xz -d | ssh pi@{pi's hostname or ip} 'dd of=/dev/sdX bs=4k conv=fs
 8. Wait for a Green Screen
 9. Remove Power
 
+### Head Node
+
+1. Open the RPi Imager
+2. Choose Board -> Your Board
+3. Choose OS -> Custom Image -> Head-Node Image (downloaded earlier)
+4. Choose Storage -> Your SSD (via USB)
+5. Next
+
+Once it's done imaging, continue onto the SD cards.
+
+As a note, when using the Raspberry Pi NVMe hat, you may not be able to flash the NVMe via USB. The following method can be used instead:
+
+1. Flash the default Raspbian Lite image to an SD card or USB stick using the RPi Imager.
+2. Insert the SD card and power on the Pi.
+3. Establish networking. If you're connected directly to the Pi, you will need to add manual IP's in the same subnet on both the Pi and your machine.
+4. `ssh` to the Pi and run `lsblk` to determine the disk name.
+5. Run the following command where 'X' is the drive revealed by `lsblk`. This can take a while. 
+
+```bash
+cat {image} | xz -d | ssh pi@{pi's hostname or ip} 'dd of=/dev/sdX bs=4k conv=fsync status=progress'
+```
+
 ## First Boot
 
-Attach the Head-Node's SSD and power, optionally a keybaord and monitor. Wait for it to boot. At this point. Compute Nodes and Client devices can be connected. Any storage nodes attached will function as compute nodes until later configured in the modules
+Attach the head node's SSD and power, optionally a keybaord and monitor. Wait for it to boot. At this point. Compute nodes and client devices can be connected.
 
+<!-- let's not include this text for now 
 ## Automatically Running Through the Modules
 
-A series of scripts are also included under `/opt/picluster/scripts`. These will run through the module automatically - it is suggested that you delete this directory after preparing the nodes for the students.
+A series of scripts are also included under `/opt/picluster/scripts`. These will run through the module automatically. -->
