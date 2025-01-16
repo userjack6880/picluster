@@ -64,6 +64,7 @@ Links are to recommended specific listing, quantitites are dependent on what is 
 | --------------------- | -------------- |
 | pi-hpc-head01         | `10.0.0.2`     |
 | pi-hpc-compute[01-40] | `10.0.0.11-50` |
+
 <!-- | pi-hpc-storage[01-40] | `10.0.0.51-90` | we're ignoring storage for now -->
 
 ## Configuring the Bootloaders
@@ -74,6 +75,7 @@ By default, the RPi's aren't set to boot from USB or the network, only the SD ca
 | --------- | ------- | ------- |
 | Head Node | USB/SD  | NVMe/SD |
 | Compute   | Network | Network |
+
 <!-- | Storage   | Network | Network | -->
 
 ### All Nodes
