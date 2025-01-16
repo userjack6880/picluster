@@ -59,7 +59,7 @@ mv /etc/slurm/slurm.conf.simple /etc/slurm/slurm.conf
 
 Now edit the config to reflect your configuration (only *changed and added lines* are shown):
 
-```bash
+```conf
 ## General
 SlurmctldHost=pi-hpc-head01
 MpiDefault=pmi2
@@ -85,7 +85,7 @@ To get the values for `NodeName`, you can run `/usr/sbin/slurmd -C` on the compu
 
 Finally, we need to create the `/etc/slurm/slurmdbd.conf` file for the Slurm database:
 
-```bash
+```conf
 AuthType=auth/munge
 DbdHost=pi-hpc-head01
 DbdPort=6819
