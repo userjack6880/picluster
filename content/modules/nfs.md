@@ -76,7 +76,7 @@ Warewulf is heavily container oriented, so it uses many containerized practices 
 
 Edit /opt/warewulf/etc/warewulf/warewulf.conf to look like the following:
 
-```bash
+```yaml
 ...
 nfs:
     enabled: true
