@@ -69,10 +69,10 @@ Links are to recommended specific listing, quantitites are dependent on what is 
 
 By default, the RPi's aren't set to boot from USB or the network, only the SD card. we must flash their firmware with the correct option. The following table outlines which boot mode each device needs:
 
-| Node      | RPi 4   | RPi 5   |
-| --------- | ------- | ------- |
-| Head Node | SD Card | SD Card |
-| Compute   | Network | Network |
+| Node      | Selection |
+| --------- | ------- |
+| Head Node | SD Card |
+| Compute   | Network |
 
 <!-- | Storage   | Network | Network | -->
 
