@@ -63,6 +63,8 @@ dnf install -y --downloadonly --downloaddir=/apps/pkgs/slurm-compute slurm-slurm
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/openmpi openmpi-devel
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/glusterfs-server glusterfs
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/glusterfs-client glusterfs-fuse
+dnf install -y --downloadonly --downloaddir=/apps/pkgs/ipa-server ipa-server --setopt=install_weak_deps=False
+dnf install -y --downloadonly --downloaddir=/apps/pkgs/ipa-client ipa-client --setopt=install_weak_deps=False
 
 ### Download source for OpenMPI: ###
 mkdir /apps/src/openmpi
