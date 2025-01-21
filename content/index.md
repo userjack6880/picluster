@@ -21,7 +21,7 @@ In this digital era, the demand for scalable and efficient computing solutions c
 - [Scheduling Processes](modules/slurm)
 - [Supporting Software](modules/supporting-software)
 - [Hello World(s)!](modules/hello-world)
-- [Managing Users](placeholder)
+- [Managing Users](modules/accounting)
 - [Monitoring Your Cluster](placeholder)
 - [Benchmarking](placeholder)
 
