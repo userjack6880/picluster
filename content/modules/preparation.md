@@ -109,7 +109,7 @@ As a note, when using the Raspberry Pi NVMe hat, you may not be able to flash th
 - Run the following command where 'X' is the drive revealed by `lsblk`. This can take a while. 
 
 ```bash
-cat {image} | xz -d | ssh pi@{pi's hostname or ip} 'dd of=/dev/sdX bs=4k conv=fsync status=progress'
+cat {image} | xz -d | ssh pi@{RPi hostname or ip} 'dd of=/dev/sdX bs=4k conv=fsync status=progress'
 ```
 
 If internet and a connection method is available to the pi, our workaround script can be used with the following command:
