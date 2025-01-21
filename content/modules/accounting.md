@@ -17,7 +17,7 @@ Lightweight Directory Access Protocol (LDAP) is the defacto standard for enterpr
 
 ## Concepts
 
-LDAP requires fully qualified domain names (FQDN) for each node. These take the form of `hostname.subdomain(optional).domain`. The FQDN's for each supported node in the picluster have been populated in `/etc/hosts/` on the head node. since the picluster is only using `/etc/hosts` and not expecting inbound traffic, a simple `.local` will suffice.
+LDAP requires fully qualified domain names (FQDN) for each node. These take the form of `hostname.subdomain(optional).domain`. The FQDN's for each supported node in the picluster have been populated in `/etc/hosts/` on the head node. since the picluster is only using `/etc/hosts` and not expecting inbound traffic, we'll use `.pi.local`to denote it's only local.
 
 ## Installing the Server
 
