@@ -1,6 +1,6 @@
 page
 Keeping Time
-Set up timesyncd to keep time.
+Set up chrony to keep time.
 
 ---
 

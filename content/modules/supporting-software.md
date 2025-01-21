@@ -1,6 +1,6 @@
 page
 Supporting Software
-Install Open MPI and mpi4py
+Installing OpenMPI and mpi4py
 
 ---
 

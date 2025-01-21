@@ -1,6 +1,6 @@
 page
 Internet Access
-Internet Access
+Configuring temporary internet access
 
 ---
 

@@ -1,6 +1,6 @@
 page
 Sharing Storage
-Setting up a simple NFS storage server.
+Configuring NFS on the picluster.
 
 ---
 
