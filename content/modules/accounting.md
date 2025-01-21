@@ -24,6 +24,7 @@ LDAP requires fully qualified domain names (FQDN) for each node. These take the 
 Installation is very simple: the head node needs the `ipa-server` package and the nodes need the `ipa-client` package.
 
 As root, install the server package on the head node:
+
 ```bash
 dnf install /apps/pkgs/ipa-server/*.rpm
 ```
