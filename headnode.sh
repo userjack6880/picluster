@@ -27,7 +27,7 @@ dnf install -y vim pdsh pdsh-rcmd-ssh pdsh-mod-genders python3-distutils-extra p
 echo 'export PDSH_RCMD_DEFAULT=ssh' > /etc/profile.d/pdsh.sh
 
 ### add apps dir: ###
-mkdir /apps
+mkdir -p /apps/pkgs
 
 ### make apps writable: ###
 chmod g+w /apps
@@ -67,7 +67,7 @@ dnf install -y --downloadonly --downloaddir=/apps/pkgs/ipa-server ipa-server dns
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/ipa-client ipa-client --setopt=install_weak_deps=False
 
 ### Download source for OpenMPI: ###
-mkdir /apps/src/openmpi
+mkdir -p /apps/src/openmpi
 curl -L https://download.open-mpi.org/release/open-mpi/v5.0/openmpi-5.0.6.tar.bz2 -o /apps/src/openmpi/openmpi-latest.tar.bz2
 
 ### Clone source for mpi4pi: ###
