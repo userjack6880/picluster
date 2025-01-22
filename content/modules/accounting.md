@@ -13,7 +13,8 @@ Configuring FreeIPA to manage users accross the picluster
 [FreeIPA Docs Home](https://www.freeipa.org/page/Documentation.html)
 </span>
 
-Lightweight Directory Access Protocol (LDAP) is the defacto standard for enterprises to manage users across devices and platforms. In our cluster, we want to be able to add, delete, and modify users and have those changes be reflected across all nodes. Since the picluster is an emulation of best practice in HPC, we'll be using the industry standard: FreeIPA.
+Lightweight Directory Access Protocol (LDAP) is the defacto standard for enterprises to manage users across devices and platforms. In our cluster, we want to be able to add, delete, and modify users and have those changes be reflected across all nodes. 
+<!-- Since the picluster is an emulation of best practice in HPC, we'll be using the industry standard: FreeIPA. -->
 
 ## Concepts
 
