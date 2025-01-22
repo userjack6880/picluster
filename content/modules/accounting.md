@@ -88,19 +88,24 @@ For FreeIPA, the WebGUI is available at [http://pi-hpc-head01.pi.local](http://p
 
 According to whether your client is running, Windows, MacOS, or Linux, you'll have to follow different instructions.
 
-For Linux and MacOS, add the following line to `/etc/hosts`:
+**For Linux and MacOS:**
+- Add the following line to `/etc/hosts`:
 
 ```bash
 10.0.0.2 pi-hpc-head01.pi.local
 ```
 
-For Windows:
+**For Windows:**
 
-1. Open Notepad as Administrator: Press Win + R, type notepad and press Ctrl + Shift + Enter to run Notepad with administrative privileges. Alternatively, right-click on Notepad in the Start menu and select “Run as administrator”.
-2. Open the Hosts File: In Notepad, go to File > Open. Navigate to C:\Windows\System32\drivers\etc and select hosts. Ensure “All Files” is selected as the file type, as the hosts file does not have an extension.
-3. Add the following entry: `10.0.0.2 pi-hpc-head01.pi.local` to the end
+- Open Notepad as Administrator: Press Win + R, type notepad and press Ctrl + Shift + Enter to run Notepad with administrative privileges. Alternatively, right-click on Notepad in the Start menu and select “Run as administrator”.
+- Open the Hosts File: In Notepad, go to File > Open. Navigate to C:\Windows\System32\drivers\etc and select hosts. Ensure “All Files” is selected as the file type, as the hosts file does not have an extension.
+- Add the following entry to the end
 
-4. Save the File: After making changes, click File > Save to save the file. You may need to save it again if Notepad warns that the file has been modified by another program.
+```bash
+10.0.0.2 pi-hpc-head01.pi.local
+```
+
+- Save the File: After making changes, click File > Save to save the file. You may need to save it again if Notepad warns that the file has been modified by another program.
 
 Once completed, navigate to [pi-hpc-head01.pi.local](pi-hpc-head01.pi.local). Login with the Username:password of admin:tuxcluster. Instructions can be read from [their docs](https://www.freeipa.org/page/Documentation.html)
 
