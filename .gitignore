@@ -8,3 +8,4 @@ index.php
 *.img*
 pi-hpc-head01-rocky.img.xz
 picluster-bullseye-best.img.zst
+.markdownlint.json
