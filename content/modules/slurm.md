@@ -238,10 +238,10 @@ sacctmgr -i add cluster <your cluster name>
 [srun](https://slurm.schedmd.com/srun.html)
 </span>
 
-Reboot the nodes with the updated image. Slurm should start. to manually start it, run the following:
+Reboot the nodes with the updated image. Slurm should start automatically. In the case that thye need to be nanully restarted, run the following:
 
 ```bash
-pdsh -g nodes sudo systemctl start slurmd
+sudo pdsh -g nodes systemctl start slurmd
 ```
 
 If all is good, the output of `sinfo -Nl` should look like the following:
