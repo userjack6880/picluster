@@ -115,10 +115,17 @@ cp /etc/munge/munge.key /shared/munge.key
 
 ## Install Slurm on the Compute Nodes
 
+Use the following command to enter the compute node container chroot with the right binds:
+
+```bash
+sudo su
+wwctl container exec --bind /shared:/shared --bind /apps:/apps base-rocky9-dracut /bin/bash
+```
+
 Inside the warewulf contianer chroot, install the required packages.
 
 ```bash
-sudo dnf install /apps/pkgs/slurm-compute/*.rpm
+rpm --install --verbose --force /apps/pkgs/slurm-compute/*.rpm 
 ```
 
 Now, move the slurm config files and the munge key to their respective places:
@@ -128,6 +135,12 @@ cp /shared/slurm.conf /etc/slurm/slurm.conf
 cp /shared/munge.key /etc/munge/munge.key
 chown munge:munge /etc/munge/munge.key
 chmod 600 /etc/munge/munge.key
+```
+
+Enable the services so that they start on boot:
+
+```bash
+systemctl enable slurmd
 ```
 
 And finally, exit and rebuild the contianer with `exit`
@@ -196,13 +209,19 @@ Your output should be:
 2 rows in set (0.002 sec)
 ```
 
+And finally:
+
+```bash
+exit;
+```
+
 ## Start Slurm on the Head Node
 
 If everything is good, then the following should work.
 
 ```bash
-systemctl enable slurmd slurmctld slurmdbd
-systemctl start slurmd slurmctld slurmdbd
+systemctl enable slurmdbd slurmctld slurmd 
+systemctl start slurmdbd slurmctld slurmd 
 ```
 
 If you encounter errors, you can look at `systemctl status [service]`, where `[service]` is either `slurmd`, `slurmctld`, `slurmdbd`. Additionally, there should be logs under `/var/log/slurm`. 
