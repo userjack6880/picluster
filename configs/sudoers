@@ -10,6 +10,7 @@ Defaults	env_reset
 Defaults	mail_badpass
 Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
+# keep pdsh's rcmd mode for sudo pdsh ...
 Defaults env_keep += PDSH_RCMD_DEFAULT
 
 # Host alias specification
