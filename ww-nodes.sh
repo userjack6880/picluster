@@ -18,7 +18,7 @@ source /etc/profile
 
 ### install docker(podman in a trenchcoat on rocky): ##################
 dnf install -y docker # last time we use dnf
-dnf clean all # remove cache for image size
+# dnf clean all # remove cache for image size
 
 ### build container: ##################################################
 cd $BASEDIR/docker
