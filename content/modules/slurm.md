@@ -220,8 +220,8 @@ exit;
 If everything is good, then the following should work.
 
 ```bash
-systemctl enable slurmdbd slurmctld slurmd 
-systemctl start slurmdbd slurmctld slurmd 
+systemctl enable slurmdbd slurmctld 
+systemctl start slurmdbd slurmctld 
 ```
 
 If you encounter errors, you can look at `systemctl status [service]`, where `[service]` is either `slurmd`, `slurmctld`, `slurmdbd`. Additionally, there should be logs under `/var/log/slurm`. 

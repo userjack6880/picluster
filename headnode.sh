@@ -53,30 +53,6 @@ cp /home/admin/.ssh/* /root/.ssh/
 useradd -m -g users -p '$5$cOTJhkxlC4$kEFPIJaKPriv16lcwNBsS4dVMT1sC/a9vFPNlZDHug1' -s /bin/bash -u 1001 user
 #        ^- creates home dir automatically w/ contents of /etc/skel
 
-### Download rpms for packages students will install: ###
-# this is actually much easier to do in rocky 
-# source: https://superuser.com/questions/1244789/is-it-possible-to-download-rpm-files-in-fedora-for-offline-usage-see-descripti
-dnf install -y --downloadonly --downloaddir=/apps/pkgs/chrony chrony
-dnf install -y --downloadonly --downloaddir=/apps/pkgs/mariadb-server mariadb-server gawk
-dnf install -y --downloadonly --downloaddir=/apps/pkgs/slurm-head slurm{,-slurmctld,-slurmdbd,-perlapi} munge
-dnf install -y --downloadonly --downloaddir=/apps/pkgs/openmpi openmpi-devel
-dnf install -y --downloadonly --downloaddir=/apps/pkgs/glusterfs-server glusterfs
-dnf install -y --downloadonly --downloaddir=/apps/pkgs/ipa-server ipa-server dnsmasq --setopt=install_weak_deps=False
-dnf install -y --downloadonly --downloaddir=/apps/pkgs/ipa-client ipa-client --setopt=install_weak_deps=False
-# these have been moved to inside the container for dependency acquisition
-# dnf install -y --downloadonly --downloaddir=/apps/pkgs/slurm-compute slurm-slurmd munge
-# dnf install -y --downloadonly --downloaddir=/apps/pkgs/glusterfs-client glusterfs-fuse
-
-### Download source for OpenMPI: ###
-mkdir -p /apps/src/openmpi
-curl -L https://download.open-mpi.org/release/open-mpi/v5.0/openmpi-5.0.6.tar.bz2 -o /apps/src/openmpi/openmpi-latest.tar.bz2
-
-### Clone source for mpi4pi: ###
-mkdir -p /mnt/apps/src/mpi4py
-curl -L https://github.com/mpi4py/mpi4py/releases/download/3.1.5/mpi4py-3.1.5.tar.gz | tar xz -C /apps/src/mpi4py
-chown -R root:users /apps/src/mpi4py
-chmod -R 770 /apps/src/mpi4py
-
 ### copy needed configs: ###
 cp $BASEDIR/configs/hosts /etc/hosts
 cp $BASEDIR/configs/sudoers /etc/sudoers
