@@ -119,7 +119,7 @@ Use the following command to enter the compute node container chroot with the ri
 
 ```bash
 sudo su
-wwctl container exec --bind /shared:/shared --bind /apps:/apps base-rocky9-dracut /bin/bash
+wwctl container exec --bind /shared:/shared base-rocky9-dracut /bin/bash
 ```
 
 Inside the warewulf contianer chroot, install the required packages.
