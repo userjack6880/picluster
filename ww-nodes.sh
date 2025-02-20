@@ -22,15 +22,14 @@ dnf clean all # remove cache for image size
 
 ### build container: ##################################################
 cd $BASEDIR/docker
+cp -r /etc/yum.repos.d . 
 docker build . -t base-rocky9-dracut
 cd -
 
 ### import container to ww: ###########################################
-# we'll store the intermediate file in a tmpfs
-mount -t tmpfs tmpfs /mnt 
-docker save base-rocky9-dracut -o /mnt/oci.tar
-wwctl container import /mnt/oci.tar base-rocky9-dracut
-umount /mnt
+docker save base-rocky9-dracut -o oci.tar
+wwctl container import oci.tar base-rocky9-dracut
+rm oci.tar
 
 ### run ww configure to bootstrap all services: #######################
 wwctl configure -a

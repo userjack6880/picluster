@@ -59,12 +59,13 @@ useradd -m -g users -p '$5$cOTJhkxlC4$kEFPIJaKPriv16lcwNBsS4dVMT1sC/a9vFPNlZDHug
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/chrony chrony
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/mariadb-server mariadb-server gawk
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/slurm-head slurm{,-slurmctld,-slurmdbd,-perlapi} munge
-dnf install -y --downloadonly --downloaddir=/apps/pkgs/slurm-compute slurm-slurmd munge
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/openmpi openmpi-devel
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/glusterfs-server glusterfs
-dnf install -y --downloadonly --downloaddir=/apps/pkgs/glusterfs-client glusterfs-fuse
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/ipa-server ipa-server dnsmasq --setopt=install_weak_deps=False
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/ipa-client ipa-client --setopt=install_weak_deps=False
+# these have been moved to inside the container for dependency acquisition
+# dnf install -y --downloadonly --downloaddir=/apps/pkgs/slurm-compute slurm-slurmd munge
+# dnf install -y --downloadonly --downloaddir=/apps/pkgs/glusterfs-client glusterfs-fuse
 
 ### Download source for OpenMPI: ###
 mkdir -p /apps/src/openmpi

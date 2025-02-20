@@ -44,3 +44,6 @@ unzip rpi-uefi.zip -d /var/lib/tftpboot/
 cd -
 
 systemctl enable dhcpd tftp warewulfd
+
+### reboot ###############################################################
+reboot
