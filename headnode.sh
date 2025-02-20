@@ -20,7 +20,7 @@ rootfs-expand
 dnf config-manager --set-enabled crb
 dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 dnf update -y # necessary. sshd breaks w/out it
-dnf install -y vim pdsh pdsh-rcmd-ssh pdsh-mod-genders python3-distutils-extra python3-devel git
+dnf install -y vim pdsh pdsh-rcmd-ssh pdsh-mod-genders python3-distutils-extra python3-devel git tar
 
 
 ### set ssh as default pdsh remote console ###
@@ -46,7 +46,7 @@ chown -R admin:admin /home/admin/.ssh
 chmod 600 /home/admin/.ssh/id_rsa
 chmod 644 /home/admin/.ssh/authorized_keys
 ### make ssh to root possible: ###
-mkdir /root/.ssh
+mkdir /root/.ssh # already exists on rocky. possibly remove
 cp /home/admin/.ssh/* /root/.ssh/
 
 ### create additional users: ###
