@@ -66,16 +66,14 @@ As root, run the following:
 ipa-server-install --mkhomedir
 ```
 
-This script will ask a few questions. 
+**Notes:**
+- This script will ask a few questions. 
 We'll be using all defaults here so whenever a question has a bracketed answer, hit enter.
-
-The password is up to you but I recommend using the one we've been using: `tuxcluster`. 
+- The password is up to you but I recommend using the one we've been using: `tuxcluster`. 
 You'll need to enter this 4 times.
-
-At the end, the script will prompt you to confirm the setup before continuing. 
+- At the end, the script will prompt you to confirm the setup before continuing. 
 The default is [no] so you must type yes.
-
-**Note:** The server install process can take some time.
+- The server install process can take some time.
 
 ## Adding a User
 
