@@ -48,7 +48,7 @@ echo 'PATH=$PATH:/apps/openmpi/bin' | sudo tee /etc/profile.d/openmpi.sh
 Install OpenMPI and supporting packages, including development packages:
 
 ```bash
-sudo rpm install /apps/pkgs/openmpi/*.rpm
+rpm --install --verbose /apps/pkgs/openmpi/*.rpm
 ```
 
 **Note: this will also need to be installed in the compute node image. Instructions [Here](ww)**

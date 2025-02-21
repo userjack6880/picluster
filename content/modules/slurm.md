@@ -21,7 +21,7 @@ Build and install slurm packages.
 While Slurm does work without MariaDB, it's fairly common to set it up to use MariaDB as it's useful for archiving account records and easily accessing these records.
 
 ```bash
-sudo dnf install /apps/pkgs/mariadb-server/*.rpm
+rpm --install --verbose /apps/pkgs/mariadb-server/*.rpm
 ```
 
 Note: `dnf` may complain about failures the first time you run this - running it a second time will usually be successful.
@@ -31,7 +31,7 @@ Note: `dnf` may complain about failures the first time you run this - running it
 The head node will be responsible for accepting jobs from users, scheduling jobs on the cluster, and keeping a record of all jobs that ran. Packages installed are `slurm`, `slurmdbd`, and `slurmctld` and their dependencies.
 
 ```bash
-sudo dnf install /apps/pkgs/slurm-head/*.rpm
+rpm --install --verbose /apps/pkgs/slurm-head/*.rpm
 ```
 
 ## Setup Munge
@@ -238,7 +238,7 @@ sacctmgr -i add cluster <your cluster name>
 [srun](https://slurm.schedmd.com/srun.html)
 </span>
 
-Reboot the nodes with the updated image. Slurm should start automatically. In the case that thye need to be nanully restarted, run the following:
+Reboot the nodes with the updated image. Slurm should start automatically. In the case that they need to be nanully restarted, run the following:
 
 ```bash
 sudo pdsh -g nodes systemctl start slurmd

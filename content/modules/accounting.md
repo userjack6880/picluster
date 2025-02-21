@@ -31,7 +31,7 @@ Installation is very simple: the head node needs the `ipa-server` package and th
 As root, install the server package on the head node:
 
 ```bash
-dnf install /apps/pkgs/ipa-server/*.rpm
+rpm --install --verbose /apps/pkgs/ipa-server/*.rpm
 ```
 
 ## Configuring DNSMASQ

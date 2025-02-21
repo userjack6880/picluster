@@ -44,7 +44,7 @@ While typically packages on a RHEL-based system would be installed using `dnf` o
 The first step will be to install the NFS server package.
 
 ```bash
-sudo dnf install /apps/pkgs/nfs-kernel-server*.rpm
+rpm --install --verbose /apps/pkgs/nfs-kernel-server*.rpm
 ```
 
 Now, create the export entries in `/etc/exports` using `vim`

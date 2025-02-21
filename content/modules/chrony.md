@@ -114,7 +114,7 @@ Now uninstall it using dnf and then install the `chrony` package via rpm.
 
 ```bash
 sudo dnf remove systemd-timesyncd
-sudo dnf install /apps/pkgs/chrony/*.rpm
+rpm --install --verbose /apps/pkgs/chrony/*.rpm
 ```
 
 next we'll need to do some configuration. First, stop `chrony`.
