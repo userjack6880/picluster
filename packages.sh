@@ -16,7 +16,6 @@ BASEDIR=$( dirname $0 )
 ### Download rpms for packages students will install: ###
 # this is actually much easier to do in rocky 
 # source: https://superuser.com/questions/1244789/is-it-possible-to-download-rpm-files-in-fedora-for-offline-usage-see-descripti
-dnf install -y --downloadonly --downloaddir=/apps/pkgs/chrony chrony
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/mariadb-server mariadb-server gawk
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/slurm-head slurm{,-slurmctld,-slurmdbd,-perlapi} munge
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/openmpi openmpi-devel
@@ -32,7 +31,7 @@ mkdir -p /apps/src/openmpi
 curl -L https://download.open-mpi.org/release/open-mpi/v5.0/openmpi-5.0.6.tar.bz2 -o /apps/src/openmpi/openmpi-latest.tar.bz2
 
 ### Clone source for mpi4pi: ###
-mkdir -p /mnt/apps/src/mpi4py
+mkdir -p /apps/src/mpi4py
 curl -L https://github.com/mpi4py/mpi4py/releases/download/3.1.5/mpi4py-3.1.5.tar.gz | tar xz -C /apps/src/mpi4py
 chown -R root:users /apps/src/mpi4py
 chmod -R 770 /apps/src/mpi4py
