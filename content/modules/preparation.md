@@ -120,7 +120,7 @@ curl -L j3b.in/pihpc/ssd-install.sh | sh -s /dev/yourssd
 
 ## First Boot
 
-Attach the head node's SSD and power, optionally a keybaord and monitor. Wait for it to boot. At this point. Compute nodes and client devices can be connected.
+Attach the head node's SSD and power, optionally a keybaord and monitor. Wait for it to boot. At this point, connect and power on each compute node ***in order***. client devices can also be connected at this time.
 
 <!-- let's not include this text for now 
 ## Automatically Running Through the Modules
