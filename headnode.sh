@@ -1,4 +1,10 @@
 ################################################################
+# check if root:
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+################################################################
 # check for network first
 if ping -c 1 72.14.177.74 &> /dev/null
 then
