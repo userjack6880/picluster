@@ -126,10 +126,15 @@ sudo systemctl stop chronyd
 Now edit `/etc/chrony/chrony.conf`. Clear all lines and make sure it only contains these lines:
 
 ```bash
-driftfile /var/lib/chrony/chrony.drift
-server 127.127.1.1  #sync to local server
-local stratum 8     #allow much variance before errors are thrown
-allow all           #host server for nodes
+driftfile /var/lib/chrony/drift
+# grab internet time if available
+pool 2.rocky.pool.ntp.org iburst
+# sync to local server
+server 127.0.0.1
+# allow much variance before errors are thrown
+local stratum 8
+# host server for nodes
+allow all
 ```
 <!-- TODO: add an internet timesync server for head to sync w/ when connected to internet -->
 
