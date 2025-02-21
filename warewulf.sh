@@ -43,7 +43,7 @@ go clean -modcache
 sed -i 's/\/opt\/warewulf\/share\/ipxe/\/usr\/share\/ipxe/' /opt/warewulf/etc/warewulf/warewulf.conf
 
 ### add warewulf to path: ################################################
-echo "export PATH=$PATH:/opt/warewulf/bin" > /etc/profile.d/warewulf.sh
+echo 'export PATH=$PATH:/opt/warewulf/bin' > /etc/profile.d/warewulf.sh
 
 ### add raspi's special uefi pxeboot: ####################################
 curl -o rpi-uefi.zip -L https://github.com/pftf/RPi4/releases/download/v1.38/RPi4_UEFI_Firmware_v1.38.zip

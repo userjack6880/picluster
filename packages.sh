@@ -37,7 +37,7 @@ dnf install -y --downloadonly --downloaddir=/apps/pkgs/ipa-client ipa-client --s
 
 ### Download source for OpenMPI: ###
 mkdir -p /apps/src/openmpi
-curl -L https://download.open-mpi.org/release/open-mpi/v5.0/openmpi-5.0.7.tar.gz -o /apps/src/openmpi/openmpi-latest.tar.gz
+curl -L https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.8.tar.gz -o /apps/src/openmpi/openmpi-latest.tar.gz
 
 ### Clone source for mpi4pi: ###
 mkdir -p /apps/src/mpi4py

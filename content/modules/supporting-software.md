@@ -40,7 +40,7 @@ CC=gcc CXX=g++ ./configure --with-slurm --enable-shared --prefix=/apps/openmpi
 make -j4
 sudo make install
 # add our custom install dir to the path
-echo 'PATH=$PATH:/apps/openmpi/bin' | sudo tee /etc/profile.d/openmpi.sh
+echo 'export PATH=$PATH:/apps/openmpi/bin' | sudo tee /etc/profile.d/openmpi.sh
 ```
 
 # Installing OpenMPI from distro repo's (Not Recommended)
