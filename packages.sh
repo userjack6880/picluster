@@ -25,6 +25,7 @@ BASEDIR=$( dirname $0 )
 ### Download rpms for packages students will install: ###
 # this is actually much easier to do in rocky 
 # source: https://superuser.com/questions/1244789/is-it-possible-to-download-rpm-files-in-fedora-for-offline-usage-see-descripti
+dnf install -y gcc g++ gfortran make automake cmake
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/mariadb-server mariadb-server gawk
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/slurm-head slurm{,-slurmctld,-slurmdbd,-perlapi} munge
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/openmpi openmpi-devel
