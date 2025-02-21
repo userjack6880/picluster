@@ -96,7 +96,7 @@ echo 'sudo hwclock -s' | sudo tee -a /etc/rc.local
 ### RaspberryPi 5
 <!-- TODO: RPi 5 HW Clock -->
 
-## Replacing timesyncd With chrony on the Server
+## Configuring Chrony on the Head
 
 <span class="small">resources:
 [systemd-timesyncd](https://wiki.archlinux.org/title/Systemd-timesyncd),
@@ -104,39 +104,25 @@ echo 'sudo hwclock -s' | sudo tee -a /etc/rc.local
 [apt](https://linux.die.net/man/8/apt)
 </span>
 
-The first thing we need to do is stop and disable `systemd-timesyncd`.
-
-```bash
-sudo systemctl disable --now systemd-timesyncd
-```
-
-Now uninstall it using dnf and then install the `chrony` package via rpm.
-
-```bash
-sudo dnf remove systemd-timesyncd
-rpm --install --verbose /apps/pkgs/chrony/*.rpm
-```
-
-next we'll need to do some configuration. First, stop `chrony`.
+Since chrony is initially setup as a client, we'll need to do some configuration. First, stop `chrony`.
 
 ```bash
 sudo systemctl stop chronyd
 ```
 
-Now edit `/etc/chrony/chrony.conf`. Clear all lines and make sure it only contains these lines:
+Now edit `/etc/chrony.conf`. Clear all lines and make sure it only contains these lines:
 
 ```bash
 driftfile /var/lib/chrony/drift
 # grab internet time if available
 pool 2.rocky.pool.ntp.org iburst
 # sync to local server
-server 127.0.0.1
+server 127.127.1.1
 # allow much variance before errors are thrown
 local stratum 8
 # host server for nodes
 allow all
 ```
-<!-- TODO: add an internet timesync server for head to sync w/ when connected to internet -->
 
 The IP address `127.127.1.1` is the loopback address for NTP. You are telling `chrony` to sync with the system's clock driver. This isn't considered best practice, but for our purposes, it'll do the trick. Now restart `chrony`.
 
@@ -163,10 +149,10 @@ sudo wwctl container exec base-rocky9-dracut /bin/bash
 
 Repeat the above process to stop, disable, and uninstall `systemd-timesyncd`. and to install `chrony`. 
 
-Next, you'll need to edit `/etc/chrony/chrony.conf` to be the following:
+Next, you'll need to edit `/etc/chrony.conf` to be the following:
 
 ```bash
-driftfile /var/lib/chrony/chrony.drift
+driftfile /var/lib/chony/drift
 server 10.0.0.2 iburst
 ```
 
