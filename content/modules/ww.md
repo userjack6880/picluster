@@ -63,7 +63,7 @@ wwctl container exec base-rocky9-dracut /bin/bash
 
 As above but making the host's `/shared` and `/apps` 
 ```bash
-wwctl container exec --bind /shared:/shared --bind /apps:/apps base-rocky9-dracut /bin/bash
+wwctl container exec --bind /shared:/shared base-rocky9-dracut /bin/bash
 ```
 
 Copying Contianers, useful when testing changes
