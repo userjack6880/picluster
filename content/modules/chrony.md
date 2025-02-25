@@ -39,9 +39,9 @@ The time is set using:
 # if an ntp server is already running, stop if first with:
 sudo systemctl stop systemd-timesyncd
 # then change the time w/
-sudo timedatectl set-time "YYYY:MM:DD HH:mm:ss"
+sudo timedatectl set-time "YYYY-MM-DD HH:mm:ss"
 # or individually with: 
-sudo timedatectl set-time "YYYY:MM:DD"
+sudo timedatectl set-time "YYYY-MM-DD"
 sudo timedatectl set-time "HH:mm:ss"
 # finally remember to start the NTP service again w/:
 sudo systemctl start systemd-timesyncd
