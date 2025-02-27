@@ -6,4 +6,5 @@ RUN dnf install -y "https://github.com/warewulf/warewulf/releases/download/v4.5.
 RUN dracut --verbose --force --no-hostonly --add wwinit --regenerate-all
 RUN dnf install -y --downloadonly --downloaddir=/apps/pkgs/chrony chrony; echo
 RUN dnf install -y --downloadonly --downloaddir=/apps/pkgs/slurm-compute slurm-slurmd munge; echo
+RUN dnf install -y --downloadonly --downloaddir=/apps/pkgs/ipa-client ipa-client; echo
 RUN dnf install -y --downloadonly --downloaddir=/apps/pkgs/glusterfs-client glusterfs-fuse; echo

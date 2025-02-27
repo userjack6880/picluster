@@ -31,8 +31,8 @@ dnf install -y --downloadonly --downloaddir=/apps/pkgs/slurm-head slurm{,-slurmc
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/openmpi openmpi-devel
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/glusterfs-server glusterfs
 dnf install -y --downloadonly --downloaddir=/apps/pkgs/ipa-server ipa-server dnsmasq --setopt=install_weak_deps=False
-dnf install -y --downloadonly --downloaddir=/apps/pkgs/ipa-client ipa-client --setopt=install_weak_deps=False
 # these have been moved to inside the container for dependency acquisition
+# dnf install -y --downloadonly --downloaddir=/apps/pkgs/ipa-client ipa-client --setopt=install_weak_deps=False
 # dnf install -y --downloadonly --downloaddir=/apps/pkgs/slurm-compute slurm-slurmd munge
 # dnf install -y --downloadonly --downloaddir=/apps/pkgs/glusterfs-client glusterfs-fuse
 
