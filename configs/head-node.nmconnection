@@ -10,6 +10,7 @@ timestamp=1731715211
 [ipv4]
 address1=10.0.0.2/24,10.0.0.1
 dns=127.0.0.1;8.8.8.8;
+dns-search=pi.local;
 method=manual
 
 [ipv6]
