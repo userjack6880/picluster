@@ -81,6 +81,7 @@ Once the server is up and running, we'll need to add users.
 
 ```bash
 kinit admin # the password is as entered before: tuxcluster
+ipa config-mod --defaultshell=/bin/bash # this only needs to be run once, to set bash as the default shell
 ipa user-add <your username>
 ipa passwd <your username>
 # enter a temporary password
