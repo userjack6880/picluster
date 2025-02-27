@@ -63,8 +63,8 @@ useradd -m -g users -p '$5$cOTJhkxlC4$kEFPIJaKPriv16lcwNBsS4dVMT1sC/a9vFPNlZDHug
 cp $BASEDIR/configs/hosts /etc/hosts
 cp $BASEDIR/configs/sudoers /etc/sudoers
 cp $BASEDIR/configs/genders /etc/genders
-mkdir /mnt/apps/configs
-cp $BASEDIR/configs/chrony-client.conf /mnt/apps/configs
+mkdir /apps/configs
+cp $BASEDIR/configs/chrony-client.conf /apps/configs
 
 ### set hostname: ###
 echo "pi-hpc-head01" > /etc/hostname
