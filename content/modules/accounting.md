@@ -40,7 +40,7 @@ Since we're working on a local network without internet, we'll need to setup DNS
 
 ```bash
 no-resolv #don't use /etc/resolve since it points to dnsmasq
-server=8.8.8.8 #add google's dns for when external connected
+#server=8.8.8.8 #add google's dns for when external connected
 user=dnsmasq
 group=dnsmasq
 bind-interfaces
