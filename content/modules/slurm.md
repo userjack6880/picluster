@@ -81,7 +81,7 @@ PartitionName=<partition_name> Nodes=pi-hpc-compute[01-04] Default=YES MaxTime=I
 
 We won't go into too much detail about what all the options mean just yet. The goal is to get the cluster working. You may chose what you want to call your cluster and what the default partition is called.
 
-To get the values for `NodeName`, you can run `/usr/sbin/slurmd -C` on the compute nodes and get those values. Multiple `NodeName` entries can be added if your cluster has different architectures.
+To get the values for `NodeName` line, you can run `/usr/sbin/slurmd -C` just after installing slurmd on the compute node image. Multiple `NodeName` entries can be added if your nodes' specs differ.
 
 Finally, we need to create the `/etc/slurm/slurmdbd.conf` file for the Slurm database:
 
