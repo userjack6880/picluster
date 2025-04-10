@@ -99,9 +99,11 @@ StorageUser=slurm
 StorageLoc=slurm_acct_db
 ```
 
-You can set the `StoragePass` password to be anything you want. Just remember what this is. Now, change the permissions of `slurmdbd.conf` to read/writeable only by the `slurm` user:
+You can set the `StoragePass` password to be anything you want. Just remember what this is. Now, create the slurm user:group and change the permissions of `slurmdbd.conf` to read/writeable only by the `slurm` user:
 
 ```bash
+groupadd -g 990 slurm
+useradd -u 990 -g 990 slurm
 chown slurm:slurm /etc/slurm/slurmdbd.conf
 chmod 600 /etc/slurm/slurmdbd.conf
 ```
