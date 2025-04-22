@@ -74,14 +74,13 @@ ClusterName=<your_cluster_name>
 JobAcctGatherType=jobacct_gather/linux
 
 ## Compute Nodes
-NodeName=pi-hpc-head01 CPUs=<num_cpus> Sockets=<sockets> CoresPerSocket=<num_cores> ThreadsPerCore=<threads> RealMemory=<memory> State=UNKNOWN
-NodeName=pi-hpc-compute[01-04] CPUs=<num_cpus> Sockets=<sockets> CoresPerSocket=<num_cores> ThreadsPerCore=<threads> RealMemory=<memory> State=UNKNOWN
+NodeName=pi-hpc-compute[01-04] CPUs=4 Sockets=4 CoresPerSocket=4 ThreadsPerCore=1 RealMemory=3700 State=UNKNOWN
 PartitionName=<partition_name> Nodes=pi-hpc-compute[01-04] Default=YES MaxTime=INFINITE State=UP
 ```
 
 We won't go into too much detail about what all the options mean just yet. The goal is to get the cluster working. You may chose what you want to call your cluster and what the default partition is called.
 
-To get the values for `NodeName` line, you can run `/usr/sbin/slurmd -C` just after installing slurmd on the compute node image. Multiple `NodeName` entries can be added if your nodes' specs differ.
+<!--To get the values for `NodeName` line, you can run `/usr/sbin/slurmd -C` just after installing slurmd on the compute node image. Multiple `NodeName` entries can be added if your nodes' specs differ.-->
 
 Finally, we need to create the `/etc/slurm/slurmdbd.conf` file for the Slurm database:
 
