@@ -19,7 +19,7 @@ echo "|_|   |_|_| |_|_|    \____|"
 # install git and clone repo:
 #-----------------------------------------------------------------
 dnf install -y git
-git clone https://github.com/userjack6880/picluster /opt/picluster
+git clone https://github.com/userjack6880/picluster -b boxocluster /opt/picluster
 #-----------------------------------------------------------------
 # run creation script:
 #-----------------------------------------------------------------

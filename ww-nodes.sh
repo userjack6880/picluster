@@ -6,7 +6,7 @@ if [ "$EUID" -ne 0 ]
 fi
 ####################################################################
 # check for network first
-if ping -c 1 72.14.177.74 &> /dev/null
+if curl google.com &> /dev/null
 then
 	echo "Online, continuing"
 else
