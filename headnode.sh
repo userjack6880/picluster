@@ -20,7 +20,7 @@ BASEDIR=$( dirname $0 )
 ##########################################################################
 
 # grow root FS to avoid running out of space during installation:
-rootfs-expand
+#rootfs-expand
 
 ### install necessary packages and update: ###
 dnf config-manager --set-enabled crb

@@ -20,7 +20,7 @@ BASEDIR=$( dirname $0 )
 ##########################################################################
 
 ### make sure filessystem is expanded ####################################
-rootfs-expand
+#rootfs-expand
 
 ### install services required for warewulf: ##############################
 dnf -y --setopt=install_weak_deps=False --nodocs install dhcp-server tftp-server nfs-utils golang unzip ipxe-bootimgs-aarch64
