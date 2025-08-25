@@ -56,7 +56,7 @@ mkdir /root/.ssh # already exists on rocky. possibly remove
 cp /home/admin/.ssh/* /root/.ssh/
 
 ### create additional users: ###
-useradd -m -g users -p '$5$cOTJhkxlC4$kEFPIJaKPriv16lcwNBsS4dVMT1sC/a9vFPNlZDHug1' -s /bin/bash -u 1001 user
+useradd -m -g users -p '$5$cOTJhkxlC4$kEFPIJaKPriv16lcwNBsS4dVMT1sC/a9vFPNlZDHug1' -s /bin/bash -u 1001 -g 1001 user
 #        ^- creates home dir automatically w/ contents of /etc/skel
 
 ### copy needed configs: ###
@@ -67,7 +67,7 @@ mkdir /apps/configs
 cp $BASEDIR/configs/chrony-client.conf /apps/configs
 
 ### set hostname: ###
-echo "pi-hpc-head01" > /etc/hostname
+echo "boxocluster-node-1" > /etc/hostname
 
 ### Setup Networking as per docs: ###
 cp $BASEDIR/configs/head-node.nmconnection /etc/NetworkManager/system-connections/

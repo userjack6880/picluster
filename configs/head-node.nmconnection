@@ -2,13 +2,13 @@
 id=head-node
 uuid=3c879119-2475-4a81-9d14-becf4bc05e01
 type=ethernet
-interface-name=eth0
+interface-name=ens4
 timestamp=1731715211
 
 [ethernet]
 
 [ipv4]
-address1=10.0.0.2/24,10.0.0.1
+address1=10.0.0.11/24
 dns=127.0.0.1;8.8.8.8;
 dns-search=pi.local;
 method=manual

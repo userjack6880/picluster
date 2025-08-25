@@ -6,7 +6,7 @@ index a9afbccb..ea74f26f 100644
  WW_INTERNAL: 45
 -ipaddr: 10.0.0.1
 -netmask: 255.255.252.0
-+ipaddr: 10.0.0.2
++ipaddr: 10.0.0.11
 +netmask: 255.255.255.0
  network: 10.0.0.0
  warewulf:
